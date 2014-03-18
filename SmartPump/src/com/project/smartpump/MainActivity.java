@@ -25,11 +25,16 @@ public class MainActivity extends Activity
 		output = (TextView)findViewById(R.id.textView1);
 		
 		calculate.setOnClickListener(new OnClickListener()
-				{	@Override
-					public void onClick(View v) 
-					{	calculate();
+		{	@Override
+			public void onClick(View v) 
+			{	if (FuelPrice.getText().toString() == "" && MPG.getText().toString() == "" && Miles.getText().toString() == "")
+					{
+						
 					}
-				});
+				//calculate();
+				//getInfoFromDatabase();
+			}
+		});
 		reset.setOnClickListener(new OnClickListener()
 		{	@Override
 			public void onClick(View v) 
@@ -42,12 +47,23 @@ public class MainActivity extends Activity
 	{	getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-	public static int calculate()
-	{
-		
+	public static double calculate(double MPG, double stationCost, double distanceToStation, double numberOfGallonsPlanned)
+	{	double realCost;
+		double distanceInGals;
+        double additionalCostInDollars;
+        distanceInGals = (distanceToStation/MPG);
+        additionalCostInDollars = distanceInGals*stationCost;
+        realCost = ((stationCost * numberOfGallonsPlanned) + additionalCostInDollars)/numberOfGallonsPlanned;
+        return realCost;
+	}
+	public static double calculate(double MPG,double FuelPrice, double Miles)
+	{	double realCost = 0.0;
+		return realCost;
 	}
 	public static void reset()
-	{
-		
+	{	//resets forms on this page
+	}
+	public static void getInfoFromDatabase()
+	{	//gets fuelPrice MPG and Miles from externel database
 	}
 }
