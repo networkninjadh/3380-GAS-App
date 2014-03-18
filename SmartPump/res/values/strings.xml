@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Smart Pump</string>
+    <string name="action_settings">Settings</string>
+    <string name="button1"> Calculate </string>
+	<string name="button2"> Reset </string>
+	<string name="text1">Fuel Price</string>
+	<string name="text2">Average MPG</string>
+	<string name="text3">Miles</string>
+	<string name="text4">Vehicle Year</string>
+	<string name="text5">Vehicle make</string>
+	<string name="text6">Vehicle Model</string>
+	<string name="text7">Vehicle ID</string>
+	<string name="textView2">OR</string>
+	<string name="button3">Add Vehicle</string>
+	<string name="button4">Reset</string>
+</resources>
