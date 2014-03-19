@@ -10,9 +10,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainActivity extends Activity 
-{	EditText FuelPrice,MPG,Miles;
-	Button   calculate,reset;
-	TextView output;
+{	static EditText FuelPrice,MPG,Miles;
+	static Button   calculate,reset;
+	static TextView output;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{	super.onCreate(savedInstanceState);
@@ -23,16 +23,19 @@ public class MainActivity extends Activity
 		calculate = (Button)findViewById(R.id.button1);
 		reset = (Button)findViewById(R.id.button2);
 		output = (TextView)findViewById(R.id.textView1);
-		
 		calculate.setOnClickListener(new OnClickListener()
 		{	@Override
 			public void onClick(View v) 
 			{	if (FuelPrice.getText().toString() == "" && MPG.getText().toString() == "" && Miles.getText().toString() == "")
-					{
-						
-					}
-				//calculate();
-				//getInfoFromDatabase();
+				{
+					//getInfoFromDatabase();	
+				}
+				else
+				{
+					Double out = calculate(Double.parseDouble(MPG.getText().toString()),Double.parseDouble(FuelPrice.getText().toString()),
+								Double.parseDouble(Miles.getText().toString()),1.0);
+					output.setText(out.toString());
+				}				
 			}
 		});
 		reset.setOnClickListener(new OnClickListener()
@@ -61,7 +64,10 @@ public class MainActivity extends Activity
 		return realCost;
 	}
 	public static void reset()
-	{	//resets forms on this page
+	{	MPG.setText("");
+		FuelPrice.setText("");
+		Miles.setText("");
+		output.setText("");
 	}
 	public static void getInfoFromDatabase()
 	{	//gets fuelPrice MPG and Miles from externel database
