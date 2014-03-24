@@ -61,13 +61,13 @@ public class CarInfoActivity extends Activity
 	}
 	public void AddVehicle(int vehicleYear,String vehicleMake, String vehicleModel, String VehicleID)
 	{	String profileName;
-		if (vehicleYear + "" == "" && vehicleMake == "" && vehicleModel == "")
-		{	DatabaseAccess.lookupCarByID(VehicleID);
+		if ((Integer)vehicleYear == null && vehicleMake == "" && vehicleModel == "")
+		{	//DatabaseAccess.lookupCarByID(VehicleID);
 		}
 		else
 		{	if (vehicleYear + "" == "")
 			{	//tell the user to enter year
-				Toast.makeText(this, "It seems like you haven't entered the year", Toast.LENGTH_LONG).show();
+				Toast.makeText(this, "It seems like you haven't entered the year", Toast.LENGTH_SHORT).show();
 			}
 			if (vehicleMake == "")
 			{	//tell the user to enter make
