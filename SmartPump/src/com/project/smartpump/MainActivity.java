@@ -3,11 +3,13 @@ package com.project.smartpump;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
   
 public class MainActivity extends Activity 
 {	static EditText FuelPrice,MPG,Miles;
@@ -48,6 +50,21 @@ public class MainActivity extends Activity
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) 
 	{	getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item)
+	{
+		switch (item.getItemId())
+		{
+			//action bar item defined in XML
+			case R.id.action_settings:
+				Toast.makeText(this, "Settings selected", Toast.LENGTH_SHORT).show();
+				//go to settings activity
+				break;
+				default:
+				break;
+		}
 		return true;
 	}
 	public static double calculate(double MPG, double stationCost, double distanceToStation, double numberOfGallonsPlanned)
