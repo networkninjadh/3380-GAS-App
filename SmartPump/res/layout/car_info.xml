@@ -22,6 +22,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
         android:ems="10"
+        android:inputType="number"
         android:hint="@string/text4" />
 
     <EditText

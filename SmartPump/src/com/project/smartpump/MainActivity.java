@@ -2,6 +2,7 @@ package com.project.smartpump;
 
 import android.os.Bundle;
 import android.app.Activity;
+//import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,12 +30,10 @@ public class MainActivity extends Activity
 		{	@Override
 			public void onClick(View v) 
 			{	if (FuelPrice.getText().toString() == "" && MPG.getText().toString() == "" && Miles.getText().toString() == "")
-				{
-					//getInfoFromDatabase();	
+				{	//getInfoFromDatabase();	
 				}
 				else
-				{
-					Double out = calculate(Double.parseDouble(MPG.getText().toString()),Double.parseDouble(FuelPrice.getText().toString()),
+				{	Double out = calculate(Double.parseDouble(MPG.getText().toString()),Double.parseDouble(FuelPrice.getText().toString()),
 								Double.parseDouble(Miles.getText().toString()),1.0);
 					output.setText(out.toString());
 				}				
@@ -54,10 +53,8 @@ public class MainActivity extends Activity
 	}
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item)
-	{
-		switch (item.getItemId())
-		{
-			//action bar item defined in XML
+	{	switch (item.getItemId())
+		{	//action bar item defined in XML
 			case R.id.action_settings:
 				Toast.makeText(this, "Settings selected", Toast.LENGTH_SHORT).show();
 				//go to settings activity
@@ -67,7 +64,7 @@ public class MainActivity extends Activity
 		}
 		return true;
 	}
-	public static double calculate(double MPG, double stationCost, double distanceToStation, double numberOfGallonsPlanned)
+	public double calculate(double MPG, double stationCost, double distanceToStation, double numberOfGallonsPlanned)
 	{	double realCost;
 		double distanceInGals;
         double additionalCostInDollars;
@@ -76,17 +73,17 @@ public class MainActivity extends Activity
         realCost = ((stationCost * numberOfGallonsPlanned) + additionalCostInDollars)/numberOfGallonsPlanned;
         return realCost;
 	}
-	public static double calculate(double MPG,double FuelPrice, double Miles)
+	public double calculate(double MPG,double FuelPrice, double Miles)
 	{	double realCost = 0.0;
 		return realCost;
 	}
-	public static void reset()
+	public void reset()
 	{	MPG.setText("");
 		FuelPrice.setText("");
 		Miles.setText("");
 		output.setText("");
 	}
-	public static void getInfoFromDatabase()
+	public void getInfoFromDatabase()
 	{	//gets fuelPrice MPG and Miles from externel database
 	}
 }

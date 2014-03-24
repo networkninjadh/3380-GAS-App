@@ -1,12 +1,10 @@
 package com.project.smartpump;
-
-import com.project.classes.CustomApplication;
 import com.project.classes.DatabaseAccess;
 
 import android.os.Bundle;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
+//import android.app.AlertDialog;
+//import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,8 +16,8 @@ import android.widget.Toast;
 
 public class CarInfoActivity extends Activity 
 {	Context context = getBaseContext();
-	static Button AddVehicle,Reset;
-	static EditText VehicleYear, VehicleMake, VehicleModel, VehicleID;
+	Button AddVehicle,Reset;
+	EditText VehicleYear, VehicleMake, VehicleModel, VehicleID;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{	super.onCreate(savedInstanceState);
@@ -51,10 +49,8 @@ public class CarInfoActivity extends Activity
 	}
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item)
-	{
-		switch (item.getItemId())
-		{
-			//action bar item defined in XML
+	{	switch (item.getItemId())
+		{	//action bar item defined in XML
 			case R.id.action_settings:
 				Toast.makeText(this, "Settings selected", Toast.LENGTH_SHORT).show();
 				break;
@@ -63,30 +59,23 @@ public class CarInfoActivity extends Activity
 		}
 		return true;
 	}
-	public static void AddVehicle(int vehicleYear,String vehicleMake, String vehicleModel, String VehicleID)
-	{
-		String profileName;
+	public void AddVehicle(int vehicleYear,String vehicleMake, String vehicleModel, String VehicleID)
+	{	String profileName;
 		if (vehicleYear + "" == "" && vehicleMake == "" && vehicleModel == "")
-		{
-			DatabaseAccess.lookupCarByID(VehicleID);
+		{	DatabaseAccess.lookupCarByID(VehicleID);
 		}
 		else
-		{
-			if (vehicleYear + "" == "")
-			{
-				//tell the user to enter year
-				Toast.makeText(CustomApplication.getCustomApplicationContext(), "It seems like you haven't entered the year", Toast.LENGTH_LONG).show();
+		{	if (vehicleYear + "" == "")
+			{	//tell the user to enter year
+				Toast.makeText(this, "It seems like you haven't entered the year", Toast.LENGTH_LONG).show();
 			}
-			else if (vehicleMake == "")
-			{
-				//tell the user to enter make
-				Toast.makeText(CustomApplication.getCustomApplicationContext(), "It seems like you haven't entered the make", Toast.LENGTH_LONG).show();
-
+			if (vehicleMake == "")
+			{	//tell the user to enter make
+				Toast.makeText(this, "It seems like you haven't entered the make", Toast.LENGTH_LONG).show();
 			}
-			else if (vehicleModel == "")
-			{
-				//tell the user to enter the model
-				Toast.makeText(CustomApplication.getCustomApplicationContext(), "It seems like you haven't entered the model", Toast.LENGTH_LONG).show();
+			if (vehicleModel == "")
+			{	//tell the user to enter the model
+				Toast.makeText(this, "It seems like you haven't entered the model", Toast.LENGTH_LONG).show();
 			}
 		}
 		//add the user's car to the database
@@ -102,9 +91,8 @@ public class CarInfoActivity extends Activity
 		//reset();
 		//else loop through the code to add another car to the database
 	}
-	public static void reset()
-	{
-		VehicleYear.setText("");
+	public void reset()
+	{	VehicleYear.setText("");
 		VehicleModel.setText("");
 		VehicleMake.setText("");
 	}

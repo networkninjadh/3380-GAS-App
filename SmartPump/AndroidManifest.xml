@@ -38,6 +38,7 @@
             android:name="com.project.smartpump.MapActivity"
             android:label="@string/title_activity_map" >
         </activity>
+       
     </application>
 
 </manifest>
