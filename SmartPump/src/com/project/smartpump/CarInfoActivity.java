@@ -23,6 +23,7 @@ public class CarInfoActivity extends Activity
 {	Context context = getBaseContext();
 	Button AddVehicle,Reset;
 	EditText VehicleYear, VehicleMake, VehicleModel, VehicleID;
+	boolean profileWasMade = false;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{	super.onCreate(savedInstanceState);
@@ -81,9 +82,29 @@ public class CarInfoActivity extends Activity
 				Toast.makeText(this, "Settings selected", Toast.LENGTH_SHORT).show();
 			break;
 			case R.id.action_done:
-				Intent done_intent = new Intent(this, MainActivity.class);
-				startActivity(done_intent);
-			break;
+				if (profileWasMade) //if a profile exists or a new one was made
+				{
+					Intent done_intent = new Intent(this, MainActivity.class);
+					startActivity(done_intent);
+				}
+				else
+				{
+					String message = "It seems that no vehicle profiles exist if you wish to add" +
+							"one later just use the settings menu";
+					AlertDialog.Builder builder = new AlertDialog.Builder(this);
+					builder.setMessage(message)
+						.setCancelable(false)
+						.setPositiveButton("OK", new DialogInterface.OnClickListener() 
+						{	@Override
+							public void onClick(DialogInterface dialog, int which) 
+							{	Intent done_intent = new Intent(MainActivity.getContext(),MainActivity.class);
+								startActivity(done_intent);
+							}
+						});
+					AlertDialog alert = builder.create();
+					alert.show();
+				}
+				break;
 			default:
 			break;
 		}
@@ -114,6 +135,7 @@ public class CarInfoActivity extends Activity
 		alert.show();
 		profileName = txtProfileName.getText().toString();
 		DatabaseAccess.saveCarToMemory(vehicleYear, vehicleMake, vehicleModel, VehicleID, profileName);
+		profileWasMade = true;
 		if (profileName != "")
 			reset();
 		else
