@@ -10,10 +10,14 @@ import com.project.smartpump.ProfileDatabaseHelper;
 //class used to interface with external databases 
 public class DatabaseAccess 
 {	public static void lookupCarByID(String vehicleID) 
-	{	// TODO Auto-generated method stub	
+	{	//find the car by it's id
+	}
+	public static void findID(int vehicleYear, String vehicleMake, String vehicleModel)
+	{
+		//find the vehicleID based of make model and year
 	}
 	public static void saveCarToMemory(int vehicleYear, String vehicleMake, String vehicleModel, String vehicleID, String profileName) 
-	{	// TODO Auto-generated method stub	
+	{	// use databasehelper to read and write from database
 		ProfileDatabaseHelper mDbHelper = new ProfileDatabaseHelper(MainActivity.getContext());
 		
 	}
