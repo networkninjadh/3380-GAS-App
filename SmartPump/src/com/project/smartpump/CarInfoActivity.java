@@ -2,12 +2,12 @@
  * @author Damond Howard
  */
 package com.project.smartpump;
+
 import com.project.classes.DatabaseAccess;
 
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.view.Menu;
@@ -35,8 +35,31 @@ public class CarInfoActivity extends Activity
 		AddVehicle.setOnClickListener(new OnClickListener()
 		{	@Override
 			public void onClick(View v) 
-			{	AddVehicle(Integer.parseInt(VehicleYear.getText().toString()),VehicleMake.getText().toString(),
-					VehicleModel.getText().toString(),VehicleID.getText().toString());
+			{	boolean allValuesEntered = false;
+				while (allValuesEntered == false)
+				{
+					if (VehicleYear.getText().toString().trim().equals(""))
+					{	//tell the user to enter year
+						Toast.makeText(CarInfoActivity.this, "It seems like you haven't entered the year", Toast.LENGTH_SHORT).show();
+						allValuesEntered = false;
+					}
+					if (VehicleMake.getText().toString().trim().equals(""))
+					{	//tell the user to enter make
+						Toast.makeText(CarInfoActivity.this, "It seems like you haven't entered the make", Toast.LENGTH_LONG).show();
+						allValuesEntered = false;
+					}
+					if (VehicleModel.getText().toString().trim().equals(""))
+					{	//tell the user to enter the model
+						Toast.makeText(CarInfoActivity.this, "It seems like you haven't entered the model", Toast.LENGTH_LONG).show();
+						allValuesEntered = false;
+					}
+					if (!VehicleYear.getText().toString().trim().equals("") && !VehicleMake.getText().toString().trim().equals("") && !VehicleModel.getText().toString().trim().equals(""))
+					{
+						allValuesEntered = true;
+					}
+				}
+				AddVehicle(Integer.parseInt(VehicleYear.getText().toString()),VehicleMake.getText().toString(),
+						VehicleModel.getText().toString(),VehicleID.getText().toString());
 			}
 		});
 		Reset.setOnClickListener(new OnClickListener()
@@ -54,12 +77,11 @@ public class CarInfoActivity extends Activity
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item)
 	{	switch (item.getItemId())
-		{	//action bar item defined in XML
-			case R.id.action_settings:
+		{	case R.id.action_settings:
 				Toast.makeText(this, "Settings selected", Toast.LENGTH_SHORT).show();
-				break;
-				default:
-				break;
+			break;
+			default:
+			break;
 		}
 		return true;
 	}
@@ -72,18 +94,6 @@ public class CarInfoActivity extends Activity
 	 */
 	public void AddVehicle(int vehicleYear,String vehicleMake, String vehicleModel, String VehicleID)
 	{	String profileName;
-		if (vehicleYear + "" == "")
-		{	//tell the user to enter year
-			Toast.makeText(this, "It seems like you haven't entered the year", Toast.LENGTH_SHORT).show();
-		}
-		if (vehicleMake == "")
-		{	//tell the user to enter make
-			Toast.makeText(this, "It seems like you haven't entered the make", Toast.LENGTH_LONG).show();
-		}
-		if (vehicleModel == "")
-		{	//tell the user to enter the model
-			Toast.makeText(this, "It seems like you haven't entered the model", Toast.LENGTH_LONG).show();
-		}
 		//add the user's car to the database
 		//ask user to enter a name for the cars profile
 		final EditText txtProfileName = new EditText(this);
@@ -107,7 +117,6 @@ public class CarInfoActivity extends Activity
 		} while(true);
 		//else loop through the code to add another car to the database
 	}
-	 
 	public void reset()
 	{	VehicleYear.setText("");
 		VehicleModel.setText("");
