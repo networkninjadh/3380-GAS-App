@@ -28,7 +28,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
         android:ems="10"
-        android:hint="@string/text1" >
+        android:hint="@string/text1"
+        android:inputType="numberDecimal" >
 
         <requestFocus />
     </EditText>
@@ -40,7 +41,8 @@
         android:layout_alignLeft="@+id/editText2"
         android:layout_centerVertical="true"
         android:ems="10"
-        android:hint="@string/text3" />
+        android:hint="@string/text3"
+        android:inputType="numberSigned" />
 
     <EditText
         android:id="@+id/editText2"
@@ -50,7 +52,8 @@
         android:layout_alignLeft="@+id/editText1"
         android:layout_marginBottom="40dp"
         android:ems="10"
-        android:hint="@string/text2" />
+        android:hint="@string/text2"
+        android:inputType="numberSigned" />
 
     <TextView
         android:id="@+id/textView1"

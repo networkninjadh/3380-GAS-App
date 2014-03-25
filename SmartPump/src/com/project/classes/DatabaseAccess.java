@@ -4,8 +4,8 @@
  */
 package com.project.classes;
 
-import com.project.smartpump.MainActivity;
-import com.project.smartpump.ProfileDatabaseHelper;
+//import com.project.smartpump.MainActivity;
+//import com.project.smartpump.ProfileDatabaseHelper;
 
 //class used to interface with external databases 
 public class DatabaseAccess 
@@ -18,7 +18,6 @@ public class DatabaseAccess
 	}
 	public static void saveCarToMemory(int vehicleYear, String vehicleMake, String vehicleModel, String vehicleID, String profileName) 
 	{	// use databasehelper to read and write from database
-		ProfileDatabaseHelper mDbHelper = new ProfileDatabaseHelper(MainActivity.getContext());
-		
+		//ProfileDatabaseHelper mDbHelper = new ProfileDatabaseHelper(MainActivity.getContext());
 	}
 }
