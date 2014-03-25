@@ -83,9 +83,9 @@ public class CarInfoActivity extends Activity
 			break;
 			case R.id.action_done:
 				if (profileWasMade) //if a profile exists or a new one was made
-				{
-					Intent done_intent = new Intent(this, MainActivity.class);
+				{	Intent done_intent = new Intent(this, MainActivity.class);
 					startActivity(done_intent);
+					finish();
 				}
 				else
 				{
@@ -104,7 +104,7 @@ public class CarInfoActivity extends Activity
 					AlertDialog alert = builder.create();
 					alert.show();
 				}
-				break;
+			break;
 			default:
 			break;
 		}

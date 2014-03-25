@@ -2,7 +2,8 @@
  * all calculations should be kept in this class
  * @author Damond Howard
  */
-package com.project.classes;
+package com.project.classes; 
+
 
 public class Calculations
 {
