@@ -1,6 +1,11 @@
 /**
  * @Author Damond Howard
  */
+
+//databasename = car_profiles
+/*database fields 
+ * profileName | vehicleID | vehicleMake | vehicleModel | vehicleYear
+ */
 package com.project.smartpump;
 
 import android.content.Context;
