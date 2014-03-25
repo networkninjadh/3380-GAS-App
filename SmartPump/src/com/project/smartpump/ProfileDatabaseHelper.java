@@ -1,5 +1,5 @@
 /**
-d * @Author Damond Howard
+ * @Author Damond Howard
  */
 
 //databasename = car_profiles

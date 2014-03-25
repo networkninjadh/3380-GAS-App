@@ -6,9 +6,10 @@ import com.project.classes.DatabaseAccess;
 
 import android.os.Bundle;
 import android.app.Activity;
-//import android.app.AlertDialog;
-//import android.app.AlertDialog.Builder;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -62,38 +63,51 @@ public class CarInfoActivity extends Activity
 		}
 		return true;
 	}
+	/**
+	 * 
+	 * @param vehicleYear
+	 * @param vehicleMake
+	 * @param vehicleModel
+	 * @param VehicleID
+	 */
 	public void AddVehicle(int vehicleYear,String vehicleMake, String vehicleModel, String VehicleID)
 	{	String profileName;
-		if ((Integer)vehicleYear == null && vehicleMake == "" && vehicleModel == "")
-		{	//DatabaseAccess.lookupCarByID(VehicleID);
+		if (vehicleYear + "" == "")
+		{	//tell the user to enter year
+			Toast.makeText(this, "It seems like you haven't entered the year", Toast.LENGTH_SHORT).show();
 		}
-		else
-		{	if (vehicleYear + "" == "")
-			{	//tell the user to enter year
-				Toast.makeText(this, "It seems like you haven't entered the year", Toast.LENGTH_SHORT).show();
-			}
-			if (vehicleMake == "")
-			{	//tell the user to enter make
-				Toast.makeText(this, "It seems like you haven't entered the make", Toast.LENGTH_LONG).show();
-			}
-			if (vehicleModel == "")
-			{	//tell the user to enter the model
-				Toast.makeText(this, "It seems like you haven't entered the model", Toast.LENGTH_LONG).show();
-			}
+		if (vehicleMake == "")
+		{	//tell the user to enter make
+			Toast.makeText(this, "It seems like you haven't entered the make", Toast.LENGTH_LONG).show();
+		}
+		if (vehicleModel == "")
+		{	//tell the user to enter the model
+			Toast.makeText(this, "It seems like you haven't entered the model", Toast.LENGTH_LONG).show();
 		}
 		//add the user's car to the database
 		//ask user to enter a name for the cars profile
-		/*final EditText txtProfileName = new EditText(this);
-		String message = "";
+		final EditText txtProfileName = new EditText(this);
+		String message = "Please enter a profile name for your car.";
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setMessage(message);
-		*/
-		profileName = " ";
-		DatabaseAccess.saveCarToMemory(vehicleYear, vehicleMake, vehicleModel, VehicleID, profileName);
-		//ask to add another car if yes clear form data 
-		//reset();
+		builder.setMessage(message)
+			.setCancelable(false)
+			.setView(txtProfileName)
+			.setPositiveButton("OK", new DialogInterface.OnClickListener() 
+			{	@Override
+				public void onClick(DialogInterface dialog, int which) 
+				{	//what to do when button is pressed	
+				}
+			});
+		AlertDialog alert = builder.create();
+		do{
+			alert.show();
+			profileName = txtProfileName.getText().toString();
+			DatabaseAccess.saveCarToMemory(vehicleYear, vehicleMake, vehicleModel, VehicleID, profileName);
+			reset();
+		} while(true);
 		//else loop through the code to add another car to the database
 	}
+	 
 	public void reset()
 	{	VehicleYear.setText("");
 		VehicleModel.setText("");

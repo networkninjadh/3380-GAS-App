@@ -6,24 +6,27 @@ package com.project.smartpump;
 import android.provider.BaseColumns;
 
 public class ProfileDatabaseContract 
-{
+{	/**
+	 * empty constructor so noone creates an instance of this class
+	 */
 	public ProfileDatabaseContract(){}
-	
 	/**
+	 * returns the sql query to make database entry
 	 * @return the sqlCreateEntries
 	 */
 	public static String getSqlCreateEntries() 
-	{
-		return SQL_CREATE_ENTRIES;
+	{	return SQL_CREATE_ENTRIES;
 	}
+	/**
+	 * returns the sql query to delete database entry
+	 * @return the sqlDeleteEntries
+	 */
 	public static String getSqlDeleteEntries()
-	{
-		return SQL_DELETE_ENTRIES;
+	{	return SQL_DELETE_ENTRIES;
 	}
 	/* Inner class that defines the table contents */
 	public static abstract class ProfileEntry implements BaseColumns
-	{
-		public static final String TABLE_NAME = "entry";
+	{	public static final String TABLE_NAME = "entry";
 		public static final String COLUMN_NAME_PROFILE_NAME = "profile";
 		public static final String COLUMN_NAME_MAKE = "make";
 		public static final String COLUMN_NAME_MODEL = "model";
@@ -41,5 +44,4 @@ public class ProfileDatabaseContract
 			" )";
 	private static final String SQL_DELETE_ENTRIES =
 			"DROP TABLE IF EXISTS " + ProfileEntry.TABLE_NAME;
-	
 }

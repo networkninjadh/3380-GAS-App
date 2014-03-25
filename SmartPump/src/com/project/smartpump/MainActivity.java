@@ -75,6 +75,14 @@ public class MainActivity extends Activity
 		}
 		return true;
 	}
+	/**
+	 * calculates cost based off mpg gas prices distance to the gas station and how many gallons the user plans to buy
+	 * @param MPG
+	 * @param stationCost
+	 * @param distanceToStation
+	 * @param numberOfGallonsPlanned
+	 * @return realCost
+	 */
 	public double calculate(double MPG, double stationCost, double distanceToStation, double numberOfGallonsPlanned)
 	{	double realCost;
 		double distanceInGals;
@@ -84,6 +92,13 @@ public class MainActivity extends Activity
         realCost = ((stationCost * numberOfGallonsPlanned) + additionalCostInDollars)/numberOfGallonsPlanned;
         return realCost;
 	}
+	/**
+	 * calculates cost based off miles mpg and gas price
+	 * @param MPG
+	 * @param stationCost
+	 * @param Miles
+	 * @return realCost
+	 */
 	public double calculate(double MPG,double stationCost, double Miles)
 	{	double realCost;
 		double distanceInGals;
@@ -93,6 +108,9 @@ public class MainActivity extends Activity
 		realCost = ((stationCost * 1.0) + additionalCostInDollars)/1.0;
 		return realCost;
 	}
+	/**
+	 * resets the fields 
+	 */
 	public void reset()
 	{	MPG.setText("");
 		FuelPrice.setText("");
