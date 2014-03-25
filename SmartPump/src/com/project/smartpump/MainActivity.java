@@ -4,8 +4,9 @@
 
 package com.project.smartpump;
 
-import com.project.classes.DatabaseAccess;
-import com.project.classes.Vehicle;
+import com.project.classes.Calculations;
+//import com.project.classes.DatabaseAccess;
+//import com.project.classes.Vehicle;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -43,10 +44,10 @@ public class MainActivity extends Activity
 		{	@Override
 			public void onClick(View v) 
 			{	if (FuelPrice.getText().toString().trim().equals("") && MPG.getText().toString().trim().equals("") && Miles.getText().toString().trim().equals(""))
-				{	Vehicle vehicle = DatabaseAccess.getInfoFromDatabase();	
+				{	//Vehicle vehicle = DatabaseAccess.getInfoFromDatabase();	
 				}
 				else
-				{	Double out = calculate(Double.parseDouble(MPG.getText().toString()),Double.parseDouble(FuelPrice.getText().toString()),
+				{	Double out = Calculations.calculate(Double.parseDouble(MPG.getText().toString()),Double.parseDouble(FuelPrice.getText().toString()),
 								Double.parseDouble(Miles.getText().toString()),1.0);
 					output.setText(out.toString());
 				}				
@@ -67,48 +68,13 @@ public class MainActivity extends Activity
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item)
 	{	switch (item.getItemId())
-		{	//action bar item defined in XML
-			case R.id.action_settings:
+		{	case R.id.action_settings:
 				Toast.makeText(this, "Settings selected", Toast.LENGTH_SHORT).show();
-				//go to settings activity
 				break;
 				default:
 				break;		
 		}
 		return true;
-	}
-	/**
-	 * calculates cost based off mpg gas prices distance to the gas station and how many gallons the user plans to buy
-	 * @param MPG
-	 * @param stationCost
-	 * @param distanceToStation
-	 * @param numberOfGallonsPlanned
-	 * @return realCost
-	 */
-	public double calculate(double MPG, double stationCost, double distanceToStation, double numberOfGallonsPlanned)
-	{	double realCost;
-		double distanceInGals;
-        double additionalCostInDollars;
-        distanceInGals = (distanceToStation/MPG);
-        additionalCostInDollars = distanceInGals*stationCost;
-        realCost = ((stationCost * numberOfGallonsPlanned) + additionalCostInDollars)/numberOfGallonsPlanned;
-        return realCost;
-	}
-	/**
-	 * calculates cost based off miles mpg and gas price
-	 * @param MPG
-	 * @param stationCost
-	 * @param Miles
-	 * @return realCost
-	 */
-	public double calculate(double MPG,double stationCost, double Miles)
-	{	double realCost;
-		double distanceInGals;
-		double additionalCostInDollars;
-		distanceInGals = (1.0/MPG);
-		additionalCostInDollars = distanceInGals*stationCost;
-		realCost = ((stationCost * 1.0) + additionalCostInDollars)/1.0;
-		return realCost;
 	}
 	/**
 	 * resets the fields 
