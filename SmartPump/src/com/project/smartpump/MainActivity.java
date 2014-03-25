@@ -1,3 +1,7 @@
+/**
+ * @author Damond Howard
+ */
+
 package com.project.smartpump;
 
 import android.os.Bundle;
@@ -60,7 +64,7 @@ public class MainActivity extends Activity
 				//go to settings activity
 				break;
 				default:
-				break;
+				break;		
 		}
 		return true;
 	}
@@ -73,8 +77,13 @@ public class MainActivity extends Activity
         realCost = ((stationCost * numberOfGallonsPlanned) + additionalCostInDollars)/numberOfGallonsPlanned;
         return realCost;
 	}
-	public double calculate(double MPG,double FuelPrice, double Miles)
-	{	double realCost = 0.0;
+	public double calculate(double MPG,double stationCost, double Miles)
+	{	double realCost;
+		double distanceInGals;
+		double additionalCostInDollars;
+		distanceInGals = (1.0/MPG);
+		additionalCostInDollars = distanceInGals*stationCost;
+		realCost = ((stationCost * 1.0) + additionalCostInDollars)/1.0;
 		return realCost;
 	}
 	public void reset()

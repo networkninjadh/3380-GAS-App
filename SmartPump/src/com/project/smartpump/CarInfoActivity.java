@@ -1,3 +1,6 @@
+/**
+ * @author Damond Howard
+ */
 package com.project.smartpump;
 import com.project.classes.DatabaseAccess;
 
