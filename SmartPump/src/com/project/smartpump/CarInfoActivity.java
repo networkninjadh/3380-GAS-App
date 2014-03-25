@@ -35,28 +35,17 @@ public class CarInfoActivity extends Activity
 		AddVehicle.setOnClickListener(new OnClickListener()
 		{	@Override
 			public void onClick(View v) 
-			{	boolean allValuesEntered = false;
-				while (allValuesEntered == false)
-				{
-					if (VehicleYear.getText().toString().trim().equals(""))
-					{	//tell the user to enter year
-						Toast.makeText(CarInfoActivity.this, "It seems like you haven't entered the year", Toast.LENGTH_SHORT).show();
-						allValuesEntered = false;
-					}
-					if (VehicleMake.getText().toString().trim().equals(""))
-					{	//tell the user to enter make
-						Toast.makeText(CarInfoActivity.this, "It seems like you haven't entered the make", Toast.LENGTH_LONG).show();
-						allValuesEntered = false;
-					}
-					if (VehicleModel.getText().toString().trim().equals(""))
-					{	//tell the user to enter the model
-						Toast.makeText(CarInfoActivity.this, "It seems like you haven't entered the model", Toast.LENGTH_LONG).show();
-						allValuesEntered = false;
-					}
-					if (!VehicleYear.getText().toString().trim().equals("") && !VehicleMake.getText().toString().trim().equals("") && !VehicleModel.getText().toString().trim().equals(""))
-					{
-						allValuesEntered = true;
-					}
+			{	if (VehicleYear.getText().toString().trim().equals(""))
+				{	//tell the user to enter year
+					Toast.makeText(CarInfoActivity.this, "It seems like you haven't entered the year", Toast.LENGTH_SHORT).show();
+				}
+				if (VehicleMake.getText().toString().trim().equals(""))
+				{	//tell the user to enter make
+					Toast.makeText(CarInfoActivity.this, "It seems like you haven't entered the make", Toast.LENGTH_SHORT).show();
+				}
+				if (VehicleModel.getText().toString().trim().equals(""))
+				{	//tell the user to enter the model
+					Toast.makeText(CarInfoActivity.this, "It seems like you haven't entered the model", Toast.LENGTH_SHORT).show();
 				}
 				AddVehicle(Integer.parseInt(VehicleYear.getText().toString()),VehicleMake.getText().toString(),
 						VehicleModel.getText().toString(),VehicleID.getText().toString());
@@ -94,10 +83,8 @@ public class CarInfoActivity extends Activity
 	 */
 	public void AddVehicle(int vehicleYear,String vehicleMake, String vehicleModel, String VehicleID)
 	{	String profileName;
-		//add the user's car to the database
-		//ask user to enter a name for the cars profile
 		final EditText txtProfileName = new EditText(this);
-		String message = "Please enter a profile name for your car.";
+		String message = "Please enter a profile name for your vehicle.";
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setMessage(message)
 			.setCancelable(false)
@@ -109,13 +96,11 @@ public class CarInfoActivity extends Activity
 				}
 			});
 		AlertDialog alert = builder.create();
-		do{
-			alert.show();
-			profileName = txtProfileName.getText().toString();
-			DatabaseAccess.saveCarToMemory(vehicleYear, vehicleMake, vehicleModel, VehicleID, profileName);
-			reset();
-		} while(true);
-		//else loop through the code to add another car to the database
+		alert.show();
+		profileName = txtProfileName.getText().toString();
+		DatabaseAccess.saveCarToMemory(vehicleYear, vehicleMake, vehicleModel, VehicleID, profileName);
+		reset();
+		//add another car when done is clicked start map activity
 	}
 	public void reset()
 	{	VehicleYear.setText("");
