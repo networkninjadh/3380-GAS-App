@@ -6,6 +6,7 @@ package com.project.smartpump;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
 //import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,10 +21,16 @@ public class MainActivity extends Activity
 {	static EditText FuelPrice,MPG,Miles;
 	static Button   calculate,reset;
 	static TextView output;
+	public static Context context;
+	public static Context getContext()
+	{
+		return context;
+	}
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{	super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		context = getApplicationContext();
 		FuelPrice = (EditText)findViewById(R.id.editText1);
 		MPG = (EditText)findViewById(R.id.editText2);
 		Miles = (EditText)findViewById(R.id.editText3);
