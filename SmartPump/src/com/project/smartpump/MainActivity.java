@@ -4,6 +4,9 @@
 
 package com.project.smartpump;
 
+import com.project.classes.DatabaseAccess;
+import com.project.classes.Vehicle;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
@@ -23,8 +26,7 @@ public class MainActivity extends Activity
 	static TextView output;
 	public static Context context;
 	public static Context getContext()
-	{
-		return context;
+	{	return context;
 	}
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
@@ -40,8 +42,8 @@ public class MainActivity extends Activity
 		calculate.setOnClickListener(new OnClickListener()
 		{	@Override
 			public void onClick(View v) 
-			{	if (FuelPrice.getText().toString() == "" && MPG.getText().toString() == "" && Miles.getText().toString() == "")
-				{	//getInfoFromDatabase();	
+			{	if (FuelPrice.getText().toString().trim().equals("") && MPG.getText().toString().trim().equals("") && Miles.getText().toString().trim().equals(""))
+				{	Vehicle vehicle = DatabaseAccess.getInfoFromDatabase();	
 				}
 				else
 				{	Double out = calculate(Double.parseDouble(MPG.getText().toString()),Double.parseDouble(FuelPrice.getText().toString()),
@@ -116,8 +118,5 @@ public class MainActivity extends Activity
 		FuelPrice.setText("");
 		Miles.setText("");
 		output.setText("");
-	}
-	public void getInfoFromDatabase()
-	{	//gets fuelPrice MPG and Miles from externel database
 	}
 }

@@ -4,7 +4,7 @@
 
 //databasename = car_profiles
 /*database fields 
- * profileName | vehicleID | vehicleMake | vehicleModel | vehicleYear
+ * | profileName | vehicleID | vehicleMake | vehicleModel | vehicleYear |
  */
 package com.project.smartpump;
 
