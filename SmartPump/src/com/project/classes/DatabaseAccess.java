@@ -44,6 +44,14 @@ public class DatabaseAccess
 		return false;
 	}
 	/**
+	 * saves a vehicle profile to memory based off the vehicleID
+	 * @param vehicleID
+	 */
+	public static boolean saveCarToMemory(String vehicleID, String profileName) 
+	{	//use databasehelper to read and write from database
+		return false;
+	}
+	/**
 	 * Returns a Vehicle object representing the last car added to the database
 	 * @return the last car added to the database
 	 */

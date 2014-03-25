@@ -18,7 +18,9 @@
     <string name="title_activity_car_info">MainActivity</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_map">MapActivity</string>
+    <string name="title_activity_main"> New Vehicle Record</string>
     <string name="text8">Latitude</string>
     <string name="text9">Longitude</string>
+    <string name="action_done">Done</string>
 
 </resources>
