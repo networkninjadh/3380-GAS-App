@@ -37,14 +37,11 @@ public class CarInfoActivity extends Activity
 		AddVehicle.setOnClickListener(new OnClickListener()
 		{	@Override
 			public void onClick(View v) 
-			{	
-				if (!VehicleID.getText().toString().trim().equals(""))
-				{
-					AddVehicle(VehicleID.getText().toString());
+			{	if (!VehicleID.getText().toString().trim().equals(""))
+				{	AddVehicle(VehicleID.getText().toString());
 				}
 				else
-				{
-					if (VehicleYear.getText().toString().trim().equals(""))
+				{	if (VehicleYear.getText().toString().trim().equals(""))
 					{	//tell the user to enter year
 						Toast.makeText(CarInfoActivity.this, "It seems like you haven't entered the year", Toast.LENGTH_SHORT).show();
 					}
@@ -88,8 +85,7 @@ public class CarInfoActivity extends Activity
 					finish();
 				}
 				else
-				{
-					String message = "It seems that no vehicle profiles exist if you wish to add" +
+				{	String message = "It seems that no vehicle profiles exist if you wish to add" +
 							"one later just use the settings menu";
 					AlertDialog.Builder builder = new AlertDialog.Builder(this);
 					builder.setMessage(message)

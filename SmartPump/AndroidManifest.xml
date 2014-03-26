@@ -32,7 +32,9 @@
             android:name="com.project.smartpump.MapActivity"
             android:label="@string/title_activity_map" >
         </activity>
-       
+       <meta-data
+    android:name="com.google.android.maps.v2.API_KEY"
+    android:value="AIzaSyBEKWe_ckGIC98ND3RHghNYtLJfpWbEcE0"/>
     </application>
 
 </manifest>
