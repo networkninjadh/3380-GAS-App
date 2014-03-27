@@ -80,11 +80,11 @@ public class CarInfoActivity extends Activity
 			break;
 			case R.id.action_done:
 				if (profileWasMade) //if a profile exists or a new one was made
-				{	Intent done_intent = new Intent(this, MainActivity.class);
+				{	Intent done_intent = new Intent(this, MapActivity.class);
 					startActivity(done_intent);
 					finish();
 				}
-				else
+				else //do this when nothing was pressed error in here
 				{	String message = "It seems that no vehicle profiles exist if you wish to add" +
 							"one later just use the settings menu";
 					AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -93,8 +93,11 @@ public class CarInfoActivity extends Activity
 						.setPositiveButton("OK", new DialogInterface.OnClickListener() 
 						{	@Override
 							public void onClick(DialogInterface dialog, int which) 
-							{	Intent done_intent = new Intent(MainActivity.getContext(),MainActivity.class);
+							{	
+								//this is causing the error
+								Intent done_intent = new Intent(context,MapActivity.class);
 								startActivity(done_intent);
+								finish();
 							}
 						});
 					AlertDialog alert = builder.create();

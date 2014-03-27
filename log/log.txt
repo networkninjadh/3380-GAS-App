@@ -1,0 +1,158 @@
+03-25 20:01:41.121: D/AndroidRuntime(20237): Shutting down VM
+03-25 20:01:41.121: W/dalvikvm(20237): threadid=1: thread exiting with uncaught exception (group=0x416a0898)
+03-25 20:01:41.125: E/AndroidRuntime(20237): FATAL EXCEPTION: main
+03-25 20:01:41.125: E/AndroidRuntime(20237): java.lang.RuntimeException: Unable to start activity ComponentInfo{com.project.smartpump/com.project.smartpump.MapActivity}: android.view.InflateException: Binary XML file line #2: Error inflating class fragment
+03-25 20:01:41.125: E/AndroidRuntime(20237): 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:2228)
+03-25 20:01:41.125: E/AndroidRuntime(20237): 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:2288)
+03-25 20:01:41.125: E/AndroidRuntime(20237): 	at android.app.ActivityThread.access$600(ActivityThread.java:148)
+03-25 20:01:41.125: E/AndroidRuntime(20237): 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1273)
+03-25 20:01:41.125: E/AndroidRuntime(20237): 	at android.os.Handler.dispatchMessage(Handler.java:99)
+03-25 20:01:41.125: E/AndroidRuntime(20237): 	at android.os.Looper.loop(Looper.java:137)
+03-25 20:01:41.125: E/AndroidRuntime(20237): 	at android.app.ActivityThread.main(ActivityThread.java:5222)
+03-25 20:01:41.125: E/AndroidRuntime(20237): 	at java.lang.reflect.Method.invokeNative(Native Method)
+03-25 20:01:41.125: E/AndroidRuntime(20237): 	at java.lang.reflect.Method.invoke(Method.java:525)
+03-25 20:01:41.125: E/AndroidRuntime(20237): 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:737)
+03-25 20:01:41.125: E/AndroidRuntime(20237): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:553)
+03-25 20:01:41.125: E/AndroidRuntime(20237): 	at dalvik.system.NativeStart.main(Native Method)
+03-25 20:01:41.125: E/AndroidRuntime(20237): Caused by: android.view.InflateException: Binary XML file line #2: Error inflating class fragment
+03-25 20:01:41.125: E/AndroidRuntime(20237): 	at android.view.LayoutInflater.createViewFromTag(LayoutInflater.java:713)
+03-25 20:01:41.125: E/AndroidRuntime(20237): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:469)
+03-25 20:01:41.125: E/AndroidRuntime(20237): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:397)
+03-25 20:01:41.125: E/AndroidRuntime(20237): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:353)
+03-25 20:01:41.125: E/AndroidRuntime(20237): 	at com.android.internal.policy.impl.PhoneWindow.setContentView(PhoneWindow.java:267)
+03-25 20:01:41.125: E/AndroidRuntime(20237): 	at android.app.Activity.setContentView(Activity.java:1903)
+03-25 20:01:41.125: E/AndroidRuntime(20237): 	at com.project.smartpump.MapActivity.onCreate(MapActivity.java:18)
+03-25 20:01:41.125: E/AndroidRuntime(20237): 	at android.app.Activity.performCreate(Activity.java:5150)
+03-25 20:01:41.125: E/AndroidRuntime(20237): 	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1087)
+03-25 20:01:41.125: E/AndroidRuntime(20237): 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:2192)
+03-25 20:01:41.125: E/AndroidRuntime(20237): 	... 11 more
+03-25 20:01:41.125: E/AndroidRuntime(20237): Caused by: android.app.Fragment$InstantiationException: Unable to instantiate fragment com.google.android.gms.maps.MapFragment: make sure class name exists, is public, and has an empty constructor that is public
+03-25 20:01:41.125: E/AndroidRuntime(20237): 	at android.app.Fragment.instantiate(Fragment.java:592)
+03-25 20:01:41.125: E/AndroidRuntime(20237): 	at android.app.Fragment.instantiate(Fragment.java:560)
+03-25 20:01:41.125: E/AndroidRuntime(20237): 	at android.app.Activity.onCreateView(Activity.java:4755)
+03-25 20:01:41.125: E/AndroidRuntime(20237): 	at android.view.LayoutInflater.createViewFromTag(LayoutInflater.java:689)
+03-25 20:01:41.125: E/AndroidRuntime(20237): 	... 20 more
+03-25 20:01:41.125: E/AndroidRuntime(20237): Caused by: java.lang.ClassNotFoundException: Didn't find class "com.google.android.gms.maps.MapFragment" on path: DexPathList[[zip file "/system/framework/com.google.android.maps.jar", zip file "/data/app/com.project.smartpump-1.apk"],nativeLibraryDirectories=[/data/app-lib/com.project.smartpump-1, /vendor/lib, /system/lib]]
+03-25 20:01:41.125: E/AndroidRuntime(20237): 	at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:53)
+03-25 20:01:41.125: E/AndroidRuntime(20237): 	at java.lang.ClassLoader.loadClass(ClassLoader.java:501)
+03-25 20:01:41.125: E/AndroidRuntime(20237): 	at java.lang.ClassLoader.loadClass(ClassLoader.java:461)
+03-25 20:01:41.125: E/AndroidRuntime(20237): 	at android.app.Fragment.instantiate(Fragment.java:582)
+03-25 20:01:41.125: E/AndroidRuntime(20237): 	... 23 more
+03-25 20:02:27.341: D/libEGL(21105): loaded /vendor/lib/egl/libEGL_adreno.so
+03-25 20:02:27.342: D/libEGL(21105): loaded /vendor/lib/egl/libGLESv1_CM_adreno.so
+03-25 20:02:27.349: D/libEGL(21105): loaded /vendor/lib/egl/libGLESv2_adreno.so
+03-25 20:02:27.353: I/Adreno-EGL(21105): <qeglDrvAPI_eglInitialize:316>: EGL 1.4 QUALCOMM build: AU_LINUX_ANDROID_JB_3.2.3.04.03.00.166.006_msm8226_JB_3.2.3__release_AU ()
+03-25 20:02:27.353: I/Adreno-EGL(21105): OpenGL ES Shader Compiler Version: 20.00.01
+03-25 20:02:27.353: I/Adreno-EGL(21105): Build Date: 10/17/13 Thu
+03-25 20:02:27.353: I/Adreno-EGL(21105): Local Branch: 
+03-25 20:02:27.353: I/Adreno-EGL(21105): Remote Branch: quic/jb_3.2.3
+03-25 20:02:27.353: I/Adreno-EGL(21105): Local Patches: NONE
+03-25 20:02:27.353: I/Adreno-EGL(21105): Reconstruct Branch: AU_LINUX_ANDROID_JB_3.2.3.04.03.00.166.006 +  NOTHING
+03-25 20:02:27.399: D/OpenGLRenderer(21105): Enabling debug mode 0
+03-25 20:02:28.966: W/IInputConnectionWrapper(21105): beginBatchEdit on inactive InputConnection
+03-25 20:02:28.966: W/IInputConnectionWrapper(21105): endBatchEdit on inactive InputConnection
+03-25 20:02:30.935: D/AndroidRuntime(21105): Shutting down VM
+03-25 20:02:30.937: W/dalvikvm(21105): threadid=1: thread exiting with uncaught exception (group=0x416a0898)
+03-25 20:02:30.940: E/AndroidRuntime(21105): FATAL EXCEPTION: main
+03-25 20:02:30.940: E/AndroidRuntime(21105): java.lang.NullPointerException
+03-25 20:02:30.940: E/AndroidRuntime(21105): 	at android.content.ComponentName.<init>(ComponentName.java:75)
+03-25 20:02:30.940: E/AndroidRuntime(21105): 	at android.content.Intent.<init>(Intent.java:3672)
+03-25 20:02:30.940: E/AndroidRuntime(21105): 	at com.project.smartpump.CarInfoActivity$3.onClick(CarInfoActivity.java:97)
+03-25 20:02:30.940: E/AndroidRuntime(21105): 	at com.android.internal.app.AlertController$ButtonHandler.handleMessage(AlertController.java:166)
+03-25 20:02:30.940: E/AndroidRuntime(21105): 	at android.os.Handler.dispatchMessage(Handler.java:99)
+03-25 20:02:30.940: E/AndroidRuntime(21105): 	at android.os.Looper.loop(Looper.java:137)
+03-25 20:02:30.940: E/AndroidRuntime(21105): 	at android.app.ActivityThread.main(ActivityThread.java:5222)
+03-25 20:02:30.940: E/AndroidRuntime(21105): 	at java.lang.reflect.Method.invokeNative(Native Method)
+03-25 20:02:30.940: E/AndroidRuntime(21105): 	at java.lang.reflect.Method.invoke(Method.java:525)
+03-25 20:02:30.940: E/AndroidRuntime(21105): 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:737)
+03-25 20:02:30.940: E/AndroidRuntime(21105): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:553)
+03-25 20:02:30.940: E/AndroidRuntime(21105): 	at dalvik.system.NativeStart.main(Native Method)
+03-25 20:02:38.652: D/libEGL(21743): loaded /vendor/lib/egl/libEGL_adreno.so
+03-25 20:02:38.653: D/libEGL(21743): loaded /vendor/lib/egl/libGLESv1_CM_adreno.so
+03-25 20:02:38.658: D/libEGL(21743): loaded /vendor/lib/egl/libGLESv2_adreno.so
+03-25 20:02:38.660: I/Adreno-EGL(21743): <qeglDrvAPI_eglInitialize:316>: EGL 1.4 QUALCOMM build: AU_LINUX_ANDROID_JB_3.2.3.04.03.00.166.006_msm8226_JB_3.2.3__release_AU ()
+03-25 20:02:38.660: I/Adreno-EGL(21743): OpenGL ES Shader Compiler Version: 20.00.01
+03-25 20:02:38.660: I/Adreno-EGL(21743): Build Date: 10/17/13 Thu
+03-25 20:02:38.660: I/Adreno-EGL(21743): Local Branch: 
+03-25 20:02:38.660: I/Adreno-EGL(21743): Remote Branch: quic/jb_3.2.3
+03-25 20:02:38.660: I/Adreno-EGL(21743): Local Patches: NONE
+03-25 20:02:38.660: I/Adreno-EGL(21743): Reconstruct Branch: AU_LINUX_ANDROID_JB_3.2.3.04.03.00.166.006 +  NOTHING
+03-25 20:02:38.693: D/OpenGLRenderer(21743): Enabling debug mode 0
+03-25 20:02:50.903: D/AndroidRuntime(21743): Shutting down VM
+03-25 20:02:50.903: W/dalvikvm(21743): threadid=1: thread exiting with uncaught exception (group=0x416a0898)
+03-25 20:02:50.916: E/AndroidRuntime(21743): FATAL EXCEPTION: main
+03-25 20:02:50.916: E/AndroidRuntime(21743): java.lang.RuntimeException: Unable to start activity ComponentInfo{com.project.smartpump/com.project.smartpump.MapActivity}: android.view.InflateException: Binary XML file line #2: Error inflating class fragment
+03-25 20:02:50.916: E/AndroidRuntime(21743): 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:2228)
+03-25 20:02:50.916: E/AndroidRuntime(21743): 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:2288)
+03-25 20:02:50.916: E/AndroidRuntime(21743): 	at android.app.ActivityThread.access$600(ActivityThread.java:148)
+03-25 20:02:50.916: E/AndroidRuntime(21743): 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1273)
+03-25 20:02:50.916: E/AndroidRuntime(21743): 	at android.os.Handler.dispatchMessage(Handler.java:99)
+03-25 20:02:50.916: E/AndroidRuntime(21743): 	at android.os.Looper.loop(Looper.java:137)
+03-25 20:02:50.916: E/AndroidRuntime(21743): 	at android.app.ActivityThread.main(ActivityThread.java:5222)
+03-25 20:02:50.916: E/AndroidRuntime(21743): 	at java.lang.reflect.Method.invokeNative(Native Method)
+03-25 20:02:50.916: E/AndroidRuntime(21743): 	at java.lang.reflect.Method.invoke(Method.java:525)
+03-25 20:02:50.916: E/AndroidRuntime(21743): 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:737)
+03-25 20:02:50.916: E/AndroidRuntime(21743): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:553)
+03-25 20:02:50.916: E/AndroidRuntime(21743): 	at dalvik.system.NativeStart.main(Native Method)
+03-25 20:02:50.916: E/AndroidRuntime(21743): Caused by: android.view.InflateException: Binary XML file line #2: Error inflating class fragment
+03-25 20:02:50.916: E/AndroidRuntime(21743): 	at android.view.LayoutInflater.createViewFromTag(LayoutInflater.java:713)
+03-25 20:02:50.916: E/AndroidRuntime(21743): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:469)
+03-25 20:02:50.916: E/AndroidRuntime(21743): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:397)
+03-25 20:02:50.916: E/AndroidRuntime(21743): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:353)
+03-25 20:02:50.916: E/AndroidRuntime(21743): 	at com.android.internal.policy.impl.PhoneWindow.setContentView(PhoneWindow.java:267)
+03-25 20:02:50.916: E/AndroidRuntime(21743): 	at android.app.Activity.setContentView(Activity.java:1903)
+03-25 20:02:50.916: E/AndroidRuntime(21743): 	at com.project.smartpump.MapActivity.onCreate(MapActivity.java:18)
+03-25 20:02:50.916: E/AndroidRuntime(21743): 	at android.app.Activity.performCreate(Activity.java:5150)
+03-25 20:02:50.916: E/AndroidRuntime(21743): 	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1087)
+03-25 20:02:50.916: E/AndroidRuntime(21743): 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:2192)
+03-25 20:02:50.916: E/AndroidRuntime(21743): 	... 11 more
+03-25 20:02:50.916: E/AndroidRuntime(21743): Caused by: android.app.Fragment$InstantiationException: Unable to instantiate fragment com.google.android.gms.maps.MapFragment: make sure class name exists, is public, and has an empty constructor that is public
+03-25 20:02:50.916: E/AndroidRuntime(21743): 	at android.app.Fragment.instantiate(Fragment.java:592)
+03-25 20:02:50.916: E/AndroidRuntime(21743): 	at android.app.Fragment.instantiate(Fragment.java:560)
+03-25 20:02:50.916: E/AndroidRuntime(21743): 	at android.app.Activity.onCreateView(Activity.java:4755)
+03-25 20:02:50.916: E/AndroidRuntime(21743): 	at android.view.LayoutInflater.createViewFromTag(LayoutInflater.java:689)
+03-25 20:02:50.916: E/AndroidRuntime(21743): 	... 20 more
+03-25 20:02:50.916: E/AndroidRuntime(21743): Caused by: java.lang.ClassNotFoundException: Didn't find class "com.google.android.gms.maps.MapFragment" on path: DexPathList[[zip file "/system/framework/com.google.android.maps.jar", zip file "/data/app/com.project.smartpump-2.apk"],nativeLibraryDirectories=[/data/app-lib/com.project.smartpump-2, /vendor/lib, /system/lib]]
+03-25 20:02:50.916: E/AndroidRuntime(21743): 	at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:53)
+03-25 20:02:50.916: E/AndroidRuntime(21743): 	at java.lang.ClassLoader.loadClass(ClassLoader.java:501)
+03-25 20:02:50.916: E/AndroidRuntime(21743): 	at java.lang.ClassLoader.loadClass(ClassLoader.java:461)
+03-25 20:02:50.916: E/AndroidRuntime(21743): 	at android.app.Fragment.instantiate(Fragment.java:582)
+03-25 20:02:50.916: E/AndroidRuntime(21743): 	... 23 more
+03-25 20:03:03.121: D/libEGL(22198): loaded /vendor/lib/egl/libEGL_adreno.so
+03-25 20:03:03.122: D/libEGL(22198): loaded /vendor/lib/egl/libGLESv1_CM_adreno.so
+03-25 20:03:03.130: D/libEGL(22198): loaded /vendor/lib/egl/libGLESv2_adreno.so
+03-25 20:03:03.133: I/Adreno-EGL(22198): <qeglDrvAPI_eglInitialize:316>: EGL 1.4 QUALCOMM build: AU_LINUX_ANDROID_JB_3.2.3.04.03.00.166.006_msm8226_JB_3.2.3__release_AU ()
+03-25 20:03:03.133: I/Adreno-EGL(22198): OpenGL ES Shader Compiler Version: 20.00.01
+03-25 20:03:03.133: I/Adreno-EGL(22198): Build Date: 10/17/13 Thu
+03-25 20:03:03.133: I/Adreno-EGL(22198): Local Branch: 
+03-25 20:03:03.133: I/Adreno-EGL(22198): Remote Branch: quic/jb_3.2.3
+03-25 20:03:03.133: I/Adreno-EGL(22198): Local Patches: NONE
+03-25 20:03:03.133: I/Adreno-EGL(22198): Reconstruct Branch: AU_LINUX_ANDROID_JB_3.2.3.04.03.00.166.006 +  NOTHING
+03-25 20:03:03.166: D/OpenGLRenderer(22198): Enabling debug mode 0
+03-25 20:03:05.133: D/AndroidRuntime(22198): Shutting down VM
+03-25 20:03:05.133: W/dalvikvm(22198): threadid=1: thread exiting with uncaught exception (group=0x416a0898)
+03-25 20:03:05.135: E/AndroidRuntime(22198): FATAL EXCEPTION: main
+03-25 20:03:05.135: E/AndroidRuntime(22198): java.lang.NullPointerException
+03-25 20:03:05.135: E/AndroidRuntime(22198): 	at android.content.ComponentName.<init>(ComponentName.java:75)
+03-25 20:03:05.135: E/AndroidRuntime(22198): 	at android.content.Intent.<init>(Intent.java:3672)
+03-25 20:03:05.135: E/AndroidRuntime(22198): 	at com.project.smartpump.CarInfoActivity$3.onClick(CarInfoActivity.java:97)
+03-25 20:03:05.135: E/AndroidRuntime(22198): 	at com.android.internal.app.AlertController$ButtonHandler.handleMessage(AlertController.java:166)
+03-25 20:03:05.135: E/AndroidRuntime(22198): 	at android.os.Handler.dispatchMessage(Handler.java:99)
+03-25 20:03:05.135: E/AndroidRuntime(22198): 	at android.os.Looper.loop(Looper.java:137)
+03-25 20:03:05.135: E/AndroidRuntime(22198): 	at android.app.ActivityThread.main(ActivityThread.java:5222)
+03-25 20:03:05.135: E/AndroidRuntime(22198): 	at java.lang.reflect.Method.invokeNative(Native Method)
+03-25 20:03:05.135: E/AndroidRuntime(22198): 	at java.lang.reflect.Method.invoke(Method.java:525)
+03-25 20:03:05.135: E/AndroidRuntime(22198): 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:737)
+03-25 20:03:05.135: E/AndroidRuntime(22198): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:553)
+03-25 20:03:05.135: E/AndroidRuntime(22198): 	at dalvik.system.NativeStart.main(Native Method)
+03-25 20:03:47.864: D/libEGL(22807): loaded /vendor/lib/egl/libEGL_adreno.so
+03-25 20:03:47.865: D/libEGL(22807): loaded /vendor/lib/egl/libGLESv1_CM_adreno.so
+03-25 20:03:47.871: D/libEGL(22807): loaded /vendor/lib/egl/libGLESv2_adreno.so
+03-25 20:03:47.874: I/Adreno-EGL(22807): <qeglDrvAPI_eglInitialize:316>: EGL 1.4 QUALCOMM build: AU_LINUX_ANDROID_JB_3.2.3.04.03.00.166.006_msm8226_JB_3.2.3__release_AU ()
+03-25 20:03:47.874: I/Adreno-EGL(22807): OpenGL ES Shader Compiler Version: 20.00.01
+03-25 20:03:47.874: I/Adreno-EGL(22807): Build Date: 10/17/13 Thu
+03-25 20:03:47.874: I/Adreno-EGL(22807): Local Branch: 
+03-25 20:03:47.874: I/Adreno-EGL(22807): Remote Branch: quic/jb_3.2.3
+03-25 20:03:47.874: I/Adreno-EGL(22807): Local Patches: NONE
+03-25 20:03:47.874: I/Adreno-EGL(22807): Reconstruct Branch: AU_LINUX_ANDROID_JB_3.2.3.04.03.00.166.006 +  NOTHING
+03-25 20:03:47.919: D/OpenGLRenderer(22807): Enabling debug mode 0
