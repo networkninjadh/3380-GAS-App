@@ -22,5 +22,7 @@
     <string name="text8">Latitude</string>
     <string name="text9">Longitude</string>
     <string name="action_done">Done</string>
+    <string name="maps_api_key">AIzaSyBEKWe_ckGIC98ND3RHghNYtLJfpWbEcE0</string>
+    <string name="title_activity_map_view">MapView</string>
 
 </resources>

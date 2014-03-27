@@ -20,7 +20,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class CarInfoActivity extends Activity 
-{	Context context = getBaseContext();
+{	Context context = this;
 	Button AddVehicle,Reset;
 	EditText VehicleYear, VehicleMake, VehicleModel, VehicleID;
 	boolean profileWasMade = false;
@@ -28,10 +28,10 @@ public class CarInfoActivity extends Activity
 	protected void onCreate(Bundle savedInstanceState) 
 	{	super.onCreate(savedInstanceState);
 		setContentView(R.layout.car_info);
-		AddVehicle = (Button)findViewById(R.id.button1);
-		Reset = (Button)findViewById(R.id.button2);
-		VehicleYear = (EditText)findViewById(R.id.editText1);
-		VehicleMake = (EditText)findViewById(R.id.editText2);
+		AddVehicle 	 = (Button)findViewById(R.id.button1);
+		Reset 	     = (Button)findViewById(R.id.button2);
+		VehicleYear  = (EditText)findViewById(R.id.editText1);
+		VehicleMake  = (EditText)findViewById(R.id.editText2);
 		VehicleModel = (EditText)findViewById(R.id.editText3);
 		VehicleID = (EditText)findViewById(R.id.editText4);
 		AddVehicle.setOnClickListener(new OnClickListener()
@@ -80,8 +80,8 @@ public class CarInfoActivity extends Activity
 			break;
 			case R.id.action_done:
 				if (profileWasMade) //if a profile exists or a new one was made
-				{	Intent done_intent = new Intent(this, MapActivity.class);
-					startActivity(done_intent);
+				{	Intent intent = new Intent(context,MapView.class);
+					startActivity(intent);
 					finish();
 				}
 				else //do this when nothing was pressed error in here
@@ -93,10 +93,8 @@ public class CarInfoActivity extends Activity
 						.setPositiveButton("OK", new DialogInterface.OnClickListener() 
 						{	@Override
 							public void onClick(DialogInterface dialog, int which) 
-							{	
-								//this is causing the error
-								Intent done_intent = new Intent(context,MapActivity.class);
-								startActivity(done_intent);
+							{	Intent intent = new Intent(context,MapView.class);
+								startActivity(intent);
 								finish();
 							}
 						});
