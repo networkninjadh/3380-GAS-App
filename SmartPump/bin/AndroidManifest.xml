@@ -33,11 +33,10 @@
         <activity
             android:name="com.project.smartpump.CarInfoActivity"
             android:label="@string/title_activity_car_info" >
-            <!--<intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter> -->
+            </intent-filter>
         </activity>
         <meta-data
             android:name="com.google.android.gms.version"
@@ -48,13 +47,7 @@
             android:value="AIzaSyBwUXhSX56AuU7hKGKCfMbM3OX3SenCQ9I" />
         <activity
             android:name="com.project.smartpump.MapView"
-            android:label="@string/title_activity_map_view"
-             >
-             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:label="@string/title_activity_map_view">/
         </activity>
     </application>
 
