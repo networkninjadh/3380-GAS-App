@@ -28,12 +28,11 @@ public class ProfileDatabaseHelper extends SQLiteOpenHelper
 	}
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) 
-	{	
-		db.execSQL(ProfileDatabaseContract.getSqlDeleteEntries());
+	{	db.execSQL(ProfileDatabaseContract.getSqlDeleteEntries());
 		onCreate(db);
 	}
-    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) 
-    {
-    	onUpgrade(db,oldVersion, newVersion);
+    @Override
+	public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) 
+    {	onUpgrade(db,oldVersion, newVersion);
     }
 }
