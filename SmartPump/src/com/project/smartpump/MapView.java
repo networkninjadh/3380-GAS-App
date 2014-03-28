@@ -1,16 +1,17 @@
 package com.project.smartpump;
 
-import android.app.Activity;
-import android.os.Bundle;
-//import com.google.android.maps.*;
+import com.google.android.gms.maps.*;
+import com.google.android.gms.maps.SupportMapFragment;
 
-public class MapView extends Activity
-{
+import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+public class MapView extends FragmentActivity
+{	private GoogleMap gMap;
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
-	{
-		super.onCreate(savedInstanceState);
+	{	super.onCreate(savedInstanceState);
 		setContentView(R.layout.map);
+        gMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+
 	}
 }
-
