@@ -31,36 +31,77 @@ public class Vehicle
 	/**
 	 * @return int
 	 */
-	int getVehicleYear()
+	public int getVehicleYear()
 	{
 		return this.vehicleYear;
 	}
 	/**
+	 * 
+	 * @param year
+	 */
+	public void setVehicleYear(int year)
+	{
+		this.vehicleYear = year;
+	}
+	/**
 	 * @return String
 	 */
-	String getVehicleMake()
+	public String getVehicleMake()
 	{
 		return this.vehicleMake;
 	}
 	/**
+	 * 
+	 * @param make
+	 */
+	public void setVehicleMake(String make)
+	{
+		this.vehicleMake = make;
+	}
+	/**
 	 * @return String
 	 */
-	String getVehicleModel()
+	public String getVehicleModel()
 	{
 		return this.vehicleModel;
 	}
 	/**
-	 * @return String
+	 * 
+	 * @param model
 	 */
-	String getVehicleID()
+	public void setVehicleModel(String model)
 	{
-		return this.vehicleID;
+		this.vehicleModel = model;
 	}
 	/**
 	 * @return String
 	 */
-	String getVehicleProfileName()
+	public String getVehicleID()
+	{
+		return this.vehicleID;
+	}
+	/**
+	 * 
+	 * @param id
+	 */
+	public void setVehicleID(String id)
+	{
+		this.vehicleID = id;
+	}
+	/**
+	 * @return String
+	 */
+	public String getVehicleProfileName()
 	{
 		return this.vehicleProfileName;
 	}
+	/**
+	 * 
+	 * @param name
+	 */
+	public void setVehicleProfileName(String name)
+	{
+		this.vehicleProfileName = name;
+	}
+	
 }

@@ -4,12 +4,10 @@
  */
 package com.project.classes;
 
-//import com.project.smartpump.MainActivity;
-//import com.project.smartpump.ProfileDatabaseHelper;
-
-//class used to interface with external databases 
+//class used to interface with external databases and save data to internal datbases  
 public class DatabaseAccess 
-{	/**
+{	
+	/**
 	 * sees if a car is in the database based off its vehicleID
 	 * @param vehicleID
 	 * @return whether the car is in the database
@@ -39,8 +37,7 @@ public class DatabaseAccess
 	 * @return whether database transaction was successful 
 	 */
 	public static boolean saveCarToMemory(int vehicleYear, String vehicleMake, String vehicleModel, String vehicleID, String profileName) 
-	{	// use databasehelper to read and write from database
-		//ProfileDatabaseHelper mDbHelper = new ProfileDatabaseHelper(MainActivity.getContext());
+	{	
 		return false;
 	}
 	/**
@@ -48,7 +45,7 @@ public class DatabaseAccess
 	 * @param vehicleID
 	 */
 	public static boolean saveCarToMemory(String vehicleID, String profileName) 
-	{	//use databasehelper to read and write from database
+	{	
 		return false;
 	}
 	/**
