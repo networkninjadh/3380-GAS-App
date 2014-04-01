@@ -8,6 +8,9 @@
  */
 package com.project.smartpump;
 
+import com.project.classes.Vehicle;
+
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -34,5 +37,20 @@ public class ProfileDatabaseHelper extends SQLiteOpenHelper
     @Override
 	public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) 
     {	onUpgrade(db,oldVersion, newVersion);
+    }
+    public void addVehicle(Vehicle vehicle)
+    {
+    	SQLiteDatabase db = this.getWritableDatabase();
+    	ContentValues values = new ContentValues();
+    	values.put(ProfileDatabaseContract.ProfileEntry.COLUMN_NAME_PROFILE_NAME,vehicle.getVehicleProfileName());
+    	values.put(ProfileDatabaseContract.ProfileEntry.COLUMN_NAME_MAKE,vehicle.getVehicleMake());
+    	values.put(ProfileDatabaseContract.ProfileEntry.COLUMN_NAME_MODEL, vehicle.getVehicleModel());
+    	values.put(ProfileDatabaseContract.ProfileEntry.COLUMN_NAME_YEAR, vehicle.getVehicleYear());
+    	db.insert(ProfileDatabaseContract.ProfileEntry.TABLE_NAME,null,values);
+    	db.close();
+    }
+    public Vehicle getVehicle(int id)
+    {
+    	SQLiteDatabase db = this.getReadableDatabase();
     }
 }
