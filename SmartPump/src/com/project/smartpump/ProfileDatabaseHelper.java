@@ -51,6 +51,7 @@ public class ProfileDatabaseHelper extends SQLiteOpenHelper
     }
     public Vehicle getVehicle(int id)
     {
-    	SQLiteDatabase db = this.getReadableDatabase();
+    	//SQLiteDatabase db = this.getReadableDatabase();
+    	return null;
     }
 }
