@@ -1,0 +1,130 @@
+myGasFeed Request: http://devapi.mygasfeed.com/stations/radius/30.0/-91.0/10.0/reg/Price/rfej9napna.json
+
+Output:
+
+Address: 36500 Highway 3089
+City: null
+State: Louisiana
+Zip: 70346
+Phone Number: 
+Fuel Price: 3.18
+
+
+Address: 2251 Highway 70
+City: null
+State: Louisiana
+Zip: 70346
+Phone Number: 
+Fuel Price: 3.18
+
+
+Address: 10493 Hwy 70 West
+City: null
+State: Louisiana
+Zip: 70086
+Phone Number: 
+Fuel Price: 3.19
+
+
+Address: 7775 Highway 70
+City: null
+State: Louisiana
+Zip: 70346
+Phone Number: 
+Fuel Price: 3.25
+
+
+Address: 104333 Highway 30 W
+City: null
+State: Louisiana
+Zip: 70086
+Phone Number: 
+Fuel Price: 3.36
+
+
+Address: 105 Hwy 70 Spur
+City: null
+State: Louisiana
+Zip: 70393
+Phone Number: 
+Fuel Price: 3.39
+
+
+Address: 12091 State Route 70
+City: null
+State: Louisiana
+Zip: 70723
+Phone Number: 
+Fuel Price: 3.39
+
+
+Address: 302 Marchand Dr
+City: null
+State: Louisiana
+Zip: 70346
+Phone Number: 
+Fuel Price: 3.39
+
+
+Address: 21 W 10th St
+City: null
+State: Louisiana
+Zip: 70346
+Phone Number: 
+Fuel Price: 3.39
+
+
+Address: 2369 Highway 70
+City: null
+State: Louisiana
+Zip: 70346
+Phone Number: 
+Fuel Price: 3.39
+
+
+Address: 202 Marchand Dr
+City: null
+State: Louisiana
+Zip: 70346
+Phone Number: 
+Fuel Price: 3.39
+
+
+Address: 1230 Highway 70 S
+City: null
+State: Louisiana
+Zip: 70341
+Phone Number: 
+Fuel Price: 3.4
+
+
+Address: 6335 Highway 18
+City: null
+State: Louisiana
+Zip: 70086
+Phone Number: 
+Fuel Price: 3.43
+
+
+Address: 4779 Highway 1
+City: null
+State: Louisiana
+Zip: 70390
+Phone Number: 
+Fuel Price: 3.45
+
+
+Address: 7080 Highway 1
+City: null
+State: Louisiana
+Zip: 70341
+Phone Number: 
+Fuel Price: 3.6
+
+
+Address: 4738 Highway 1
+City: null
+State: Louisiana
+Zip: 70390
+Phone Number: 
+Fuel Price: 3.69

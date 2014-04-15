@@ -71,4 +71,19 @@ public class GasStation
 	public int getZipCode()
 	{	return this.zipCode;
 	}
+	
+	@Override public String toString()
+	{
+	    StringBuilder result = new StringBuilder();
+	    String nl = System.getProperty("line.separator");
+	    
+	    result.append("Address: " + getWebAddress() + nl);
+	    result.append("City: " + getCity() + nl);
+	    result.append("State: " + getState() + nl);
+	    result.append("Zip: " + getZipCode() + nl);
+	    result.append("Phone Number: " + getPhoneNumber() + nl);
+	    result.append("Fuel Price: " + getFuelPrice() + nl);
+	    result.append(nl);
+	    return result.toString();
+	}
 }
