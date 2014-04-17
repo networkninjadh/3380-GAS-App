@@ -24,5 +24,6 @@
     <string name="action_done">Done</string>
     <string name="maps_api_key">AIzaSyBEKWe_ckGIC98ND3RHghNYtLJfpWbEcE0</string>
     <string name="title_activity_map_view">MapView</string>
+    <string name="title_activity_main_test">MainTest</string>
 
 </resources>

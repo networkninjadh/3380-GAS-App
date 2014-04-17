@@ -33,6 +33,10 @@
         <activity
             android:name="com.project.smartpump.CarInfoActivity"
             android:label="@string/title_activity_car_info" >
+        </activity>
+        <activity
+            android:name="com.project.smartpump.MainActivityTest"
+            android:label="@string/title_activity_main_test" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
