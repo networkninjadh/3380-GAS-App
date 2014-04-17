@@ -28,11 +28,13 @@
 
         <activity
             android:name="com.project.smartpump.MainActivity"
-            android:label="@string/title_activity_main" >
+            android:label="@string/title_activity_main">
         </activity>
         <activity
             android:name="com.project.smartpump.CarInfoActivity"
-            android:label="@string/title_activity_car_info" >
+            android:label="@string/title_activity_car_info" 
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

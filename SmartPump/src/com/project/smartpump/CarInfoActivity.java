@@ -3,62 +3,217 @@
  */
 package com.project.smartpump;
 
-import com.project.classes.DatabaseAccess;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 
-import android.os.Bundle;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+
+import org.xml.sax.InputSource;
+import org.xml.sax.XMLReader;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.XmlResourceParser;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
-public class CarInfoActivity extends Activity 
-{	Context context = this;
+import com.project.classes.DataParser;
+import com.project.classes.DatabaseAccess;
+import com.project.classes.Vehicle;
+
+public class CarInfoActivity extends Activity implements OnItemSelectedListener 
+{	
+	private static final String TAG = "Fuel Economy Query";
+	private static final String APP_ID = "123";
+	private static final String SERVER_URL = "http://www.fueleconomy.gov/ws/rest/vehicle/menu/";
+	private static String full_URL1;
+	private static String full_URL2;
+	private static String full_URL3;
+	
+	private static ArrayList<String> SpinnerList1 = new ArrayList<String>();
+	private static ArrayList<String> SpinnerList2 = new ArrayList<String>();
+	private static ArrayList<String> SpinnerList3 = new ArrayList<String>();
+	private static ArrayList<String> VehicleIDList = new ArrayList<String>();
+	private Vehicle vehicle = new Vehicle();
+	private static URL FedGov; 
+	private static Boolean falloutbool = false;
+	
+	Context context = this;
 	Button AddVehicle,Reset;
-	EditText VehicleYear, VehicleMake, VehicleModel, VehicleID;
+	Spinner year_spinner, make_spinner, model_spinner,options_spinner;
+	String make,model,year;
+	int vID;
 	boolean profileWasMade = false;
+	
+	ArrayAdapter<CharSequence> adapter = null, makeAdapter = null,modelAdapter = null, optionsAdapter = null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{	super.onCreate(savedInstanceState);
 		setContentView(R.layout.car_info);
 		AddVehicle 	 = (Button)findViewById(R.id.button1);
 		Reset 	     = (Button)findViewById(R.id.button2);
-		VehicleYear  = (EditText)findViewById(R.id.editText1);
-		VehicleMake  = (EditText)findViewById(R.id.editText2);
-		VehicleModel = (EditText)findViewById(R.id.editText3);
-		VehicleID = (EditText)findViewById(R.id.editText4);
-		AddVehicle.setOnClickListener(new OnClickListener()
-		{	@Override
-			public void onClick(View v) 
-			{	if (!VehicleID.getText().toString().trim().equals(""))
-				{	AddVehicle(VehicleID.getText().toString());
-				}
-				else
-				{	if (VehicleYear.getText().toString().trim().equals(""))
-					{	//tell the user to enter year
-						Toast.makeText(CarInfoActivity.this, "It seems like you haven't entered the year", Toast.LENGTH_SHORT).show();
-					}
-					if (VehicleMake.getText().toString().trim().equals(""))
-					{	//tell the user to enter make
-						Toast.makeText(CarInfoActivity.this, "It seems like you haven't entered the make", Toast.LENGTH_SHORT).show();
-					}
-					if (VehicleModel.getText().toString().trim().equals(""))
-					{	//tell the user to enter the model
-						Toast.makeText(CarInfoActivity.this, "It seems like you haven't entered the model", Toast.LENGTH_SHORT).show();
-					}
-					if (!VehicleYear.getText().toString().trim().equals("") && !VehicleMake.getText().toString().trim().equals("") && !VehicleModel.getText().toString().trim().equals(""))
-					{	AddVehicle(Integer.parseInt(VehicleYear.getText().toString()),VehicleMake.getText().toString(),
-								VehicleModel.getText().toString(),VehicleID.getText().toString());
-					}
-				}	
+		year_spinner = (Spinner)findViewById(R.id.spinnerYear);	
+		make_spinner = (Spinner)findViewById(R.id.spinnerMake);	
+		model_spinner = (Spinner)findViewById(R.id.spinnerModel);
+		options_spinner = (Spinner)findViewById(R.id.spinnerOptions);
+
+		
+		
+		
+		
+		adapter = ArrayAdapter.createFromResource(CarInfoActivity.this, R.array.years_spinner, android.R.layout.simple_spinner_dropdown_item
+				);
+		// Specify the layout to use when the list of choices appears
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		adapter.notifyDataSetChanged();
+
+		
+		
+		year_spinner.setAdapter(adapter);
+		year_spinner.setSelection(-1, false);
+		
+    	year_spinner.setOnItemSelectedListener(new OnItemSelectedListener(){
+
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view,
+					int position, long id) {
+				year = year_spinner.getSelectedItem().toString();
+				Log.i(TAG, "Query Database...");
+				
+				StringBuilder RequestURL = new StringBuilder(SERVER_URL);
+				RequestURL.append("make?year=" + year_spinner.getSelectedItem());
+				full_URL1 = RequestURL.toString();
+
+				AsyncDownloader downloader = new AsyncDownloader(); 
+				downloader.execute();
+
+				String[] MakeLists = new String[SpinnerList1.size()];
+				MakeLists = SpinnerList1.toArray(MakeLists);
+				
+				makeAdapter = new ArrayAdapter<CharSequence>(CarInfoActivity.this, android.R.layout.simple_spinner_dropdown_item
+						, MakeLists);
+				// Specify the layout to use when the list of choices appears
+				makeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+				makeAdapter.notifyDataSetChanged();
+				make_spinner.setAdapter(makeAdapter);	
+				make_spinner.setSelection(0, false);
 			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> parent) {
+				// TODO Auto-generated method stub
+				
+			}
+    	});
+    	make_spinner.setOnItemSelectedListener(new OnItemSelectedListener(){
+
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view,
+					int position, long id) {
+				
+				make = make_spinner.getSelectedItem().toString();
+				Log.i(TAG, "Query Database 2...");
+				
+				StringBuilder ModelURL = new StringBuilder(SERVER_URL);
+				ModelURL.append("model?year=" + year + "&make=" + make);
+				full_URL2 = new String(ModelURL.toString());
+				
+				AsyncDownloader1 modelDownloader = new AsyncDownloader1(); 
+				modelDownloader.execute();
+				android.os.SystemClock.sleep(1000);
+				
+				String[] ModelLists = new String[SpinnerList2.size()];
+				ModelLists = SpinnerList2.toArray(ModelLists);
+				
+				modelAdapter = new ArrayAdapter<CharSequence>(CarInfoActivity.this, android.R.layout.simple_spinner_item
+						, ModelLists);
+				// Specify the layout to use when the list of choices appears
+				modelAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		    	// Apply the adapter to the spinner
+				model_spinner.setSelection(0, false);
+				model_spinner.setAdapter(modelAdapter);	
+				android.os.SystemClock.sleep(1000);
+		    	modelAdapter.notifyDataSetChanged();
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> parent) {
+				// TODO Auto-generated method stub
+				
+			}
+    		
+    	});
+    	model_spinner.setOnItemSelectedListener(new OnItemSelectedListener(){
+
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view,
+					int position, long id) {
+				
+				model = model_spinner.getSelectedItem().toString();
+				Log.i(TAG, "Query Database 3...");
+				
+				StringBuilder ModelURL = new StringBuilder(SERVER_URL);
+				ModelURL.append("options?year=" + year + "&make=" + make + "&model=" + model);
+				full_URL3 = new String(ModelURL.toString());
+				
+				AsyncDownloader2 optionsDownloader = new AsyncDownloader2(); 
+				optionsDownloader.execute();
+				android.os.SystemClock.sleep(1000);
+				
+				String[] OptionsLists = new String[SpinnerList3.size()];
+				OptionsLists = SpinnerList3.toArray(OptionsLists);
+				
+				optionsAdapter = new ArrayAdapter<CharSequence>(CarInfoActivity.this, android.R.layout.simple_spinner_item
+						, OptionsLists);
+				// Specify the layout to use when the list of choices appears
+				optionsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		    	// Apply the adapter to the spinner
+				options_spinner.setAdapter(optionsAdapter);	
+				options_spinner.setSelection(0, false);
+				android.os.SystemClock.sleep(2000);
+		    	optionsAdapter.notifyDataSetChanged();
+		    	vID = model_spinner.getSelectedItemPosition();
+		    	
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> parent) {
+				// TODO Auto-generated method stub
+				
+			}
+    	});
+    	
+    	
+		AddVehicle.setOnClickListener(new OnClickListener()
+		{
+
+			@Override
+			public void onClick(View v) {
+				vehicle.setVehicleID(VehicleIDList.get(vID).toString());
+			}	
+		
 		});
 		Reset.setOnClickListener(new OnClickListener()
 		{	@Override
@@ -78,7 +233,7 @@ public class CarInfoActivity extends Activity
 		{	case R.id.action_settings:
 				Toast.makeText(this, "Settings selected", Toast.LENGTH_SHORT).show();
 			break;
-			case R.id.action_done:
+			case R.id.action_done:		
 				if (profileWasMade) //if a profile exists or a new one was made
 				{	Intent intent = new Intent(context,MapView.class);
 					startActivity(intent);
@@ -114,7 +269,7 @@ public class CarInfoActivity extends Activity
 	 * @param vehicleModel
 	 * @param VehicleID
 	 */
-	public void AddVehicle(int vehicleYear,String vehicleMake, String vehicleModel, String VehicleID)
+	public void AddVehicle(int vehicleYear,String vehicleMake, String vehicleModel)
 	{	String profileName;
 		final EditText txtProfileName = new EditText(this);
 		String message = "Please enter a profile name for your vehicle.";
@@ -131,7 +286,6 @@ public class CarInfoActivity extends Activity
 		AlertDialog alert = builder.create();
 		alert.show();
 		profileName = txtProfileName.getText().toString();
-		DatabaseAccess.saveCarToMemory(vehicleYear, vehicleMake, vehicleModel, VehicleID, profileName);
 		profileWasMade = true;
 		if (profileName != "")
 			reset();
@@ -142,33 +296,369 @@ public class CarInfoActivity extends Activity
 	 *takes the vehicle information and passes it to the database
 	 * @param vehicleID
 	 */
-	public void AddVehicle(String vehicleID)
-	{	String profileName;
-		final EditText txtProfileName = new EditText(this);
-		String message = "Please enter a profile name for your vehicle.";
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setMessage(message)
-			.setCancelable(false)
-			.setView(txtProfileName)
-			.setPositiveButton("OK", new DialogInterface.OnClickListener() 
-			{	@Override
-				public void onClick(DialogInterface dialog, int which) 
-				{	
-				}
-			});
-		AlertDialog alert = builder.create();
-		alert.show();
-		profileName = txtProfileName.getText().toString();
-		DatabaseAccess.saveCarToMemory(vehicleID, profileName);
-		if (profileName != "")
-			reset();
-		else
-			alert.show();
-	}
 	public void reset()
-	{	VehicleYear.setText("");
-		VehicleModel.setText("");
-		VehicleMake.setText("");
-		VehicleID.setText("");
+
+	{	
+		year_spinner.setSelection(0);
+		make_spinner.setSelection(0);
+		model_spinner.setSelection(0);
+		
+	}
+	
+	public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
+		switch (parent.getId()) {
+		case R.id.spinnerYear:
+		
+			year = year_spinner.getSelectedItem().toString();
+			Log.i(TAG, "Query Database...");
+			
+			StringBuilder RequestURL = new StringBuilder(SERVER_URL);
+			RequestURL.append("make?year=" + year_spinner.getSelectedItem());
+			full_URL1 = RequestURL.toString();
+			
+			AsyncDownloader downloader = new AsyncDownloader(); 
+			downloader.execute();
+
+			
+			String[] MakeLists = new String[SpinnerList1.size()];
+			MakeLists = SpinnerList1.toArray(MakeLists);
+			
+			ArrayAdapter<String> makeAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item
+					, MakeLists);
+			// Specify the layout to use when the list of choices appears
+			makeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			makeAdapter.notifyDataSetChanged();
+			make_spinner.setAdapter(makeAdapter);
+			break;
+		case R.id.spinnerMake:
+			make = make_spinner.getSelectedItem().toString();
+			Log.i(TAG, "Query Database 2...");
+			
+			StringBuilder ModelURL = new StringBuilder(SERVER_URL);
+			ModelURL.append("model?year=" + year + "&make=" + make);
+			full_URL1 = new String(ModelURL.toString());
+			
+			
+			AsyncDownloader modelDownloader = new AsyncDownloader(); 
+			modelDownloader.execute();
+			
+			while(falloutbool != true)
+		    {
+		       // wait on background thread
+		    }
+			
+			String[] ModelLists = new String[SpinnerList2.size()];
+			ModelLists = SpinnerList2.toArray(ModelLists);
+			
+			ArrayAdapter<String> modelAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item
+					, ModelLists);
+			// Specify the layout to use when the list of choices appears
+			modelAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+	    	modelAdapter.notifyDataSetChanged();
+	    	// Apply the adapter to the spinner
+			model_spinner.setAdapter(modelAdapter);	
+	    	model_spinner.setSelection(0, true);
+	    	falloutbool = false;
+		    
+	    	break;
+		case R.id.spinnerModel:
+			
+		
+			break;
+		default: break;
+		}
+    }
+	@Override
+	public void onNothingSelected(AdapterView<?> parent) {
+		// TODO Auto-generated method stub
+		
+	}
+	private class AsyncDownloader extends AsyncTask<Object,String,Integer> {
+
+		@Override
+		protected Integer doInBackground(Object... params) {
+			Log.i(TAG, "In doInBackground task");
+
+			XmlPullParser downloadData = tryDownloadingXmlData();
+			int recordsFound = tryParsingXmlData(downloadData);
+			return null;
+		}
+
+		private XmlPullParser tryDownloadingXmlData() {
+			Log.i(TAG, "Trying to download XML");
+			
+			try {
+				FedGov = new URL(full_URL1);
+				XmlPullParser downloadData;
+				downloadData= XmlPullParserFactory.newInstance().newPullParser();
+				InputStream IS = FedGov.openConnection().getInputStream();
+				downloadData.setInput(IS, null);
+				return downloadData;
+			} catch (XmlPullParserException e) {
+				Log.i(TAG, "XML Pull Parser Exception");
+			} catch (IOException e){
+				Log.i(TAG, "IOException +");
+				
+			}
+			
+			return null;
+		}
+		private int tryParsingXmlData(XmlPullParser downloadData) {
+			Log.i(TAG, "Trying to parse Data");
+
+			if (downloadData != null){
+				try {
+					return processDownloadData(downloadData);
+				} catch (XmlPullParserException e) {
+					Log.i(TAG, "XmlPullParserException");
+				} catch (IOException e){
+					Log.i(TAG, "IOException +");
+
+				}
+			} else {
+				Log.i(TAG, "No Downloaded Data");
+
+			}
+			return 0;
+		}
+
+		private int processDownloadData(XmlPullParser xmlData) throws XmlPullParserException, IOException {
+			Log.i(TAG, "Attempting Process");
+			int recordsFound = 0; // Find values in the XML records
+			 int eventType = xmlData.getEventType();
+			 SpinnerList1.clear();SpinnerList2.clear();
+	         while (eventType != XmlPullParser.END_DOCUMENT) {
+	          if(eventType == XmlPullParser.START_DOCUMENT) {
+	        	  recordsFound++;
+	        	  Log.i(TAG,"Start document");
+	          } else if(eventType == XmlPullParser.START_TAG) {
+	        	  recordsFound++;
+	        	  Log.i(TAG,"Start tag combo F "+xmlData.getName());
+	        	  Log.i(TAG,"Start tag combo F "+xmlData.getName());
+	        	  if (xmlData.getName().equals("value")) {
+	        		  SpinnerList1.add(xmlData.nextText().toString());
+	        	  }
+	        	  Log.i(TAG,"Start tag combo S"+xmlData.getName());
+	          } else if(eventType == XmlPullParser.END_TAG) {
+	        	 Log.i(TAG,"End tag "+xmlData.getName());	         
+	          } else if(eventType == XmlPullParser.TEXT) {
+	        	  recordsFound++;
+//	        	  SpinnerLists.add(xmlData.getText());  
+	          }
+	          eventType = xmlData.next();
+	         }
+	         falloutbool = true;
+			 if (recordsFound == 0) {
+				 publishProgress();
+			 }
+			 Log.i(TAG, "Finished processing "+recordsFound+" records.");
+			 return recordsFound;
+		}
+
+		@Override
+		protected void onProgressUpdate(String... values) {
+			if (values.length == 0)
+				falloutbool = false;
+				Log.i(TAG, "No Data Downloaded");
+			if(values.length > 0) {
+				falloutbool = true;
+			}
+			super.onProgressUpdate(values);
+		}
+
+		
+	}
+	private class AsyncDownloader1 extends AsyncTask<Object,String,Integer> {
+
+		@Override
+		protected Integer doInBackground(Object... params) {
+			Log.i(TAG, "In doInBackground task");
+
+			XmlPullParser downloadData = tryDownloadingXmlData();
+			int recordsFound = tryParsingXmlData(downloadData);
+			return null;
+		}
+
+		private XmlPullParser tryDownloadingXmlData() {
+			Log.i(TAG, "Trying to download XML");
+			
+			try {
+				FedGov = new URL(full_URL2);
+				XmlPullParser downloadData;
+				downloadData= XmlPullParserFactory.newInstance().newPullParser();
+				InputStream IS = FedGov.openConnection().getInputStream();
+				downloadData.setInput(IS, null);
+				return downloadData;
+			} catch (XmlPullParserException e) {
+				Log.i(TAG, "XML Pull Parser Exception");
+			} catch (IOException e){
+				Log.i(TAG, "IOException +");
+				
+			}
+			
+			return null;
+		}
+		private int tryParsingXmlData(XmlPullParser downloadData) {
+			Log.i(TAG, "Trying to parse Data");
+
+			if (downloadData != null){
+				try {
+					return processDownloadData(downloadData);
+				} catch (XmlPullParserException e) {
+					Log.i(TAG, "XmlPullParserException");
+				} catch (IOException e){
+					Log.i(TAG, "IOException +");
+
+				}
+			} else {
+				Log.i(TAG, "No Downloaded Data");
+
+			}
+			return 0;
+		}
+
+		private int processDownloadData(XmlPullParser xmlData) throws XmlPullParserException, IOException {
+			Log.i(TAG, "Attempting Process");
+			int recordsFound = 0; // Find values in the XML records
+			 int eventType = xmlData.getEventType();
+			 SpinnerList2.clear();
+	         while (eventType != XmlPullParser.END_DOCUMENT) {
+	          if(eventType == XmlPullParser.START_DOCUMENT) {
+	        	  recordsFound++;
+	        	  Log.i(TAG,"Start document");
+	          } else if(eventType == XmlPullParser.START_TAG) {
+	        	  recordsFound++;
+	        	  Log.i(TAG,"Start tag combo F "+xmlData.getName());
+	        	  Log.i(TAG,"Start tag combo F "+xmlData.getName());
+	        	  if (xmlData.getName().equals("value")) {
+	        		  SpinnerList2.add(xmlData.nextText().toString());
+	        	  }
+	        	  Log.i(TAG,"Start tag combo S"+xmlData.getName());
+	          } else if(eventType == XmlPullParser.END_TAG) {
+	        	 Log.i(TAG,"End tag "+xmlData.getName());	         
+	          } else if(eventType == XmlPullParser.TEXT) {
+	        	  recordsFound++;
+//	        	  SpinnerLists.add(xmlData.getText());  
+	          }
+	          eventType = xmlData.next();
+	         }
+			 if (recordsFound == 0) {
+				 publishProgress();
+			 }
+			 Log.i(TAG, "Finished processing "+recordsFound+" records.");
+			 return recordsFound;
+		}
+
+		@Override
+		protected void onProgressUpdate(String... values) {
+			if (values.length == 0)
+				falloutbool = false;
+				Log.i(TAG, "No Data Downloaded");
+			if(values.length > 0) {
+				falloutbool = true;
+			}
+			super.onProgressUpdate(values);
+		}
+
+		
+	}	
+	private class AsyncDownloader2 extends AsyncTask<Object,String,Integer> {
+
+		@Override
+		protected Integer doInBackground(Object... params) {
+			Log.i(TAG, "In doInBackground task");
+
+			XmlPullParser downloadData = tryDownloadingXmlData();
+			int recordsFound = tryParsingXmlData(downloadData);
+			return null;
+		}
+
+		private XmlPullParser tryDownloadingXmlData() {
+			Log.i(TAG, "Trying to download XML");
+			
+			try {
+				FedGov = new URL(full_URL3);
+				XmlPullParser downloadData;
+				downloadData= XmlPullParserFactory.newInstance().newPullParser();
+				InputStream IS = FedGov.openConnection().getInputStream();
+				downloadData.setInput(IS, null);
+				return downloadData;
+			} catch (XmlPullParserException e) {
+				Log.i(TAG, "XML Pull Parser Exception");
+			} catch (IOException e){
+				Log.i(TAG, "IOException +");
+				
+			}
+			
+			return null;
+		}
+		private int tryParsingXmlData(XmlPullParser downloadData) {
+			Log.i(TAG, "Trying to parse Data");
+
+			if (downloadData != null){
+				try {
+					return processDownloadData(downloadData);
+				} catch (XmlPullParserException e) {
+					Log.i(TAG, "XmlPullParserException");
+				} catch (IOException e){
+					Log.i(TAG, "IOException +");
+
+				}
+			} else {
+				Log.i(TAG, "No Downloaded Data");
+
+			}
+			return 0;
+		}
+
+		private int processDownloadData(XmlPullParser xmlData) throws XmlPullParserException, IOException {
+			Log.i(TAG, "Attempting Process");
+			int recordsFound = 0; // Find values in the XML records
+			 int eventType = xmlData.getEventType();
+			 SpinnerList3.clear();
+	         while (eventType != XmlPullParser.END_DOCUMENT) {
+	          if(eventType == XmlPullParser.START_DOCUMENT) {
+	        	  recordsFound++;
+	        	  Log.i(TAG,"Start document");
+	          } else if(eventType == XmlPullParser.START_TAG) {
+	        	  recordsFound++;
+	        	  Log.i(TAG,"Start tag combo F "+xmlData.getName());
+	        	  Log.i(TAG,"Start tag combo F "+xmlData.getName());
+	        	  if (xmlData.getName().equals("text")) {
+	        		  SpinnerList3.add(xmlData.nextText().toString());
+	        	  } else if (xmlData.getName().equals("value")) {
+	        		  VehicleIDList.add(xmlData.nextText().toString());
+	        	  }
+	        	  
+	        	  Log.i(TAG,"Start tag combo S"+xmlData.getName());
+	          } else if(eventType == XmlPullParser.END_TAG) {
+	        	 Log.i(TAG,"End tag "+xmlData.getName());	         
+	          } else if(eventType == XmlPullParser.TEXT) {
+	        	  recordsFound++;
+//	        	  SpinnerLists.add(xmlData.getText());  
+	          }
+	          eventType = xmlData.next();
+	         }
+	         falloutbool = true;
+			 if (recordsFound == 0) {
+				 publishProgress();
+			 }
+			 Log.i(TAG, "Finished processing "+recordsFound+" records.");
+			 return recordsFound;
+		}
+
+		@Override
+		protected void onProgressUpdate(String... values) {
+			if (values.length == 0)
+				falloutbool = false;
+				Log.i(TAG, "No Data Downloaded");
+			if(values.length > 0) {
+				falloutbool = true;
+			}
+			super.onProgressUpdate(values);
+		}
+
+		
 	}
 }
+
