@@ -32,21 +32,18 @@
         </activity>
         <activity
             android:name="com.project.smartpump.CarInfoActivity"
-<<<<<<< HEAD
             android:label="@string/title_activity_car_info" 
             android:configChanges="orientation"
             android:screenOrientation="portrait">
-=======
             android:label="@string/title_activity_car_info" >
-        </activity>
-        <activity
-            android:name="com.project.smartpump.MainActivityTest"
-            android:label="@string/title_activity_main_test" >
->>>>>>> b32689abc3a7741d6ee8c01d3fa0bba66d6d4162
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="com.project.smartpump.MainActivityTest"
+            android:label="@string/title_activity_main_test" >
         </activity>
         <meta-data
             android:name="com.google.android.gms.version"
