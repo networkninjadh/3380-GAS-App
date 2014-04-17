@@ -231,13 +231,22 @@ containing a value of this type.
         public static final int ic_plusone_tall_off_client=0x7f02001d;
     }
     public static final class id {
+<<<<<<< HEAD
         public static final int action_done=0x7f050012;
         public static final int action_settings=0x7f050011;
+=======
+        public static final int LinearLayout1=0x7f05000b;
+        public static final int Output=0x7f050019;
+        public static final int action_done=0x7f05001d;
+        public static final int action_settings=0x7f05001c;
+        public static final int address=0x7f05000d;
+>>>>>>> b32689abc3a7741d6ee8c01d3fa0bba66d6d4162
         public static final int button1=0x7f050005;
         public static final int button2=0x7f050007;
         public static final int editText1=0x7f050008;
         public static final int editText2=0x7f050009;
         public static final int editText3=0x7f050006;
+<<<<<<< HEAD
         public static final int hybrid=0x7f050004;
         public static final int map=0x7f05000f;
         public static final int none=0x7f050000;
@@ -248,19 +257,41 @@ containing a value of this type.
         public static final int spinnerModel=0x7f05000d;
         public static final int spinnerOptions=0x7f05000e;
         public static final int spinnerYear=0x7f05000b;
+=======
+        public static final int editText4=0x7f050015;
+        public static final int hybrid=0x7f050004;
+        public static final int latitude=0x7f050017;
+        public static final int locationSubmit=0x7f050018;
+        public static final int longitude=0x7f050016;
+        public static final int map=0x7f05001a;
+        public static final int none=0x7f050000;
+        public static final int normal=0x7f050001;
+        public static final int pager=0x7f05001b;
+        public static final int satellite=0x7f050002;
+        public static final int searchLatitude=0x7f050012;
+        public static final int searchLongitude=0x7f050014;
+        public static final int searchOutput=0x7f050011;
+        public static final int searchWithAddress=0x7f05000e;
+        public static final int searchWithLocation=0x7f050010;
+        public static final int tableRow1=0x7f05000c;
+        public static final int tableRow2=0x7f05000f;
+>>>>>>> b32689abc3a7741d6ee8c01d3fa0bba66d6d4162
         public static final int terrain=0x7f050003;
         public static final int textView1=0x7f05000a;
+        public static final int textView2=0x7f050013;
     }
     public static final class integer {
         public static final int google_play_services_version=0x7f070000;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
-        public static final int car_info=0x7f030001;
-        public static final int fragment_map=0x7f030002;
-        public static final int map=0x7f030003;
-        public static final int map_fragment=0x7f030004;
-        public static final int splash=0x7f030005;
+        public static final int activity_main_test=0x7f030001;
+        public static final int car_info=0x7f030002;
+        public static final int fragment_map=0x7f030003;
+        public static final int location_input=0x7f030004;
+        public static final int map=0x7f030005;
+        public static final int map_fragment=0x7f030006;
+        public static final int splash=0x7f030007;
     }
     public static final class menu {
         public static final int car_info=0x7f0b0000;
@@ -384,6 +415,7 @@ containing a value of this type.
         public static final int textView2=0x7f060025;
         public static final int title_activity_car_info=0x7f060028;
         public static final int title_activity_main=0x7f06002b;
+        public static final int title_activity_main_test=0x7f060031;
         public static final int title_activity_map=0x7f06002a;
         public static final int title_activity_map_view=0x7f060030;
     }

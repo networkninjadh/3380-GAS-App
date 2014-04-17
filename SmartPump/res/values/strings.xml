@@ -24,6 +24,7 @@
     <string name="action_done">Done</string>
     <string name="maps_api_key">AIzaSyBEKWe_ckGIC98ND3RHghNYtLJfpWbEcE0</string>
     <string name="title_activity_map_view">MapView</string>
+<<<<<<< HEAD
     <string-array name="years_spinner">
         <item >1984</item>        <item >1985</item>        <item >1986</item>        <item >1987</item>
         <item >1988</item>        <item >1989</item>        <item >1990</item>        <item >1992</item>
@@ -35,5 +36,8 @@
         <item >2012</item>        <item >2013</item>        <item >2014</item>
     </string-array>
     <string-array name="makes_spinner"></string-array>
+=======
+    <string name="title_activity_main_test">MainTest</string>
+>>>>>>> b32689abc3a7741d6ee8c01d3fa0bba66d6d4162
 
 </resources>
