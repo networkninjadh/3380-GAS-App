@@ -13,20 +13,10 @@ public class Vehicle
 	private String vehicleProfileName; //ID to keep track of vehicle profile
 	
 	/**
-	 * 
-	 * @param vehicleYear
-	 * @param vehicleMake
-	 * @param vehicleModel
-	 * @param vehicleID
-	 * @param vehicleProfileName
 	 */
-	Vehicle(int vehicleYear, String vehicleMake, String vehicleModel, String vehicleID, String vehicleProfileName)
+	public static void Vehicle()
 	{
-		this.vehicleID = vehicleID;
-		this.vehicleMake = vehicleMake;
-		this.vehicleModel = vehicleModel;
-		this.vehicleYear = vehicleYear;
-		this.vehicleProfileName = vehicleProfileName;
+
 	}
 	/**
 	 * @return int
