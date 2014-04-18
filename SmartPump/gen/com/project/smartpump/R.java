@@ -232,8 +232,9 @@ containing a value of this type.
     }
     public static final class id {
         public static final int LinearLayout1=0x7f05000b;
-        public static final int action_done=0x7f05001c;
-        public static final int action_settings=0x7f05001b;
+        public static final int Output=0x7f05001c;
+        public static final int action_done=0x7f050020;
+        public static final int action_settings=0x7f05001f;
         public static final int address=0x7f05000d;
         public static final int button1=0x7f050005;
         public static final int button2=0x7f050007;
@@ -241,10 +242,13 @@ containing a value of this type.
         public static final int editText2=0x7f050009;
         public static final int editText3=0x7f050006;
         public static final int hybrid=0x7f050004;
-        public static final int map=0x7f050019;
+        public static final int latitude=0x7f05001a;
+        public static final int locationSubmit=0x7f05001b;
+        public static final int longitude=0x7f050019;
+        public static final int map=0x7f05001d;
         public static final int none=0x7f050000;
         public static final int normal=0x7f050001;
-        public static final int pager=0x7f05001a;
+        public static final int pager=0x7f05001e;
         public static final int satellite=0x7f050002;
         public static final int searchLatitude=0x7f050012;
         public static final int searchLongitude=0x7f050014;
@@ -269,9 +273,10 @@ containing a value of this type.
         public static final int activity_main_test=0x7f030001;
         public static final int car_info=0x7f030002;
         public static final int fragment_map=0x7f030003;
-        public static final int map=0x7f030004;
-        public static final int map_fragment=0x7f030005;
-        public static final int splash=0x7f030006;
+        public static final int location_input=0x7f030004;
+        public static final int map=0x7f030005;
+        public static final int map_fragment=0x7f030006;
+        public static final int splash=0x7f030007;
     }
     public static final class menu {
         public static final int car_info=0x7f0b0000;

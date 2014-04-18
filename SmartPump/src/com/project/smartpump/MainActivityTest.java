@@ -62,6 +62,9 @@ public class MainActivityTest extends Activity implements LocationListener
             {
                 ArrayList<GasStation> stations = StationLocator.NearbyGasStations(latitude, longitude, 10.0, "reg");
                 output.setText(stations.get(0).toString());
+                Intent i = new Intent(getContext(), MapView.class);
+                i.putParcelableArrayListExtra("data", stations);
+                startActivity(i);
             }
         });
         

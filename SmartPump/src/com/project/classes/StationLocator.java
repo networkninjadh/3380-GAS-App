@@ -64,8 +64,10 @@ public class StationLocator {
                 double price = (sPrice.equals("N/A")) ? 0.0 : Double.parseDouble((String) station.get("price"));
                 
                 int zip = Integer.parseInt((String) station.get("zip"));
+                double lat = Double.parseDouble((String) station.get("lat"));
+                double lng = Double.parseDouble((String) station.get("lng"));
                 String phone = ""; //this is not returned by mygasfeed
-                gasStations.add(new GasStation(price, phone, address, city, state, zip));
+                gasStations.add(new GasStation(price, phone, address, city, state, zip, lat, lng));
             }
             
             return gasStations;
