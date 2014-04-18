@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.google.android.gms.maps.*;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.project.classes.GasStation;
@@ -11,18 +12,30 @@ import com.project.classes.GasStation;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 public class MapView extends FragmentActivity
-{	private GoogleMap gMap;
+{   
+    private GoogleMap gMap;
+    private double currentLat;
+    private double currentLng;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState)
-    {	System.out.println("map here1");
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.map);
         gMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
         gMap.setMyLocationEnabled(true);
-        System.out.println("here2");
+        
+        //Add markers to map
         ArrayList<GasStation> stations = this.getIntent().getExtras().getParcelableArrayList("data");
         addMarkersToMap(stations);
+        
+        //Adjust camera to current location
+        currentLat = this.getIntent().getExtras().getDouble("latitude");
+        currentLng = this.getIntent().getExtras().getDouble("longitude");
+        CameraUpdate location = CameraUpdateFactory.newLatLngZoom(new LatLng(currentLat, currentLng), 10);
+        gMap.animateCamera(location);
     }
+    
     protected void addMarkersToMap(ArrayList<GasStation> stations)
     {
         for(GasStation s: stations)

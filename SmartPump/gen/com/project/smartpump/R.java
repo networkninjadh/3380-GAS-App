@@ -225,36 +225,37 @@ containing a value of this type.
         public static final int common_signin_btn_text_pressed_light=0x7f020017;
         public static final int ic_action_settings=0x7f020018;
         public static final int ic_launcher=0x7f020019;
-        public static final int ic_plusone_medium_off_client=0x7f02001a;
-        public static final int ic_plusone_small_off_client=0x7f02001b;
-        public static final int ic_plusone_standard_off_client=0x7f02001c;
-        public static final int ic_plusone_tall_off_client=0x7f02001d;
+        public static final int ic_menu_star=0x7f02001a;
+        public static final int ic_plusone_medium_off_client=0x7f02001b;
+        public static final int ic_plusone_small_off_client=0x7f02001c;
+        public static final int ic_plusone_standard_off_client=0x7f02001d;
+        public static final int ic_plusone_tall_off_client=0x7f02001e;
     }
     public static final class id {
         public static final int LinearLayout1=0x7f05000b;
-        public static final int Output=0x7f05001c;
-        public static final int action_done=0x7f050020;
-        public static final int action_settings=0x7f05001f;
+        public static final int action_done=0x7f05001e;
+        public static final int action_settings=0x7f05001d;
         public static final int address=0x7f05000d;
         public static final int button1=0x7f050005;
         public static final int button2=0x7f050007;
         public static final int editText1=0x7f050008;
         public static final int editText2=0x7f050009;
         public static final int editText3=0x7f050006;
+        public static final int favorites=0x7f05001f;
+        public static final int fvList=0x7f05001a;
         public static final int hybrid=0x7f050004;
-        public static final int latitude=0x7f05001a;
-        public static final int locationSubmit=0x7f05001b;
-        public static final int longitude=0x7f050019;
-        public static final int map=0x7f05001d;
+        public static final int map=0x7f05001b;
         public static final int none=0x7f050000;
         public static final int normal=0x7f050001;
-        public static final int pager=0x7f05001e;
+        public static final int pager=0x7f05001c;
+        public static final int rowTextView=0x7f050019;
         public static final int satellite=0x7f050002;
         public static final int searchLatitude=0x7f050012;
         public static final int searchLongitude=0x7f050014;
         public static final int searchOutput=0x7f050011;
         public static final int searchWithAddress=0x7f05000e;
         public static final int searchWithLocation=0x7f050010;
+        public static final int settings=0x7f050020;
         public static final int spinnerMake=0x7f050016;
         public static final int spinnerModel=0x7f050017;
         public static final int spinnerOptions=0x7f050018;
@@ -272,17 +273,19 @@ containing a value of this type.
         public static final int activity_main=0x7f030000;
         public static final int activity_main_test=0x7f030001;
         public static final int car_info=0x7f030002;
-        public static final int fragment_map=0x7f030003;
-        public static final int location_input=0x7f030004;
-        public static final int map=0x7f030005;
-        public static final int map_fragment=0x7f030006;
-        public static final int splash=0x7f030007;
+        public static final int favorite_item=0x7f030003;
+        public static final int favorites=0x7f030004;
+        public static final int fragment_map=0x7f030005;
+        public static final int map=0x7f030006;
+        public static final int map_fragment=0x7f030007;
+        public static final int splash=0x7f030008;
     }
     public static final class menu {
         public static final int car_info=0x7f0b0000;
         public static final int homescreen=0x7f0b0001;
         public static final int main=0x7f0b0002;
         public static final int map_view=0x7f0b0003;
+        public static final int options_menu=0x7f0b0004;
     }
     public static final class string {
         public static final int action_done=0x7f06002e;
@@ -386,6 +389,7 @@ containing a value of this type.
         /**  Long form sign-in button text [CHAR LIMIT=30] 
          */
         public static final int common_signin_button_text_long=0x7f060013;
+        public static final int favorites=0x7f060032;
         public static final int hello_world=0x7f060029;
         public static final int maps_api_key=0x7f06002f;
         public static final int text1=0x7f06001e;

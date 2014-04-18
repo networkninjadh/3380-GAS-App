@@ -8,6 +8,7 @@ import android.os.Parcelable;
 
 public class GasStation implements Parcelable {
     private double fuelPrice;
+    private String stationName;
     private String phoneNumber;
     private String webAddress;
     private String city;
@@ -15,6 +16,7 @@ public class GasStation implements Parcelable {
     private int zipCode;
     private double latitude;
     private double longitude;
+    private String stationId;
 
     /**
      * creates a gas station object which represents a particular gas station
@@ -26,9 +28,10 @@ public class GasStation implements Parcelable {
      * @param state
      * @param zipCode
      */
-    GasStation(double fuelPrice, String phoneNumber, String webAddress,
-            String city, String state, int zipCode, double lat, double lng) {
+    GasStation(double fuelPrice, String stationName, String phoneNumber, String webAddress,
+            String city, String state, int zipCode, double lat, double lng, String stationId) {
         this.fuelPrice = fuelPrice;
+        this.stationName = stationName;
         this.phoneNumber = phoneNumber;
         this.webAddress = webAddress;
         this.city = city;
@@ -36,6 +39,7 @@ public class GasStation implements Parcelable {
         this.zipCode = zipCode;
         this.latitude = lat;
         this.longitude = lng;
+        this.stationId = stationId;
     }
     
     public GasStation(Parcel in) {
@@ -47,6 +51,8 @@ public class GasStation implements Parcelable {
         longitude = in.readDouble();
         fuelPrice = in.readDouble();
         phoneNumber = in.readString();
+        stationId = in.readString();
+        stationName = in.readString();
     }
 
 
@@ -58,6 +64,10 @@ public class GasStation implements Parcelable {
         return this.fuelPrice;
     }
 
+    public String getStationName()
+    {
+        return this.stationName;
+    }
     /**
      * 
      * @return the phone number of the gas station
@@ -94,18 +104,25 @@ public class GasStation implements Parcelable {
      * 
      * @return the zip code of the gas station
      */
-    public int getZipCode() {
+    public int getZipCode() 
+    {
         return this.zipCode;
     }
 
-    public double getLatitude() {
+    public double getLatitude() 
+    {
         return this.latitude;
     }
 
-    public double getLongitude() {
+    public double getLongitude() 
+    {
         return this.longitude;
     }
 
+    public String getStationId()
+    {
+    	return this.stationId;
+    }
     @Override
     public int describeContents() {
         // TODO Auto-generated method stub
@@ -122,6 +139,8 @@ public class GasStation implements Parcelable {
         dest.writeDouble(getLongitude());
         dest.writeDouble(getFuelPrice());
         dest.writeString(getPhoneNumber());
+        dest.writeString(getStationId());
+        dest.writeString(getStationName());
     }
 
     public static final Parcelable.Creator<GasStation> CREATOR = new Parcelable.Creator<GasStation>() 
@@ -138,13 +157,14 @@ public class GasStation implements Parcelable {
             return new GasStation[size];
         }
     };
-
+    
     @Override
     public String toString() 
     {
         StringBuilder result = new StringBuilder();
         String nl = System.getProperty("line.separator");
 
+        result.append("Name: " + getStationName() + nl);
         result.append("Address: " + getWebAddress() + nl);
         result.append("City: " + getCity() + nl);
         result.append("State: " + getState() + nl);
@@ -153,6 +173,7 @@ public class GasStation implements Parcelable {
         result.append("Longitude: " + getLongitude() + nl);
         result.append("Phone Number: " + getPhoneNumber() + nl);
         result.append("Fuel Price: " + getFuelPrice() + nl);
+        result.append("Station Id:" + getStationId() + nl);
         result.append(nl);
         return result.toString();
     }

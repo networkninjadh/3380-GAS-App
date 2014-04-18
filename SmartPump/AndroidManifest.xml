@@ -45,13 +45,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+        	android:name="com.project.smartpump.FavoritesActivity"
+        	android:label="@string/favorites" >
+        </activity>
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version"
             />
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyBwUXhSX56AuU7hKGKCfMbM3OX3SenCQ9I" />
+            android:value="AIzaSyBafJ_CEAEyohPS09lCoJYcdefGuBa5WoE" />
         <activity
             android:name="com.project.smartpump.MapView"
             android:label="@string/title_activity_map_view">/
