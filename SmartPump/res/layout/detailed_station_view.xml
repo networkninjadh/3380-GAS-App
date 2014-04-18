@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/TableLayout1"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical" >
+
+	<fragment
+		android:id="@+id/miniMap"
+		android:name="com.google.android.gms.maps.MapFragment"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_weight="0.06" />
+
+	<Space
+		android:layout_width="1dp"
+		android:layout_height="15dp" />
+
+	<TableRow
+		android:id="@+id/tableRow1"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content" >
+
+		<TextView
+			android:id="@+id/textView1"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="10dp"
+			android:layout_marginRight="10dp"
+			android:text="Station Name" />
+
+		<TextView
+			android:id="@+id/stationName"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
+	</TableRow>
+
+	<TableRow
+		android:id="@+id/tableRow2"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content" >
+
+		<TextView
+			android:id="@+id/textView2"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="10dp"
+			android:layout_marginRight="10dp"
+			android:text="Address" />
+
+		<TextView
+			android:id="@+id/stationAddress"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
+	</TableRow>
+
+	<TableRow
+		android:id="@+id/tableRow3"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content" >
+
+		<TextView
+			android:id="@+id/textView3"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="10dp"
+			android:layout_marginRight="10dp"
+			android:text="Phone" />
+
+		<TextView
+			android:id="@+id/stationPhone"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
+	</TableRow>
+
+	<TableRow
+		android:id="@+id/tableRow4"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content" >
+
+		<TextView
+			android:id="@+id/textView4"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="10dp"
+			android:layout_marginRight="10dp"
+			android:text="Fuel Price" />
+
+		<TextView
+			android:id="@+id/stationPrice"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
+	</TableRow>
+
+	<TableRow
+		android:id="@+id/tableRow5"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content" >
+
+		<TextView
+			android:id="@+id/textView5"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="10dp"
+			android:layout_marginRight="10dp"
+			android:text="Adjusted Cost" />
+
+		<TextView
+			android:id="@+id/stationAdjustedCost"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
+	</TableRow>
+
+</TableLayout>
