@@ -1,15 +1,23 @@
 package com.project.classes;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+
+import com.google.android.gms.maps.model.LatLng;
+
+import android.content.Context;
+import android.location.Address;
+import android.location.Geocoder;
 
 public class StationLocator {
     
@@ -41,8 +49,6 @@ public class StationLocator {
         {
             e.printStackTrace();
         }
-        
-        System.out.println(json);
         
         try
         {
@@ -78,5 +84,30 @@ public class StationLocator {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public static LatLng getGeoCoordsFromAddress(Context c, String address)
+    {
+        Geocoder geocoder = new Geocoder(c);
+        List<Address> addresses;
+        try 
+        {
+            addresses = geocoder.getFromLocationName(address, 1);
+            if(addresses.size() > 0)
+            {
+                double latitude = addresses.get(0).getLatitude();
+                double longitude = addresses.get(0).getLongitude();
+                return new LatLng(latitude, longitude);
+            }
+            else
+            {
+                return null;
+            }
+        } 
+        catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+        
     }
 }

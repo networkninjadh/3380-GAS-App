@@ -2,6 +2,7 @@ package com.project.smartpump;
 
 import java.util.ArrayList;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.project.classes.GasStation;
 import com.project.classes.StationLocator;
 
@@ -26,6 +27,7 @@ import android.widget.Toast;
 
 public class MainActivityTest extends Activity implements LocationListener
 {
+    static EditText address;
     static TextView output, sLat, sLong;
     static Button searchWithAddress, searchWithLocation;
     public static Context context;
@@ -40,6 +42,7 @@ public class MainActivityTest extends Activity implements LocationListener
     {   super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_test);
         context = getApplicationContext();
+        address = (EditText)findViewById(R.id.address);
         output = (TextView)findViewById(R.id.searchOutput);
         sLat = (TextView)findViewById(R.id.searchLatitude);
         sLong = (TextView)findViewById(R.id.searchLongitude);
@@ -50,9 +53,12 @@ public class MainActivityTest extends Activity implements LocationListener
             @Override
             public void onClick(View v)
             {
-                //get geo coordinates of address
-                //ArrayList<GasStation> stations = StationLocator.NearbyGasStations(lat, long, 10.0, "reg");
-                //output
+                LatLng coords = StationLocator.getGeoCoordsFromAddress(context, address.getText().toString());
+                ArrayList<GasStation> stations = StationLocator.NearbyGasStations(coords.latitude, coords.longitude, 10.0, "reg");
+                output.setText(stations.get(0).toString());
+                Intent i = new Intent(getContext(), MapView.class);
+                i.putParcelableArrayListExtra("data", stations);
+                startActivity(i);
             }
         });
         searchWithLocation.setOnClickListener(new OnClickListener()
