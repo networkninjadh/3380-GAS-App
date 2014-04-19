@@ -58,8 +58,6 @@ public class MainActivityTest extends Activity implements LocationListener {
                         address.getText().toString());
                 ArrayList<GasStation> stations = StationRequest.NearbyGasStations(coords.latitude, coords.longitude,
                                 10.0, "reg");
-                output.setText(stations.get(0).toString());
-                testSaveFavorite(stations);
                 Intent i = new Intent(getContext(), MapView.class);
                 i.putParcelableArrayListExtra("data", stations);
                 i.putExtra("latitude", coords.latitude);
@@ -73,10 +71,8 @@ public class MainActivityTest extends Activity implements LocationListener {
             public void onClick(View v) {
                 ArrayList<GasStation> stations = StationRequest
                         .NearbyGasStations(latitude, longitude, 10.0, "reg");
-                output.setText(stations.get(0).toString());
-                testSaveFavorite(stations);
-                Intent i = new Intent(getContext(), MapView.class);
-                i.putParcelableArrayListExtra("data", stations);
+                Intent i = new Intent(getContext(), StationDetailsActivity.class);
+                i.putExtra("stationSelected", stations.get(1));
                 i.putExtra("latitude", latitude);
                 i.putExtra("longitude", longitude);
                 startActivity(i);

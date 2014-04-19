@@ -20,8 +20,14 @@ import android.location.Address;
 import android.location.Geocoder;
 
 public class StationRequest {
-    private static String APIkey = "rfej9napna";
-    private static String myGasFeedUrl = "http://devapi.mygasfeed.com/";
+    private static String myGasFeedkey = "rfej9napna";
+    private static String myGasFeedProdutionKey = "";
+    private static String placesKey = "AIzaSyBafJ_CEAEyohPS09lCoJYcdefGuBa5WoE";
+    
+    private static String myGasFeedDevUrl = "http://devapi.mygasfeed.com/";
+    private static String myGasFeedUrl = "http://api.mygasfeed.com/";
+    private static String placeSearch = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
+    private static String placeDetails = "https://maps.googleapis.com/maps/api/place/details/json?";
     
     private static JSONObject getJson(URL requestUrl)
     {
@@ -56,6 +62,73 @@ public class StationRequest {
         return null;
     }
     
+    private static String getPlaceReference(String address, String lat, String lng)
+    {
+        StringBuilder url = new StringBuilder(placeSearch);
+        url.append("location=" + lat + "," + lng);
+        url.append("&radius=5&sensor=false&key=" + placesKey);
+        
+        try 
+        {
+            URL requestUrl = new URL(url.toString());
+            JSONObject placeInfo = getJson(requestUrl);
+            JSONArray places = (JSONArray) placeInfo.get("results");
+            if (places.size() == 0) return null;
+            Iterator i = places.iterator();
+            while(i.hasNext())
+            {
+                JSONObject place = (JSONObject) i.next();
+                String formattedAddress = (String) place.get("formatted_address");
+                if(formattedAddress.equals(address))
+                {
+                    System.out.println("found a ref");
+                    return (String) place.get("reference");
+                }
+            }
+            return null;
+        } 
+        catch (MalformedURLException e1) 
+        {
+            e1.printStackTrace();
+        }
+        catch (NullPointerException e)
+        {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    private static String getPhoneNumber(String address, double latitude, double longitude)
+    {
+        String lat = String.valueOf(latitude);
+        String lng = String.valueOf(longitude);
+        String ref = getPlaceReference(address,lat,lng);
+        
+        if (ref == null)
+        {
+            return null;
+        }
+        
+        StringBuilder url = new StringBuilder(placeDetails);
+        url.append("reference=" + ref);
+        url.append("&sensor=false&key=" + placesKey);
+        
+        try 
+        {
+            URL requestUrl = new URL(url.toString());
+            JSONObject placeInfo = getJson(requestUrl);
+            JSONObject placeDetails = (JSONObject) placeInfo.get("result");
+            String phone = (String) placeDetails.get("formatted_phone_number");
+            return phone;
+        } 
+        catch (MalformedURLException e1) 
+        {
+            e1.printStackTrace();
+        }
+        
+        return null;
+    }
+    
     private static GasStation mapJsonToStation(JSONObject station, boolean requestById)
     {
         String address = (String) station.get("address");
@@ -65,7 +138,11 @@ public class StationRequest {
         double lat = Double.parseDouble((String) station.get("lat"));
         double lng = Double.parseDouble((String) station.get("lng"));
         String id = (String) station.get("id");
-        String phone = ""; //this is not returned by mygasfeed
+        
+        String formattedAddress = address + ", " + city + ", " + state;
+        String phone = getPhoneNumber(formattedAddress, lat,lng);
+        if(phone==null) phone = "Not Available";
+        else System.out.println(phone);
         
         String name;
         String sPrice;
@@ -93,7 +170,7 @@ public class StationRequest {
         url.append("stations/radius/");
         url.append(latitude + "/" + longitude + "/" + radius + "/");
         url.append(fuelType + "/" + sortby + "/");
-        url.append(APIkey + ".json");
+        url.append(myGasFeedkey + ".json");
         
         JSONArray stations = new JSONArray();
         try 
@@ -149,7 +226,7 @@ public class StationRequest {
     {
         StringBuilder url = new StringBuilder(myGasFeedUrl);
         url.append("stations/details/" + id);
-        url.append("/" + APIkey + ".json");
+        url.append("/" + myGasFeedkey + ".json");
         
         try 
         {

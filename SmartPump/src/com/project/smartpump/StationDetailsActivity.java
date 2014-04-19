@@ -23,7 +23,7 @@ public class StationDetailsActivity extends Activity
 {
     public static Context context;
     private GoogleMap gMap;
-    private static TextView name, address, phone, price, adjustedPrice;
+    private static TextView name, address, cityStateZip, phone, price, adjustedPrice;
     private double currentLat, currentLng, stationLat, stationLng;
 
     public static Context getContext() 
@@ -43,6 +43,7 @@ public class StationDetailsActivity extends Activity
         
         name = (TextView)findViewById(R.id.stationName);
         address = (TextView)findViewById(R.id.stationAddress);
+        cityStateZip = (TextView)findViewById(R.id.cityStateZip);
         phone = (TextView)findViewById(R.id.stationPhone);
         price = (TextView)findViewById(R.id.stationPrice);
         adjustedPrice = (TextView)findViewById(R.id.stationAdjustedCost);
@@ -69,7 +70,8 @@ public class StationDetailsActivity extends Activity
         
         //Add station details
         name.setText(station.getStationName());
-        address.setText(station.getWebAddress() + " " + station.getCity() + ", " + station.getState());
+        address.setText(station.getWebAddress());
+        cityStateZip.setText(station.getCity() + ", " + station.getState() + " " + station.getZipCode());
         phone.setText(station.getPhoneNumber());
         price.setText(String.valueOf(station.getFuelPrice()));
         adjustedPrice.setText("0");
