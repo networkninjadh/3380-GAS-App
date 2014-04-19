@@ -23,7 +23,7 @@ public class StationDetailsActivity extends Activity
 {
     public static Context context;
     private GoogleMap gMap;
-    private static TextView name, address, cityStateZip, phone, price, adjustedPrice;
+    private static TextView name, address, cityStateZip, phone, price, adjustedPrice, distance;
     private double currentLat, currentLng, stationLat, stationLng;
 
     public static Context getContext() 
@@ -47,6 +47,7 @@ public class StationDetailsActivity extends Activity
         phone = (TextView)findViewById(R.id.stationPhone);
         price = (TextView)findViewById(R.id.stationPrice);
         adjustedPrice = (TextView)findViewById(R.id.stationAdjustedCost);
+        distance = (TextView)findViewById(R.id.distanceAway);
         
         GasStation station = this.getIntent().getExtras().getParcelable("stationSelected");
         
@@ -75,5 +76,6 @@ public class StationDetailsActivity extends Activity
         phone.setText(station.getPhoneNumber());
         price.setText(String.valueOf(station.getFuelPrice()));
         adjustedPrice.setText("0");
+        distance.setText(String.valueOf(station.getDistance()));
     }
 }

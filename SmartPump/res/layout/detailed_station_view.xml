@@ -10,7 +10,7 @@
 		android:name="com.google.android.gms.maps.MapFragment"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_weight="0.06" />
+		android:layout_weight="0.05" />
 
 	<Space
 		android:layout_width="1dp"
@@ -128,6 +128,26 @@
 			android:id="@+id/stationAdjustedCost"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content" />
+	</TableRow>
+
+	<TableRow
+		android:id="@+id/tableRow7"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content" >
+
+		<TextView
+			android:id="@+id/textView7"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
+			android:text="Distance" />
+
+		<TextView
+			android:id="@+id/distanceAway"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
+
 	</TableRow>
 
 </TableLayout>
