@@ -22,15 +22,17 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivityTest extends Activity implements LocationListener {
     static EditText address;
-    static TextView output, sLat, sLong;
     static Button searchWithAddress, searchWithLocation;
+    static Spinner fuelType;
     public static Context context;
     private String provider;
     private double latitude, longitude;
@@ -45,19 +47,29 @@ public class MainActivityTest extends Activity implements LocationListener {
         setContentView(R.layout.activity_main_test);
         context = getApplicationContext();
         address = (EditText) findViewById(R.id.address);
-        output = (TextView) findViewById(R.id.searchOutput);
-        sLat = (TextView) findViewById(R.id.searchLatitude);
-        sLong = (TextView) findViewById(R.id.searchLongitude);
+        
+        fuelType = (Spinner) findViewById(R.id.fuelType);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.fuel_types, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        fuelType.setAdapter(adapter);
+        // Make default selection "reg"
+        fuelType.setSelection(0);
+        
         searchWithAddress = (Button) findViewById(R.id.searchWithAddress);
         searchWithLocation = (Button) findViewById(R.id.searchWithLocation);
+        
         searchWithAddress.setOnClickListener(new OnClickListener() 
         {
             @Override
             public void onClick(View v) {
                 LatLng coords = StationRequest.getGeoCoordsFromAddress(context,
                         address.getText().toString());
+                String selectedFuelType = fuelType.getSelectedItem().toString();
                 ArrayList<GasStation> stations = StationRequest.NearbyGasStations(coords.latitude, coords.longitude,
-                                10.0, "reg");
+                                10.0, selectedFuelType);
                 Intent i = new Intent(getContext(), MapView.class);
                 i.putParcelableArrayListExtra("data", stations);
                 i.putExtra("latitude", coords.latitude);
@@ -69,8 +81,9 @@ public class MainActivityTest extends Activity implements LocationListener {
         {
             @Override
             public void onClick(View v) {
+                String selectedFuelType = fuelType.getSelectedItem().toString();
                 ArrayList<GasStation> stations = StationRequest
-                        .NearbyGasStations(latitude, longitude, 10.0, "reg");
+                        .NearbyGasStations(latitude, longitude, 10.0, selectedFuelType);
                 Intent i = new Intent(getContext(), StationDetailsActivity.class);
                 i.putExtra("stationSelected", stations.get(1));
                 i.putExtra("latitude", latitude);
@@ -78,7 +91,7 @@ public class MainActivityTest extends Activity implements LocationListener {
                 startActivity(i);
             }
         });
-
+        
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         boolean enabled = locationManager
                 .isProviderEnabled(LocationManager.GPS_PROVIDER);
@@ -94,8 +107,6 @@ public class MainActivityTest extends Activity implements LocationListener {
         {
             latitude = location.getLatitude();
             longitude = location.getLongitude();
-            sLat.setText(String.valueOf(latitude));
-            sLong.setText(String.valueOf(longitude));
             onLocationChanged(location);
         } 
         else 
@@ -136,8 +147,6 @@ public class MainActivityTest extends Activity implements LocationListener {
     public void onLocationChanged(Location location) {
         latitude = location.getLatitude();
         longitude = location.getLongitude();
-        sLat.setText(String.valueOf(latitude));
-        sLong.setText(String.valueOf(longitude));
     }
 
     @Override

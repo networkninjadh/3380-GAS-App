@@ -10,6 +10,18 @@
         android:layout_height="wrap_content" >
 
         <TableRow
+        	android:id="@+id/tableRow3"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content" >
+
+            <Spinner
+            	android:id="@+id/fuelType"
+            	android:layout_width="match_parent"
+            	android:layout_height="wrap_content" />
+
+        </TableRow>
+
+        <TableRow
             android:id="@+id/tableRow1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -40,6 +52,7 @@
             android:layout_height="wrap_content" >
 
         </TableRow>
+
     </TableLayout>
 
     <Button
@@ -48,34 +61,5 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
         android:text="Search With Current Location" />
-
-    <TextView
-        android:id="@+id/searchOutput"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Current Latitude: " />
-
-    <TextView
-        android:id="@+id/searchLatitude"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Current Longitude" />
-    
-    <TextView
-        android:id="@+id/searchLongitude"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 
 </LinearLayout>

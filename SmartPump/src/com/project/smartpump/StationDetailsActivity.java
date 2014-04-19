@@ -70,12 +70,14 @@ public class StationDetailsActivity extends Activity
         gMap.animateCamera(location);
         
         //Add station details
+        double fuelPrice = station.getFuelPrice();
+        String sPrice = fuelPrice == 0.0 ? "Price Not Available" : String.valueOf(fuelPrice);
+        price.setText(sPrice);
+        adjustedPrice.setText("0");
         name.setText(station.getStationName());
         address.setText(station.getWebAddress());
         cityStateZip.setText(station.getCity() + ", " + station.getState() + " " + station.getZipCode());
         phone.setText(station.getPhoneNumber());
-        price.setText(String.valueOf(station.getFuelPrice()));
-        adjustedPrice.setText("0");
         distance.setText(String.valueOf(station.getDistance()));
     }
 }
