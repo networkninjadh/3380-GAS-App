@@ -5,16 +5,28 @@
 	android:layout_height="match_parent"
 	android:orientation="vertical" >
 
+    <Button
+    	android:id="@+id/ChooseDestination"
+    	android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:text="Select As Destination" />
+
 	<fragment
 		android:id="@+id/miniMap"
 		android:name="com.google.android.gms.maps.MapFragment"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_weight="0.05" />
+		android:layout_weight="0.04" />
 
 	<Space
 		android:layout_width="1dp"
 		android:layout_height="15dp" />
+
+	<TableRow
+		android:id="@+id/tableRow8"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content" >
+	</TableRow>
 
 	<TableRow
 		android:id="@+id/tableRow1"
@@ -90,6 +102,7 @@
 			android:id="@+id/stationPhone"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content" />
+
 	</TableRow>
 
 	<TableRow

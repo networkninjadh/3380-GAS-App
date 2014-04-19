@@ -1,5 +1,7 @@
 package com.project.smartpump;
 
+import java.util.ArrayList;
+
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -10,11 +12,16 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.project.classes.GasStation;
+import com.project.classes.StationRequest;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -24,6 +31,7 @@ public class StationDetailsActivity extends Activity
     public static Context context;
     private GoogleMap gMap;
     private static TextView name, address, cityStateZip, phone, price, adjustedPrice, distance;
+    private static Button chooseStation;
     private double currentLat, currentLng, stationLat, stationLng;
 
     public static Context getContext() 
@@ -48,6 +56,24 @@ public class StationDetailsActivity extends Activity
         price = (TextView)findViewById(R.id.stationPrice);
         adjustedPrice = (TextView)findViewById(R.id.stationAdjustedCost);
         distance = (TextView)findViewById(R.id.distanceAway);
+        chooseStation = (Button)findViewById(R.id.ChooseDestination);
+        
+        chooseStation.setOnClickListener(new OnClickListener() 
+        {
+            @Override
+            public void onClick(View v) {
+                //Intent i = new Intent(getContext(), MapView.class);
+                //i.putExtra("latitude", currentLat);
+                //i.putExtra("longitude", currentLng);
+                //i.putExtra("stationLat",  stationLat);
+                //i.putExtra("stationLng", stationLng);
+                //startActivity(i);
+                final Intent intent = new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("http://maps.google.com/maps?" + "saddr="+ currentLat + "," + currentLng + "&daddr=" + stationLat + "," + stationLng));
+                intent.setClassName("com.google.android.apps.maps","com.google.android.maps.MapsActivity");
+                startActivity(intent);
+            }
+        });
         
         GasStation station = this.getIntent().getExtras().getParcelable("stationSelected");
         
