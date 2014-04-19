@@ -16,6 +16,7 @@ public class GasStation implements Parcelable {
     private int zipCode;
     private double latitude;
     private double longitude;
+    private double distance; //in Miles
     private String stationId;
 
     /**
@@ -29,7 +30,9 @@ public class GasStation implements Parcelable {
      * @param zipCode
      */
     GasStation(double fuelPrice, String stationName, String phoneNumber, String webAddress,
-            String city, String state, int zipCode, double lat, double lng, String stationId) {
+            String city, String state, int zipCode, double lat, double lng, 
+            double distance, String stationId) 
+    {
         this.fuelPrice = fuelPrice;
         this.stationName = stationName;
         this.phoneNumber = phoneNumber;
@@ -39,6 +42,7 @@ public class GasStation implements Parcelable {
         this.zipCode = zipCode;
         this.latitude = lat;
         this.longitude = lng;
+        this.distance = distance;
         this.stationId = stationId;
     }
     
@@ -49,6 +53,7 @@ public class GasStation implements Parcelable {
         zipCode = in.readInt();
         latitude = in.readDouble();
         longitude = in.readDouble();
+        distance = in.readDouble();
         fuelPrice = in.readDouble();
         phoneNumber = in.readString();
         stationId = in.readString();
@@ -123,6 +128,17 @@ public class GasStation implements Parcelable {
     {
     	return this.stationId;
     }
+    
+    public void setDistance(double value)
+    {
+        this.distance = value;
+    }
+    
+    public Double getDistance()
+    {
+        return this.distance;
+    }
+    
     @Override
     public int describeContents() {
         // TODO Auto-generated method stub
@@ -137,6 +153,7 @@ public class GasStation implements Parcelable {
         dest.writeInt(getZipCode());
         dest.writeDouble(getLatitude());
         dest.writeDouble(getLongitude());
+        dest.writeDouble(getDistance());
         dest.writeDouble(getFuelPrice());
         dest.writeString(getPhoneNumber());
         dest.writeString(getStationId());
