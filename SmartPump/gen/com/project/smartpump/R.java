@@ -290,9 +290,11 @@ containing a value of this type.
         public static final int favorite_item=0x7f030004;
         public static final int favorites=0x7f030005;
         public static final int fragment_map=0x7f030006;
-        public static final int map=0x7f030007;
-        public static final int map_fragment=0x7f030008;
-        public static final int splash=0x7f030009;
+        public static final int fragment_result_list_view=0x7f030007;
+        public static final int map=0x7f030008;
+        public static final int map_fragment=0x7f030009;
+        public static final int result_list_view=0x7f03000a;
+        public static final int splash=0x7f03000b;
     }
     public static final class menu {
         public static final int car_info=0x7f0b0000;
@@ -300,6 +302,7 @@ containing a value of this type.
         public static final int main=0x7f0b0002;
         public static final int map_view=0x7f0b0003;
         public static final int options_menu=0x7f0b0004;
+        public static final int result_list_view=0x7f0b0005;
     }
     public static final class string {
         public static final int action_done=0x7f06002e;
