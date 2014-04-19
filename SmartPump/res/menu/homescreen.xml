@@ -1,6 +1,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
+        android:id="@+id/favorites"
+        android:icon="@drawable/ic_menu_star"
+        android:showAsAction="always"
+        android:title="@string/favorites"/>
+    <item
         android:id="@+id/action_settings"
         android:icon="@drawable/ic_action_settings"
         android:orderInCategory="100"

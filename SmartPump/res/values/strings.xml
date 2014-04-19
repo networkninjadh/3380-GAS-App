@@ -36,5 +36,12 @@
     </string-array>
     <string-array name="makes_spinner"></string-array>
     <string name="title_activity_main_test">MainTest</string>
+    <string name="favorites">Favorites</string>
+    <string-array name="fuel_types">
+    	<item>reg</item>
+    	<item>mid</item>
+    	<item>pre</item>
+    	<item>diesel</item>
+    </string-array>
 
 </resources>
