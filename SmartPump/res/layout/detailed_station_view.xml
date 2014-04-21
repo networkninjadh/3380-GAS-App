@@ -12,11 +12,11 @@
     	android:text="Select As Destination" />
 
 	<fragment
-		android:id="@+id/miniMap"
-		android:name="com.google.android.gms.maps.MapFragment"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_weight="0.04" />
+	    android:id="@+id/miniMap"
+	    android:name="com.google.android.gms.maps.MapFragment"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_weight="0.06" />
 
 	<Space
 		android:layout_width="1dp"
@@ -47,43 +47,6 @@
 			android:layout_height="wrap_content" />
 	</TableRow>
 
-	<TableRow
-		android:id="@+id/tableRow2"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content" >
-
-		<TextView
-			android:id="@+id/textView2"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_marginBottom="10dp"
-			android:layout_marginRight="10dp"
-			android:text="Address" />
-
-		<TextView
-			android:id="@+id/stationAddress"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content" />
-	</TableRow>
-
-	<TableRow
-		android:id="@+id/tableRow6"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content" >
-
-		<TextView
-			android:id="@+id/textView6"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_marginBottom="10dp"
-            android:layout_marginRight="10dp"/>
-
-		<TextView
-			android:id="@+id/cityStateZip"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content" />
-
-	</TableRow>
 
 	<TableRow
 		android:id="@+id/tableRow3"

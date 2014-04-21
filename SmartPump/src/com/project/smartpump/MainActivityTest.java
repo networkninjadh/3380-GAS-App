@@ -3,8 +3,10 @@ package com.project.smartpump;
 import java.util.ArrayList;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.project.classes.Calculations;
 import com.project.classes.FavoritesManager;
 import com.project.classes.GasStation;
+import com.project.classes.PreferencesHelper;
 import com.project.classes.StationRequest;
 
 import android.location.Criteria;
@@ -14,7 +16,9 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 //import android.content.Intent;
 import android.view.Menu;
@@ -30,12 +34,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivityTest extends Activity implements LocationListener {
+    public static Context context;
     static EditText address;
     static Button searchWithAddress, searchWithLocation;
     static Spinner fuelType;
-    public static Context context;
     private String provider;
     private double latitude, longitude;
+    private double MPG;
 
     public static Context getContext() {
         return context;
@@ -46,63 +51,69 @@ public class MainActivityTest extends Activity implements LocationListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_test);
         context = getApplicationContext();
-        address = (EditText) findViewById(R.id.address);
         
+        // Verify that there is saved vehicle data
+        PreferencesHelper prefs = new PreferencesHelper(context);
+        
+        //For now hard-coding a vehicle
+        MPG = 0.0;
+        String vId = prefs.GetPreferences("VehicleID");
+        String mpg = vId.equals("") ? "" : prefs.GetPreferences("VehicleMPG");
+        if (mpg.equals("")) 
+        {
+            //Prompt user to save a vehicle profile
+            profileErrorAlert();
+        } 
+        else 
+        {
+            MPG = Double.parseDouble(mpg);
+        }
+
+        // Set up spinner menu for selecting fuel type
         fuelType = (Spinner) findViewById(R.id.fuelType);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.fuel_types, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                this, R.array.fuel_types, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
         fuelType.setAdapter(adapter);
-        // Make default selection "reg"
         fuelType.setSelection(0);
-        
+
+        // Functionality for handling searches
+        address = (EditText) findViewById(R.id.address);
         searchWithAddress = (Button) findViewById(R.id.searchWithAddress);
         searchWithLocation = (Button) findViewById(R.id.searchWithLocation);
-        
         searchWithAddress.setOnClickListener(new OnClickListener() 
         {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) 
+            {
                 LatLng coords = StationRequest.getGeoCoordsFromAddress(context,
                         address.getText().toString());
-                String selectedFuelType = fuelType.getSelectedItem().toString();
-                ArrayList<GasStation> stations = StationRequest.NearbyGasStations(coords.latitude, coords.longitude,
-                                10.0, selectedFuelType);
-                Intent i = new Intent(getContext(), MapView.class);
-                i.putParcelableArrayListExtra("data", stations);
-                i.putExtra("latitude", coords.latitude);
-                i.putExtra("longitude", coords.longitude);
-                startActivity(i);
+                getResults(coords.latitude, coords.longitude);
             }
         });
         searchWithLocation.setOnClickListener(new OnClickListener() 
         {
             @Override
-            public void onClick(View v) {
-                String selectedFuelType = fuelType.getSelectedItem().toString();
-                ArrayList<GasStation> stations = StationRequest
-                        .NearbyGasStations(latitude, longitude, 10.0, selectedFuelType);
-                Intent i = new Intent(getContext(), StationDetailsActivity.class);
-                i.putExtra("stationSelected", stations.get(1));
-                i.putExtra("latitude", latitude);
-                i.putExtra("longitude", longitude);
-                startActivity(i);
+            public void onClick(View v) 
+            {
+                getResults(latitude, longitude);
             }
         });
-        
+
+        // Set up location manager for getting GPS coordinates
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        // If GPS is not enabled, take user to screen to enable it
         boolean enabled = locationManager
                 .isProviderEnabled(LocationManager.GPS_PROVIDER);
-        if (!enabled) {
+        if (!enabled) 
+        {
             Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
             startActivity(intent);
         }
         Criteria criteria = new Criteria();
         provider = locationManager.getBestProvider(criteria, false);
+        // Get last known location
         Location location = locationManager.getLastKnownLocation(provider);
-
         if (location != null) 
         {
             latitude = location.getLatitude();
@@ -111,16 +122,56 @@ public class MainActivityTest extends Activity implements LocationListener {
         } 
         else 
         {
-            // handle error
+            // What to do if last known collection cannot be found
+            // Will not be able to do routing if requested
         }
     }
 
-    private void testSaveFavorite(ArrayList<GasStation> stations) 
+    private void profileErrorAlert()
     {
-        System.out.println("trying to save favorite");
-        FavoritesManager.addFavorite(getContext(), stations.get(0));
+        String message = "It seems that you do not hava a complete vehicle profile. Adjusted pump prices" +
+                " cannot be computed without the average MPG of your vehicle. Would you like to add a vehicle?";
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(message)
+            .setPositiveButton("YES", new DialogInterface.OnClickListener() 
+            {   @Override
+                public void onClick(DialogInterface dialog, int which) 
+                { 
+                    Intent intent = new Intent(context,CarInfoActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            })
+            .setNegativeButton("NO", new DialogInterface.OnClickListener()
+            {
+                @Override
+                public void onClick(DialogInterface dialog, int which) 
+                {
+                    dialog.dismiss();
+                } 
+            });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
-    
+
+    private void getResults(double lat, double lng) {
+        String selectedFuelType = fuelType.getSelectedItem().toString();
+        ArrayList<GasStation> stations = StationRequest.NearbyGasStations(lat,
+                lng, 10.0, selectedFuelType);
+        ArrayList<Double> adjustedPrices = new ArrayList<Double>();
+        for (GasStation s : stations) {
+            double adjustedPrice = MPG == 0 ? 0.0 : Calculations.calculate(MPG, s.getFuelPrice(),
+                    s.getDistance(), 15);
+            adjustedPrices.add(adjustedPrice);
+        }
+        Intent i = new Intent(getContext(), SearchResultsView.class);
+        i.putParcelableArrayListExtra("data", stations);
+        i.putExtra("adjustedPrices", adjustedPrices);
+        i.putExtra("latitude", lat);
+        i.putExtra("longitude", lng);
+        startActivity(i);
+    }
+
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.homescreen, menu);

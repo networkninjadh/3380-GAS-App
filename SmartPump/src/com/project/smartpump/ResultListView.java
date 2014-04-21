@@ -28,8 +28,8 @@ public class ResultListView extends ListActivity
 		RowData rd = new RowData("Test data 1","Description");
 		data.add(rd);
 		rd = new RowData("Test Data 2", "Description 2");
-		CustomAdapter adapter = new CustomAdapter(this,R.layout.custom_row,R.id.item,data);
-		setListAdapter(adapter);
+		//CustomAdapter adapter = new CustomAdapter(this,R.layout.custom_row,R.id.item,data);
+		//setListAdapter(adapter);
 		getListView().setTextFilterEnabled(true);
 	}
 	public void onListItemClick(ListView parent, View view, int position, long id)
@@ -54,9 +54,9 @@ public class ResultListView extends ListActivity
 			TextView description = null;
 			RowData rowData= getItem(position);
 			if(null == convertView)
-			{	convertView = inflater.inflate(R.layout.custom_row, null);
-				holder = new ViewHolder(convertView);
-				convertView.setTag(holder);
+			{	//convertView = inflater.inflate(R.layout.custom_row, null);
+				//holder = new ViewHolder(convertView);
+				//convertView.setTag(holder);
 			}
 			holder = (ViewHolder) convertView.getTag();
 			item = holder.getItem();
@@ -87,13 +87,13 @@ public class ResultListView extends ListActivity
 		{	this.row = row;
 		}
 		public TextView getDescription()
-		{	if(null == description)
-				description = (TextView) row.findViewById(R.id.description);
+		{	//if(null == description)
+			//	description = (TextView) row.findViewById(R.id.description);
 			return description;
 		}
 		public TextView getItem()
-		{	if(null == item)
-				item = (TextView)row.findViewById(R.id.item);
+		{	//if(null == item)
+			//	item = (TextView)row.findViewById(R.id.item);
 			return item;
 		}
 	}

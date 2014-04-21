@@ -43,5 +43,6 @@
     	<item>pre</item>
     	<item>diesel</item>
     </string-array>
+    <string name="search_results">Search Results</string>
 
 </resources>

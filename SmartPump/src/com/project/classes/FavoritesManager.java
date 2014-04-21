@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 public class FavoritesManager 
 {
     static String PREFS = "smartpumpFavorites";
+    private SharedPreferences favorites;
     
     public static void addFavorite(Context c, GasStation station)
     {
@@ -33,6 +34,13 @@ public class FavoritesManager
         
         editor.putStringSet("stationId", favId);
         editor.commit();
+    }
+    
+    public static boolean checkForFavorite(Context c, GasStation station)
+    {
+        SharedPreferences favorites = c.getSharedPreferences(PREFS, 0);
+        Set<String> favId = favorites.getStringSet("stationId", new HashSet<String>());
+        return favId.contains(station.getStationId());
     }
     
     public static ArrayList<String> getFavorites(Context c)
