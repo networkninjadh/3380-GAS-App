@@ -65,12 +65,40 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/miniMap"
         android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp" 
-        android:layout_marginBottom="5dp" 
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp" 
+        android:layout_marginBottom="10dp" 
         android:text="Get Directions" 
         android:textColor="#FFFFFF"
         android:background="#222222"/>
+
+    <RelativeLayout
+        android:id="@+id/fuelSelection"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ChooseDestination"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp" >
+        
+        <TextView
+            android:id="@+id/fuelTypeLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="@string/fuel_type_prompt"
+            android:textSize="18sp" 
+        />
+        
+        <Spinner
+            android:id="@+id/fuelType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/fuelTypeLabel"
+            android:layout_alignParentLeft="true"
+            android:spinnerMode="dialog"
+            android:prompt="@string/fuel_type_prompt"
+        />
+    </RelativeLayout>
     
     <RelativeLayout
         android:id="@+id/priceSummary"

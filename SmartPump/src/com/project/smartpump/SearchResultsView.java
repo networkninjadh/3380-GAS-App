@@ -54,10 +54,14 @@ public class SearchResultsView extends Activity
                 GasStation s = stations.get(i);
                 double adjustedPrice = adjustedPrices.get(i);
                 NumberFormat currency = NumberFormat.getCurrencyInstance();
+                String priceDisplay = s.getFuelPrice() == 0.0 ? "Price not available" :
+                    currency.format(s.getFuelPrice());
+                String adjustedPriceDisplay = adjustedPrice == 0.0 ? "Adjusted price not available" :
+                    currency.format(adjustedPrice);
                 StringBuilder result = new StringBuilder(s.getStationName());
                 result.append(" " + String.valueOf(s.getDistance()));
-                result.append(" " + currency.format(s.getFuelPrice()));
-                result.append(" " + currency.format(adjustedPrice));
+                result.append(" " + priceDisplay);
+                result.append(" " + adjustedPriceDisplay);
                 searchResults.add(result.toString());
             }
         }
@@ -82,6 +86,7 @@ public class SearchResultsView extends Activity
                 double adjusted = adjustedPrices.get(position);
                 Intent i = new Intent(getContext(), StationDetailsActivity.class);
                 i.putExtra("stationSelected", selected);
+                i.putExtra("fuelTypeSelected", true);
                 i.putExtra("latitude", currentLat);
                 i.putExtra("longitude", currentLng);
                 i.putExtra("adjustedPrice", adjusted);

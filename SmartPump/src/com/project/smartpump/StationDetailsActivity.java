@@ -12,6 +12,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.project.classes.FavoritesManager;
 import com.project.classes.GasStation;
+import com.project.smartpump.CarInfoActivity.AsyncDownloader;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -22,13 +23,19 @@ import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.AdapterView.OnItemSelectedListener;
 
 public class StationDetailsActivity extends Activity 
 {
@@ -36,6 +43,7 @@ public class StationDetailsActivity extends Activity
     private GoogleMap gMap;
     private static TextView name, address, cityStateZip, phone, price, adjustedPrice, distance;
     private static Button chooseStation;
+    private static Spinner fuelType;
     private double currentLat, currentLng, stationLat, stationLng;
     private GasStation station;
     private FavoritesManager favoriteManager;
@@ -58,7 +66,10 @@ public class StationDetailsActivity extends Activity
         gMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.miniMap)).getMap();
         gMap.setMyLocationEnabled(true);
         
-
+        RelativeLayout priceSummary = (RelativeLayout)findViewById(R.id.priceSummary);
+        RelativeLayout fuelSelection = (RelativeLayout)findViewById(R.id.fuelSelection);
+        fuelType = (Spinner) findViewById(R.id.fuelType);
+        
         name = (TextView)findViewById(R.id.stationName);
         address = (TextView)findViewById(R.id.stationAddress);
         cityStateZip = (TextView)findViewById(R.id.cityStateZip);
@@ -112,38 +123,47 @@ public class StationDetailsActivity extends Activity
             distanceAway = Math.round(d * 100.0) / 100.0;
         }
         
-        //Determine price information
-        NumberFormat currency = NumberFormat.getCurrencyInstance();
-        double adjustPrice = this.getIntent().getExtras().getDouble("adjustedPrice");
-        double fuelPrice = station.getFuelPrice();
-        String sPrice, sAdjustPrice;
-        if (fuelPrice == 0.0)
-        {
-            sPrice = "Not Available";
-            price.setTextSize(12);
-        }
-        else
-        {
-            sPrice = currency.format(fuelPrice);
-        }
-        if (adjustPrice == 0.0)
-        {
-            sAdjustPrice = "Not Available";
-            adjustedPrice.setTextSize(12);
-        }
-        else
-        {
-            sAdjustPrice = currency.format(adjustPrice);
-        }
-        
         //Add station details to display
-        price.setText(sPrice);
-        adjustedPrice.setText(sAdjustPrice);
         name.setText(station.getStationName());
         address.setText(station.getWebAddress());
         cityStateZip.setText(station.getCity() + ", " + station.getState() + " " + station.getZipCode());
         //phone.setText(station.getPhoneNumber());
         distance.setText(String.valueOf(distanceAway) + " miles");
+        
+        //Price information
+        boolean fuelSelected = this.getIntent().getExtras().getBoolean("fuelTypeSelected");
+        if (fuelSelected)
+        {
+            fuelSelection.setVisibility(View.GONE);
+            priceSummary.setVisibility(View.VISIBLE);
+            double adjustPrice = this.getIntent().getExtras().getDouble("adjustedPrice");
+            double fuelPrice = station.getFuelPrice();
+            setPriceDisplays(fuelPrice, adjustPrice);
+        }
+        else
+        {
+            //Hide price summary from display
+            priceSummary.setVisibility(View.GONE);
+            fuelSelection.setVisibility(View.VISIBLE);
+            
+            // Set up spinner menu for selecting fuel type
+            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                    this, R.array.fuel_types, android.R.layout.simple_spinner_item);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            fuelType.setAdapter(adapter);
+            fuelType.setSelection(0);
+            fuelType.setOnItemSelectedListener(new OnItemSelectedListener(){
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view,
+                        int position, long id) {
+
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+                }
+            });
+        }
     }
 
     public boolean onCreateOptionsMenu(Menu menu) 
@@ -209,5 +229,34 @@ public class StationDetailsActivity extends Activity
         default:
             return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void setPriceDisplays(double fuelPrice, double adjustPrice)
+    {
+        //Determine price information
+        NumberFormat currency = NumberFormat.getCurrencyInstance();
+        String sPrice, sAdjustPrice;
+        if (fuelPrice == 0.0)
+        {
+            sPrice = "Not Available";
+            price.setTextSize(12);
+        }
+        else
+        {
+            sPrice = currency.format(fuelPrice);
+        }
+        if (adjustPrice == 0.0)
+        {
+            sAdjustPrice = "Not Available";
+            adjustedPrice.setTextSize(12);
+        }
+        else
+        {
+            sAdjustPrice = currency.format(adjustPrice);
+        }
+        
+        //Add station details to display
+        price.setText(sPrice);
+        adjustedPrice.setText(sAdjustPrice); 
     }
 }

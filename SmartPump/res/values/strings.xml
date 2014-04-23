@@ -45,5 +45,6 @@
     </string-array>
     <string name="search_results">Search Results</string>
     <string name="no_favorite_stations">No saved favorites to display</string>
+    <string name="fuel_type_prompt">Select fuel type</string>
 
 </resources>

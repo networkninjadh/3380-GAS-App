@@ -8,6 +8,10 @@ import android.os.Parcelable;
 
 public class GasStation implements Parcelable {
     private double fuelPrice;
+    private FuelPrice regPrice;
+    private FuelPrice midPrice;
+    private FuelPrice prePrice;
+    private FuelPrice dieselPrice;
     private String stationName;
     private String phoneNumber;
     private String webAddress;
@@ -46,6 +50,28 @@ public class GasStation implements Parcelable {
         this.stationId = stationId;
     }
     
+    GasStation(String stationName, String phoneNumber, String webAddress,
+            String city, String state, int zipCode, double lat, double lng, 
+            double distance, String stationId, FuelPrice reg, FuelPrice mid,
+            FuelPrice pre, FuelPrice diesel)
+    {
+        this.stationName = stationName;
+        this.phoneNumber = phoneNumber;
+        this.webAddress = webAddress;
+        this.city = city;
+        this.state = state;
+        this.zipCode = zipCode;
+        this.latitude = lat;
+        this.longitude = lng;
+        this.distance = distance;
+        this.stationId = stationId;
+        this.regPrice = reg;
+        this.midPrice = mid;
+        this.prePrice = pre;
+        this.dieselPrice = diesel;
+        this.fuelPrice = 0.0;
+    }
+            
     public GasStation(Parcel in) {
         webAddress = in.readString();
         city = in.readString();
@@ -58,6 +84,7 @@ public class GasStation implements Parcelable {
         phoneNumber = in.readString();
         stationId = in.readString();
         stationName = in.readString();
+        midPrice = in.readParcelable(FuelPrice.class.getClassLoader());
     }
 
 
@@ -139,6 +166,11 @@ public class GasStation implements Parcelable {
         return this.distance;
     }
     
+    public FuelPrice getMidPrice()
+    {
+        return this.midPrice;
+    }
+    
     @Override
     public int describeContents() {
         // TODO Auto-generated method stub
@@ -158,6 +190,7 @@ public class GasStation implements Parcelable {
         dest.writeString(getPhoneNumber());
         dest.writeString(getStationId());
         dest.writeString(getStationName());
+        dest.writeParcelable(getMidPrice(), flags);
     }
 
     public static final Parcelable.Creator<GasStation> CREATOR = new Parcelable.Creator<GasStation>() 

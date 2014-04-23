@@ -75,6 +75,7 @@ public class FavoritesActivity extends ListActivity {
                 double adjusted = 0.0;
                 Intent i = new Intent(getContext(), StationDetailsActivity.class);
                 i.putExtra("stationSelected", selected);
+                i.putExtra("fuelTypeSelected", false);
                 i.putExtra("latitude", currentLat);
                 i.putExtra("longitude", currentLng);
                 i.putExtra("adjustedPrice", adjusted);
