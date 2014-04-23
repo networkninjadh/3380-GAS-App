@@ -21,7 +21,7 @@ import android.location.Geocoder;
 
 public class StationRequest {
     private static String myGasFeedDevkey = "rfej9napna";
-    private static String myGasFeedkey = "";
+    private static String myGasFeedkey = "jgzifo2p0g";
     private static String placesKey = "";
     
     private static String myGasFeedDevUrl = "http://devapi.mygasfeed.com/";

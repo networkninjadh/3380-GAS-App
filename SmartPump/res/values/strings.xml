@@ -44,5 +44,6 @@
     	<item>diesel</item>
     </string-array>
     <string name="search_results">Search Results</string>
+    <string name="no_favorite_stations">No saved favorites to display</string>
 
 </resources>

@@ -9,47 +9,59 @@ import android.content.SharedPreferences;
 
 public class FavoritesManager 
 {
-    static String PREFS = "smartpumpFavorites";
-    private SharedPreferences favorites;
+    //static String PREFS = "smartpumpFavorites";
+    //private SharedPreferences favorites;
+    private PreferencesHelper helper;
+    private Set<String> favorites;
+    private String favoritesKey = "stationId";
     
-    public static void addFavorite(Context c, GasStation station)
+    public FavoritesManager(Context context)
     {
-        SharedPreferences favorites = c.getSharedPreferences(PREFS, 0);
-        SharedPreferences.Editor editor = favorites.edit();
-        Set<String> favId = favorites.getStringSet("stationId", new HashSet<String>());
+        this.helper = new PreferencesHelper(context);
+        this.favorites = helper.GetPreferenceStringSet(favoritesKey);
+    }
+    public void addFavorite(GasStation station)
+    {
+        //SharedPreferences favorites = c.getSharedPreferences(PREFS, 0);
+        //SharedPreferences.Editor editor = favorites.edit();
+        //Set<String> favId = favorites.getStringSet("stationId", new HashSet<String>());
         
-        favId.add(station.getStationId());
+        //Set<String> favId = helper.GetPreferenceStringSet(favoritesKey);
+        favorites.add(station.getStationId());
+        helper.SavePreferenceStringSet(favoritesKey, favorites);
         
-        editor.putStringSet("stationId", favId);
-        editor.commit();
+        //editor.putStringSet("stationId", favId);
+        //editor.commit();
     }
     
-    public static void removeFavorite(Context c, GasStation station)
+    public void removeFavorite(GasStation station)
     {
-        SharedPreferences favorites = c.getSharedPreferences(PREFS, 0);
-        SharedPreferences.Editor editor = favorites.edit();
-        Set<String> favId = favorites.getStringSet("stationId", new HashSet<String>());
+        //SharedPreferences favorites = c.getSharedPreferences(PREFS, 0);
+        //SharedPreferences.Editor editor = favorites.edit();
+        //Set<String> favId = favorites.getStringSet("stationId", new HashSet<String>());
         
-        favId.remove(station.getStationId());
+        //favId.remove(station.getStationId());
+        favorites.remove(station.getStationId());
+        helper.SavePreferenceStringSet(favoritesKey, favorites);
         
-        editor.putStringSet("stationId", favId);
-        editor.commit();
+        //editor.putStringSet("stationId", favId);
+        //editor.commit();
     }
     
-    public static boolean checkForFavorite(Context c, GasStation station)
+    public boolean checkForFavorite(GasStation station)
     {
-        SharedPreferences favorites = c.getSharedPreferences(PREFS, 0);
-        Set<String> favId = favorites.getStringSet("stationId", new HashSet<String>());
-        return favId.contains(station.getStationId());
+        //SharedPreferences favorites = c.getSharedPreferences(PREFS, 0);
+        //Set<String> favId = favorites.getStringSet("stationId", new HashSet<String>());
+        return favorites.contains(station.getStationId());
     }
     
-    public static ArrayList<String> getFavorites(Context c)
+    public ArrayList<String> getFavorites()
     {
-        SharedPreferences favorites = c.getSharedPreferences(PREFS, 0);
-        Set<String> favId = favorites.getStringSet("stationId", new HashSet<String>());
-        if (favId != null)
+        //SharedPreferences favorites = c.getSharedPreferences(PREFS, 0);
+        //Set<String> favId = favorites.getStringSet("stationId", new HashSet<String>());
+        if (favorites != null)
         {
-            return new ArrayList<String> (favId);
+            return new ArrayList<String> (favorites);
         }
         
         return null;

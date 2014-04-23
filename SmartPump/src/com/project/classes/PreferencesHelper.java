@@ -1,5 +1,8 @@
 package com.project.classes;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -21,5 +24,14 @@ public class PreferencesHelper {
     public void SavePreferences(String key, String value) {
         editor.putString(key, value);    
         editor.commit();  
+    }
+    
+    public Set<String> GetPreferenceStringSet(String key) {
+        return sharedPreferences.getStringSet(key, new HashSet<String>());
+    }
+    
+    public void SavePreferenceStringSet(String key, Set<String> set) {
+        editor.putStringSet(key, set);
+        editor.commit();
     }
 } 

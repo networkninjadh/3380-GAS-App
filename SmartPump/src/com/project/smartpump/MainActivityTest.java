@@ -88,7 +88,23 @@ public class MainActivityTest extends Activity implements LocationListener {
             {
                 LatLng coords = StationRequest.getGeoCoordsFromAddress(context,
                         address.getText().toString());
-                getResults(coords.latitude, coords.longitude);
+                if (coords == null)
+                {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setMessage("Could not find location")
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() 
+                        {   @Override
+                            public void onClick(DialogInterface dialog, int which) 
+                            { 
+                                address.setText("");
+                                dialog.dismiss();
+                            }
+                        });
+                }
+                else
+                {
+                    getResults(coords.latitude, coords.longitude);
+                }
             }
         });
         searchWithLocation.setOnClickListener(new OnClickListener() 
@@ -185,6 +201,8 @@ public class MainActivityTest extends Activity implements LocationListener {
         case R.id.favorites:
             System.out.println("star clicked");
             Intent i = new Intent(getContext(), FavoritesActivity.class);
+            i.putExtra("latitude", latitude);
+            i.putExtra("longitude", longitude);
             startActivity(i);
             return true;
         case R.id.action_settings:
