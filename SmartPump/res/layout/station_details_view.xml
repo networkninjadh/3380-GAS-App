@@ -69,7 +69,7 @@
         android:layout_marginBottom="10dp" 
         android:text="@string/get_directions" 
         android:textColor="#FFFFFF"
-        android:background="#222222"/>
+        android:background="#EF9E40"/>
 
     <RelativeLayout
         android:id="@+id/fuelSelection"
@@ -79,11 +79,46 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp" >
         
+        <TextView
+           android:id="@+id/fuelSelectionLabel"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginBottom="5dp"
+           android:text="@string/fuelSelectionLabel"
+           android:textSize="18sp"
+           android:textColor="#000000" >
+        </TextView>
+        
         <Spinner
             android:id="@+id/fuelType"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/fuelSelectionLabel"
+            android:layout_toLeftOf="@+id/estimatedGallons"
+            android:layout_alignParentLeft="true"
         />
+        <EditText
+            android:id="@+id/estimatedGallons"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/fuelSelectionLabel"
+            android:layout_alignParentRight="true"
+            android:inputType="number"
+            android:hint="@string/estimate_gallons">
+        </EditText>
+        
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/fuelType"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"
+            android:text="@string/submit"
+            android:textColor="#FFFFFF"
+            android:background="#EF9E40" />
     </RelativeLayout>
     
     <RelativeLayout

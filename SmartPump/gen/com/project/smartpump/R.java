@@ -236,44 +236,47 @@ containing a value of this type.
         public static final int ic_plusone_tall_off_client=0x7f020021;
     }
     public static final class id {
+        public static final int AddV=0x7f050009;
         public static final int ChooseDestination=0x7f05001e;
-        public static final int action_done=0x7f050026;
-        public static final int action_settings=0x7f050025;
+        public static final int ResetV=0x7f05000a;
+        public static final int action_done=0x7f050028;
+        public static final int action_settings=0x7f050027;
         public static final int address=0x7f05000f;
         public static final int adjustedCost=0x7f050019;
-        public static final int adjustedLabel=0x7f050022;
-        public static final int button1=0x7f050007;
-        public static final int button2=0x7f050006;
+        public static final int adjustedLabel=0x7f050024;
         public static final int cityStateZip=0x7f05001c;
         public static final int detailsSummary=0x7f050015;
         public static final int distanceAway=0x7f050014;
         public static final int estimatedGallons=0x7f05000e;
-        public static final int favorite=0x7f050027;
-        public static final int favorites=0x7f050028;
+        public static final int favorite=0x7f050029;
+        public static final int favorites=0x7f05002a;
         public static final int fuelSelection=0x7f05001f;
+        public static final int fuelSelectionLabel=0x7f050020;
         public static final int fuelType=0x7f05000d;
         public static final int fvList=0x7f05000b;
         public static final int hybrid=0x7f050004;
         public static final int miniMap=0x7f05001d;
+        public static final int newVehicle=0x7f05002b;
         public static final int none=0x7f050000;
         public static final int normal=0x7f050001;
         public static final int orLabel=0x7f050011;
-        public static final int priceLabel=0x7f050021;
-        public static final int priceSummary=0x7f050020;
+        public static final int priceLabel=0x7f050023;
+        public static final int priceSummary=0x7f050022;
         public static final int pumpPrice=0x7f050018;
         public static final int satellite=0x7f050002;
         public static final int searchWithAddress=0x7f050010;
         public static final int searchWithLocation=0x7f050012;
-        public static final int settings=0x7f050029;
-        public static final int spinnerMake=0x7f050008;
-        public static final int spinnerModel=0x7f050009;
-        public static final int spinnerOptions=0x7f05000a;
+        public static final int settings=0x7f05002c;
+        public static final int spinnerMake=0x7f050006;
+        public static final int spinnerModel=0x7f050007;
+        public static final int spinnerOptions=0x7f050008;
         public static final int spinnerYear=0x7f050005;
         public static final int stationAddress=0x7f05001b;
-        public static final int stationAdjustedCost=0x7f050024;
+        public static final int stationAdjustedCost=0x7f050026;
         public static final int stationName=0x7f050013;
-        public static final int stationPrice=0x7f050023;
+        public static final int stationPrice=0x7f050025;
         public static final int stationSummary=0x7f05001a;
+        public static final int submit=0x7f050021;
         public static final int terrain=0x7f050003;
         public static final int textView2=0x7f050016;
         public static final int textView3=0x7f050017;
@@ -297,10 +300,12 @@ containing a value of this type.
         public static final int options_menu=0x7f0b0003;
     }
     public static final class string {
+        public static final int AddV=0x7f060027;
+        public static final int ResetV=0x7f060028;
         public static final int action_done=0x7f06002f;
         public static final int action_settings=0x7f06001b;
-        public static final int adjusted=0x7f060040;
-        public static final int adjusted_cost=0x7f06003f;
+        public static final int adjusted=0x7f060042;
+        public static final int adjusted_cost=0x7f060041;
         public static final int app_name=0x7f06001a;
         /**   Title for notification shown when GooglePlayServices needs to be
         enabled for a application to work. [CHAR LIMIT=70] 
@@ -327,8 +332,6 @@ containing a value of this type.
         public static final int auth_client_using_bad_version_title=0x7f060014;
         public static final int button1=0x7f06001d;
         public static final int button2=0x7f06001e;
-        public static final int button3=0x7f060027;
-        public static final int button4=0x7f060028;
         /**  Button in confirmation dialog to enable Google Play services.  Clicking it
         will direct user to application settings of Google Play services where they
         can enable it [CHAR LIMIT=40] 
@@ -400,20 +403,22 @@ containing a value of this type.
         /**  Long form sign-in button text [CHAR LIMIT=30] 
          */
         public static final int common_signin_button_text_long=0x7f060013;
-        public static final int distance_away=0x7f06003d;
-        public static final int estimate_gallons=0x7f060037;
+        public static final int distance_away=0x7f06003f;
+        public static final int estimate_gallons=0x7f060038;
         public static final int favorites=0x7f060033;
-        public static final int fuel_type_prompt=0x7f060036;
-        public static final int get_directions=0x7f06003c;
+        public static final int fuelSelectionLabel=0x7f060036;
+        public static final int fuel_type_prompt=0x7f060037;
+        public static final int get_directions=0x7f06003e;
         public static final int hello_world=0x7f06002a;
         public static final int maps_api_key=0x7f060030;
         public static final int no_favorite_stations=0x7f060035;
-        public static final int or_label=0x7f06003b;
-        public static final int pump_price=0x7f06003e;
-        public static final int search=0x7f060038;
-        public static final int searchByAddress=0x7f060039;
-        public static final int searchByLocation=0x7f06003a;
+        public static final int or_label=0x7f06003d;
+        public static final int pump_price=0x7f060040;
+        public static final int search=0x7f060039;
+        public static final int searchByAddress=0x7f06003b;
+        public static final int searchByLocation=0x7f06003c;
         public static final int search_results=0x7f060034;
+        public static final int submit=0x7f06003a;
         public static final int text1=0x7f06001f;
         public static final int text2=0x7f060020;
         public static final int text3=0x7f060021;

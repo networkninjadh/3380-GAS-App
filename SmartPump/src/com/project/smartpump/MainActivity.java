@@ -155,7 +155,7 @@ public class MainActivity extends Activity implements LocationListener {
             alert.show();
         } else if ((numGallons.getText().toString()).equals("")) {
             String message = "If you wish to see adjusted fuel costs, please cancel this search"
-                    + "and enter the number of gallons of fuel you expect to purchase.";
+                    + " and enter the number of gallons of fuel you expect to purchase.";
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage(message)
                     .setPositiveButton("CONTINUE",
@@ -285,13 +285,17 @@ public class MainActivity extends Activity implements LocationListener {
         case R.id.favorites:
             System.out.println("star clicked");
             Intent i = new Intent(getContext(), FavoritesActivity.class);
-            i.putExtra("latitude", latitude);
+            i.putExtra("l"
+            		+ "atitude", latitude);
             i.putExtra("longitude", longitude);
             i.putExtra("MPG", MPG);
             startActivity(i);
             return true;
-        case R.id.action_settings:
-            return true;
+        case R.id.newVehicle:
+        	System.out.println("New Vehicle Create Selected");
+        	Intent I = new Intent(getContext(), CarInfoActivity.class);
+        	startActivity(I);
+        	return true;
         default:
             return super.onOptionsItemSelected(item);
         }

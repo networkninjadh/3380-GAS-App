@@ -10,6 +10,10 @@
         android:icon="@drawable/ic_action_settings"
         android:orderInCategory="100"
         android:showAsAction="always"
-        android:title="@string/action_settings"/>
+        android:title="@string/action_settings" android:visible="true" android:enabled="true">
+        <menu>
+            <item android:id="@+id/newVehicle" android:titleCondensed="New Vehicle" android:visible="true" android:title="New vehicle" android:enabled="true"/>
+        </menu>
+    </item>
 
 </menu>

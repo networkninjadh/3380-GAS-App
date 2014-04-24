@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <Spinner
+    <com.project.classes.NoDefaultSpinner
         android:id="@+id/spinnerYear"
         android:layout_width="250dp"
         android:layout_height="50dp"

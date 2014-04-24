@@ -34,6 +34,7 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -51,8 +52,9 @@ public class StationDetailsActivity extends Activity {
                             price,
                             adjustedPrice, 
                             distance;
-    private static Button chooseStation;
+    private static Button chooseStation, priceRequest;
     private static Spinner fuelType;
+    private static EditText numGallons;
     private boolean spinnerInitialized = false;
     
     private FavoritesManager favoriteManager;
@@ -86,7 +88,9 @@ public class StationDetailsActivity extends Activity {
         priceSummary = (RelativeLayout) findViewById(R.id.priceSummary);
         fuelSelection = (RelativeLayout) findViewById(R.id.fuelSelection);
         fuelType = (Spinner) findViewById(R.id.fuelType);
-
+        numGallons = (EditText) findViewById(R.id.estimatedGallons);
+        priceRequest = (Button) findViewById(R.id.submit);
+        
         name = (TextView) findViewById(R.id.stationName);
         address = (TextView) findViewById(R.id.stationAddress);
         cityStateZip = (TextView) findViewById(R.id.cityStateZip);
@@ -95,18 +99,6 @@ public class StationDetailsActivity extends Activity {
         adjustedPrice = (TextView) findViewById(R.id.stationAdjustedCost);
         distance = (TextView) findViewById(R.id.distanceAway);
         chooseStation = (Button) findViewById(R.id.ChooseDestination);
-        chooseStation.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Intent intent = new Intent(Intent.ACTION_VIEW, Uri
-                        .parse("http://maps.google.com/maps?" + "saddr="
-                                + currentLat + "," + currentLng + "&daddr="
-                                + stationLat + "," + stationLng));
-                intent.setClassName("com.google.android.apps.maps",
-                        "com.google.android.maps.MapsActivity");
-                startActivity(intent);
-            }
-        });
 
         // Get station and price information from intent
         boolean fuelSelected = this.getIntent().getExtras()
@@ -185,45 +177,85 @@ public class StationDetailsActivity extends Activity {
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             fuelType.setAdapter(adapter);
             fuelType.setSelection(0);
-            fuelType.setOnItemSelectedListener(new OnItemSelectedListener() {
+            // Set up listener for price request
+            priceRequest.setOnClickListener(new OnClickListener() {
                 @Override
-                public void onItemSelected(AdapterView<?> parent, View view,
-                        int position, long id) {
-                    if (!spinnerInitialized) {
-                        spinnerInitialized = true;
-                    } else {
-                        fuelSelection.setVisibility(View.GONE);
-                        priceSummary.setVisibility(View.VISIBLE);
-                        switch (position) {
-                        case 1:
-                            setPriceDisplays(station.getRegPrice());
-                            break;
-                        case 2:
-                            setPriceDisplays(station.getMidPrice());
-                            break;
-                        case 3:
-                            setPriceDisplays(station.getPrePrice());
-                            break;
-                        case 4:
-                            setPriceDisplays(station.getDieselPrice());
-                            break;
-                        }
-                    }
-
+                public void onClick(View v) {
+                    getPriceSummary();
                 }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-                }
+                
             });
         }
     }
     
     // -----------------------PRICE DISPLAY HELPERS--------------------------
-    private void setPriceDisplays(FuelPrice price) {
+    private void getPriceSummary()
+    {
+        final int selectedFuel = fuelType.getSelectedItemPosition();
+        if (selectedFuel == 0) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Please select a fuel type").setPositiveButton(
+                    "OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            AlertDialog alert = builder.create();
+            alert.show();
+        } else if ((numGallons.getText().toString()).equals("")) {
+            String message = "If you wish to see adjusted fuel costs, please cancel this search"
+                    + " and enter the number of gallons of fuel you expect to purchase.";
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage(message)
+                    .setPositiveButton("CONTINUE",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog,int which) 
+                                {
+                                    FuelPrice price = getFuelSelection(selectedFuel);
+                                    setPriceDisplays(price, 0.0);
+                                }
+                            })
+                    .setNegativeButton("CANCEL",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog,
+                                        int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+            AlertDialog alert = builder.create();
+            alert.show();
+        } 
+        else 
+        {
+            FuelPrice price = getFuelSelection(selectedFuel);
+            double gallons = Double.parseDouble(numGallons.getText().toString());
+            setPriceDisplays(price, gallons);
+        }
+    }
+    
+    private FuelPrice getFuelSelection(int position)
+    {
+        switch (position) {
+        case 1:
+            return station.getRegPrice();
+        case 2:
+            return station.getMidPrice();
+        case 3:
+            return station.getPrePrice();
+        case 4:
+            return station.getDieselPrice();
+        default:
+            return null;        
+        }
+    }
+    
+    private void setPriceDisplays(FuelPrice price, double gallons) {
         double fuelPrice = price.getPrice();
         double adjustPrice = MPG == 0 ? 0.0 : Calculations.calculate(MPG,
-                fuelPrice, distanceAway, 15);
+                fuelPrice, distanceAway, gallons);
         setPriceDisplays(fuelPrice, adjustPrice);
 
     }
@@ -248,6 +280,8 @@ public class StationDetailsActivity extends Activity {
         // Add station details to display
         price.setText(sPrice);
         adjustedPrice.setText(sAdjustPrice);
+        fuelSelection.setVisibility(View.GONE);
+        priceSummary.setVisibility(View.VISIBLE);
     }
     
     // -------------------------- OPTIONS MENU----------------------------

@@ -40,26 +40,28 @@
     <string name="title_activity_main_test">MainTest</string>
     <string name="favorites">Favorites</string>
     <string-array name="fuel_types">
-    	<item>Select fuel type</item>
-    	<item>reg</item>
-    	<item>mid</item>
-    	<item>pre</item>
-    	<item>diesel</item>
+        <item>Select fuel type</item>
+        <item>reg</item>
+        <item>mid</item>
+        <item>pre</item>
+        <item>diesel</item>
     </string-array>
     
     <string name="search_results">Search Results</string>
     
     <string name="no_favorite_stations">No saved favorites to display</string>
+    <string name="fuelSelectionLabel">View fuel price</string>
     <string name="fuel_type_prompt">Select fuel type</string>
     <string name="estimate_gallons"># Gallons</string>
     <string name="search">Search</string>
+    <string name="submit">Submit</string>
     <string name="searchByAddress">City,State OR Zip</string>
     <string name="searchByLocation">Search Near Me</string>
-	<string name="or_label">OR</string>
-	
-	<string name="get_directions">Get Directions</string>
-	<string name="distance_away">Distance</string>
-	<string name="pump_price">Pump Price</string>
-	<string name="adjusted_cost">Adjusted Cost</string>
-	<string name="adjusted">Adjusted</string>
+    <string name="or_label">OR</string>
+    
+    <string name="get_directions">Get Directions</string>
+    <string name="distance_away">Distance</string>
+    <string name="pump_price">Pump Price</string>
+    <string name="adjusted_cost">Adjusted Cost</string>
+    <string name="adjusted">Adjusted</string>
 </resources>

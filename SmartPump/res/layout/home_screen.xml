@@ -30,6 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/welcome"
             android:layout_alignParentRight="true"
+            android:inputType="number"
             android:hint="@string/estimate_gallons">
         </EditText>
         

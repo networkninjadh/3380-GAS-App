@@ -43,6 +43,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.project.classes.NoDefaultSpinner;
 import com.project.classes.PreferencesHelper;
 import com.project.classes.Vehicle;
 
@@ -69,7 +70,8 @@ public class CarInfoActivity extends Activity implements OnItemSelectedListener
     
     
     Button AddVehicle,Reset;
-    Spinner year_spinner, make_spinner, model_spinner,options_spinner;
+    Spinner  make_spinner, model_spinner,options_spinner;
+    NoDefaultSpinner year_spinner;
     String make,model,year;
     String vID;
     
@@ -87,7 +89,7 @@ public class CarInfoActivity extends Activity implements OnItemSelectedListener
         setContentView(R.layout.car_info);
         AddVehicle   = (Button)findViewById(R.id.AddV);
         Reset        = (Button)findViewById(R.id.ResetV);
-        year_spinner = (Spinner)findViewById(R.id.spinnerYear); 
+        year_spinner = (NoDefaultSpinner)findViewById(R.id.spinnerYear); 
         make_spinner = (Spinner)findViewById(R.id.spinnerMake); 
         model_spinner = (Spinner)findViewById(R.id.spinnerModel);
         options_spinner = (Spinner)findViewById(R.id.spinnerOptions);
@@ -106,6 +108,8 @@ public class CarInfoActivity extends Activity implements OnItemSelectedListener
         adapter.notifyDataSetChanged();
     
         year_spinner.setAdapter(adapter);
+        year_spinner.setPrompt("Select Vehicle Year");
+        year_spinner.setSelection(-1);
         
         System.out.println("Making item selector 1");
         year_spinner.setOnItemSelectedListener(new OnItemSelectedListener(){
@@ -113,48 +117,45 @@ public class CarInfoActivity extends Activity implements OnItemSelectedListener
             @Override
             public void onItemSelected(AdapterView<?> parent, View view,
                     int position, long id) {
-                if (firstRunCheckYearSpinner == false){
-                    year = year_spinner.getSelectedItem().toString();
-                    Log.i(TAG, "Query Database...");
-                    
-                    StringBuilder RequestURL = new StringBuilder(SERVER_URL);
-                    RequestURL.append("make?year=" + year_spinner.getSelectedItem());
-                    full_URL1 = RequestURL.toString();
-    
-                    AsyncDownloader downloader = new AsyncDownloader(); 
-                    downloader.execute();
-                    try {
-                        downloader.get();
-                    } catch (InterruptedException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    } catch (ExecutionException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
-    
-                    String[] MakeLists = new String[SpinnerList1.size()];
-                    MakeLists = SpinnerList1.toArray(MakeLists);
-                    
-                    makeAdapter = new ArrayAdapter<CharSequence>(CarInfoActivity.this, android.R.layout.simple_spinner_dropdown_item
-                            , MakeLists);
-                    // Specify the layout to use when the list of choices appears
-                    makeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    makeAdapter.notifyDataSetChanged();
-                    make_spinner.setEnabled(true);   
-                    make_spinner.setClickable(true); 
-                    make_spinner.setAdapter(makeAdapter);   
-                    make_spinner.setSelection(-1, false);
-                    try{
-                        makeAdapter.notifyDataSetChanged();
-                        modelAdapter.notifyDataSetChanged();
-                        optionsAdapter.notifyDataSetChanged();
-                        
-                    }catch(Exception e){
-                        
-                    }
+                year = year_spinner.getSelectedItem().toString();
+                Log.i(TAG, "Query Database...");
+                
+                StringBuilder RequestURL = new StringBuilder(SERVER_URL);
+                RequestURL.append("make?year=" + year_spinner.getSelectedItem());
+                full_URL1 = RequestURL.toString();
+
+                AsyncDownloader downloader = new AsyncDownloader(); 
+                downloader.execute();
+                try {
+                    downloader.get();
+                } catch (InterruptedException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
                 }
-                firstRunCheckYearSpinner = false;
+
+                String[] MakeLists = new String[SpinnerList1.size()];
+                MakeLists = SpinnerList1.toArray(MakeLists);
+                
+                makeAdapter = new ArrayAdapter<CharSequence>(CarInfoActivity.this, android.R.layout.simple_spinner_dropdown_item
+                        , MakeLists);
+                // Specify the layout to use when the list of choices appears
+                makeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                makeAdapter.notifyDataSetChanged();
+                make_spinner.setEnabled(true);   
+                make_spinner.setClickable(true); 
+                make_spinner.setAdapter(makeAdapter);   
+                make_spinner.setSelection(-1, false);
+                try{
+                    makeAdapter.notifyDataSetChanged();
+                    modelAdapter.notifyDataSetChanged();
+                    optionsAdapter.notifyDataSetChanged();
+                    
+                }catch(Exception e){
+                    
+                }
             }
 
             @Override
