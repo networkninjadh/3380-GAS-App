@@ -10,26 +10,6 @@
         android:layout_height="50dp"
         android:entries="@array/years_spinner" />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/button1"
-        android:layout_alignBottom="@+id/button1"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="39dp"
-        android:text="@string/button4" />
-
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="24dp"
-        android:layout_marginRight="23dp"
-        android:text="@string/button3" />
-
     <Spinner
         android:id="@+id/spinnerMake"
         android:layout_width="250dp"
@@ -51,5 +31,29 @@
         android:layout_height="50dp"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/spinnerModel" />
+
+    <Button
+        android:id="@+id/AddV"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="61dp"
+        android:layout_marginRight="35dp"
+        android:background="#EF9E40"
+        android:text="@string/AddV"
+        android:textColor="#FFFFFF" />
+
+    <Button
+        android:id="@+id/ResetV"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/AddV"
+        android:layout_alignBottom="@+id/AddV"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="42dp"
+        android:background="#EF9E40"
+        android:text="@string/ResetV"
+        android:textColor="#FFFFFF" />
 
 </RelativeLayout>

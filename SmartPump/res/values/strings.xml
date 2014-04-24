@@ -14,8 +14,8 @@
     <string name="text6">Vehicle Model</string>
     <string name="text7">Vehicle ID</string>
     <string name="textView2">OR</string>
-    <string name="button3">Add Vehicle</string>
-    <string name="button4">Reset</string>
+    <string name="AddV">Add Vehicle</string>
+    <string name="ResetV">Reset</string>
     <string name="title_activity_car_info">New Vehicle Record</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_map">MapActivity</string>

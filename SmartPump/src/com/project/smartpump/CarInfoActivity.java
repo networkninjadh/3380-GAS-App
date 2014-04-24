@@ -85,8 +85,8 @@ public class CarInfoActivity extends Activity implements OnItemSelectedListener
         
         System.out.println("Initializing components in car info");
         setContentView(R.layout.car_info);
-        AddVehicle   = (Button)findViewById(R.id.button1);
-        Reset        = (Button)findViewById(R.id.button2);
+        AddVehicle   = (Button)findViewById(R.id.AddV);
+        Reset        = (Button)findViewById(R.id.ResetV);
         year_spinner = (Spinner)findViewById(R.id.spinnerYear); 
         make_spinner = (Spinner)findViewById(R.id.spinnerMake); 
         model_spinner = (Spinner)findViewById(R.id.spinnerModel);
