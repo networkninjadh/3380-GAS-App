@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+        <TextView
+           android:id="@+id/welcome"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginBottom="5dp"
+           android:text="@string/welcome_message"
+           android:textSize="22sp"
+           android:textColor="#EF9E40" >
+        </TextView>
+        
+        <Spinner
+            android:id="@+id/fuelType"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/welcome"
+            android:layout_toLeftOf="@+id/estimatedGallons"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="20dp" />
+        
+        <EditText
+            android:id="@+id/estimatedGallons"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/welcome"
+            android:layout_alignParentRight="true"
+            android:hint="@string/estimate_gallons">
+        </EditText>
+        
+        <EditText
+            android:id="@+id/address"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/fuelType"
+            android:layout_toLeftOf="@+id/searchWithAddress"
+            android:layout_marginLeft="5dp"
+            android:layout_marginBottom="5dp"
+            android:ems="10"
+            android:hint="@string/searchByAddress" >
+        </EditText>
+
+        <Button
+            android:id="@+id/searchWithAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/fuelType"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"
+            android:text="@string/search"
+            android:textColor="#FFFFFF"
+        	android:background="#EF9E40" />
+   
+        <TextView
+            android:id="@+id/orLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/address"
+            android:layout_marginTop="15dp"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="15dp"
+            android:text="@string/or_label"
+            android:textSize="22sp"
+            android:textColor="#EF9E40" >
+        </TextView>
+        
+        <Button
+            android:id="@+id/searchWithLocation"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/orLabel"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="5dp"
+            android:text="@string/searchByLocation"
+            android:textColor="#FFFFFF"
+        	android:background="#EF9E40" />
+        
+        
+</RelativeLayout>

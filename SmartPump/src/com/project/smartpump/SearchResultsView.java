@@ -8,6 +8,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.project.classes.GasStation;
 import com.project.classes.StationRequest;
+import com.project.classes.StationSearchResult;
 
 import android.app.Activity;
 import android.content.Context;
@@ -22,9 +23,9 @@ import android.widget.ListView;
 public class SearchResultsView extends Activity 
 {
     public static Context context;
-    private ArrayList<GasStation> stations;
+    private ArrayList<StationSearchResult> stations;
     private ArrayList<String> searchResults;
-    private ArrayList<Double> adjustedPrices;
+    //private ArrayList<Double> adjustedPrices;
     private double currentLat, currentLng;
     static ListView results;
 
@@ -41,7 +42,7 @@ public class SearchResultsView extends Activity
         System.out.println("opening search results");
         results = (ListView)findViewById(android.R.id.list);
         stations = this.getIntent().getExtras().getParcelableArrayList("data");
-        adjustedPrices = (ArrayList<Double>) this.getIntent().getSerializableExtra("adjustedPrices");
+        //adjustedPrices = (ArrayList<Double>) this.getIntent().getSerializableExtra("adjustedPrices");
         currentLat = this.getIntent().getExtras().getDouble("latitude");
         currentLng = this.getIntent().getExtras().getDouble("longitude");
         
@@ -51,12 +52,12 @@ public class SearchResultsView extends Activity
             int numStations = stations.size();
             for (int i = 0; i < numStations; ++i)
             {
-                GasStation s = stations.get(i);
-                double adjustedPrice = adjustedPrices.get(i);
+                GasStation s = stations.get(i).getStation();
+                double adjustedPrice = stations.get(i).getAdjustedCost();
                 NumberFormat currency = NumberFormat.getCurrencyInstance();
-                String priceDisplay = s.getFuelPrice() == 0.0 ? "Price not available" :
-                    currency.format(s.getFuelPrice());
-                String adjustedPriceDisplay = adjustedPrice == 0.0 ? "Adjusted price not available" :
+                String priceDisplay = s.getSelectedFuelPrice().getPrice() == 0.0 ? "Not Available" :
+                    currency.format(s.getSelectedFuelPrice().getPrice());
+                String adjustedPriceDisplay = adjustedPrice == 0.0 ? "Not Available" :
                     currency.format(adjustedPrice);
                 StringBuilder result = new StringBuilder(s.getStationName());
                 result.append(" " + String.valueOf(s.getDistance()));
@@ -71,9 +72,12 @@ public class SearchResultsView extends Activity
         }
 
         System.out.println("Finished setting up results");
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, searchResults);
+        
+        //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, searchResults);
+        SearchResultsAdapter adapter = new SearchResultsAdapter(stations, context);
         System.out.println("Created adapter");
-        results.setAdapter(adapter);
+       
+        results.setAdapter(adapter);  
         System.out.println("Set adapter");
         
         results.setOnItemClickListener(new OnItemClickListener()
@@ -82,14 +86,14 @@ public class SearchResultsView extends Activity
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) 
             {
                 view.setSelected(true);
-                GasStation selected = stations.get(position);
-                double adjusted = adjustedPrices.get(position);
+                StationSearchResult selected = stations.get(position);
+                //double adjusted = adjustedPrices.get(position);
                 Intent i = new Intent(getContext(), StationDetailsActivity.class);
-                i.putExtra("stationSelected", selected);
+                i.putExtra("resultSelected", selected);
                 i.putExtra("fuelTypeSelected", true);
                 i.putExtra("latitude", currentLat);
                 i.putExtra("longitude", currentLng);
-                i.putExtra("adjustedPrice", adjusted);
+                //i.putExtra("adjustedPrice", adjusted);
                 startActivity(i);
             }
         });

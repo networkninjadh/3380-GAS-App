@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.project.classes.Calculations;
 import com.project.classes.FavoritesManager;
 import com.project.classes.GasStation;
 import com.project.classes.StationRequest;
@@ -25,7 +26,7 @@ public class FavoritesActivity extends ListActivity {
     private FavoritesManager manager;
     private ArrayList<GasStation> favoriteStations;
     private double currentLat, currentLng;
-    private double mpg;
+    private double MPG;
     static ListView lvFavs;
 
     public static Context getContext() {
@@ -42,7 +43,7 @@ public class FavoritesActivity extends ListActivity {
         manager = new FavoritesManager(context);
         currentLat = this.getIntent().getExtras().getDouble("latitude");
         currentLng = this.getIntent().getExtras().getDouble("longitude");
-        
+        MPG = this.getIntent().getExtras().getDouble("MPG");
         
         ArrayList<String> favId = manager.getFavorites();
         favoriteStations = new ArrayList<GasStation>();
@@ -55,7 +56,7 @@ public class FavoritesActivity extends ListActivity {
             {
                 GasStation s = StationRequest.getStationById(id);
                 favoriteStations.add(s);
-                favDetails.add(putStation(s.getStationName(), s.getWebAddress()));;
+                favDetails.add(putStation(s.getStationName(), s.getStationAddress().getStreet()));;
             }
             String[] from = {"Name", "Address"};
             int[] to = { android.R.id.text1, android.R.id.text2 };
@@ -72,13 +73,13 @@ public class FavoritesActivity extends ListActivity {
             {
                 view.setSelected(true);
                 GasStation selected = favoriteStations.get(position);
-                double adjusted = 0.0;
                 Intent i = new Intent(getContext(), StationDetailsActivity.class);
                 i.putExtra("stationSelected", selected);
                 i.putExtra("fuelTypeSelected", false);
                 i.putExtra("latitude", currentLat);
                 i.putExtra("longitude", currentLng);
-                i.putExtra("adjustedPrice", adjusted);
+                i.putExtra("MPG", MPG);
+                System.out.println("MPG:" + MPG);
                 startActivity(i);
             }
         });

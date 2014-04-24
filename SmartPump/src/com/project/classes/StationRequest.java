@@ -139,13 +139,20 @@ public class StationRequest {
     
     private static GasStation mapJsonToStation(JSONObject station, boolean requestById)
     {
+        String id = (String) station.get("id");
+        
+        //Get address details
         String address = (String) station.get("address");
         String city = (String) station.get("city");
         String state = (String) station.get("region");
-        int zip = Integer.parseInt((String) station.get("zip"));
+        String zip = (String) station.get("zip");
+        StationAddress stationAddress = new StationAddress(address, city, state, zip);
+        
+        //Get station coordinates
         double lat = Double.parseDouble((String) station.get("lat"));
         double lng = Double.parseDouble((String) station.get("lng"));
-        String id = (String) station.get("id");
+        LatLng coords = new LatLng(lat,lng);
+        
         //String formattedAddress = address + ", " + city + ", " + state;
         //String phone = getPhoneNumber(formattedAddress, lat,lng);
         //if(phone==null) phone = "Not Available";
@@ -154,15 +161,12 @@ public class StationRequest {
         
         if(requestById)
         {
-            //sPrice = (String) station.get("reg_price");
             String name = (String) station.get("station_name");
             FuelPrice reg = getPriceValue(station, "reg_price", "reg_date");
             FuelPrice mid = getPriceValue(station, "mid_price", "mid_date");
             FuelPrice pre = getPriceValue(station, "pre_price", "pre_date");
             FuelPrice diesel = getPriceValue(station, "diesel_price", "diesel_date");
-            double distance = 0.0;
-            return new GasStation(name, phone, address, city, state, zip,
-                    lat, lng, distance, id, reg, mid, pre, diesel);
+            return new GasStation(id, name, phone, coords, stationAddress, reg, mid, pre, diesel);
         }
         else
         {
@@ -172,7 +176,7 @@ public class StationRequest {
             String[] distanceParts = distanceInfo.split(" ");
             double distance = Double.parseDouble(distanceParts[0]);
             //TODO: convert price property to FuelPrice
-            return new GasStation(price.getPrice(), name, phone, address, city, state, zip, lat, lng, distance, id);
+            return new GasStation(id, name, phone, coords, stationAddress, price, distance);
         }
     }
 

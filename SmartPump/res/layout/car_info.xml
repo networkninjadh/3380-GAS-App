@@ -6,25 +6,9 @@
 
     <Spinner
         android:id="@+id/spinnerYear"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
         android:entries="@array/years_spinner" />
-
-    <Spinner
-        android:id="@+id/spinnerMake"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/spinnerYear"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/spinnerYear" />
-
-    <Spinner
-        android:id="@+id/spinnerModel"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/spinnerMake"
-        android:layout_centerHorizontal="true" />
 
     <Button
         android:id="@+id/button2"
@@ -47,9 +31,24 @@
         android:text="@string/button3" />
 
     <Spinner
+        android:id="@+id/spinnerMake"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="50dp" />
+
+    <Spinner
+        android:id="@+id/spinnerModel"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/spinnerMake" />
+
+    <Spinner
         android:id="@+id/spinnerOptions"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/spinnerModel" />
 

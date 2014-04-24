@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/stationName"
+        android:layout_width="85dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+        android:gravity="center_vertical"
+        android:textColor="#000000" >
+    </TextView>
+
+    <TextView
+        android:id="@+id/distanceAway"
+        android:layout_width="35dp"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:textColor="#000000"
+        android:background="#9D7050">
+    </TextView>
+            
+    <TableLayout
+        android:id="@+id/detailsSummary"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:stretchColumns="1" >
+        <TableRow
+            android:layout_weight="1"
+            android:background="#EF9D3F" >
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/pump_price"
+                android:textColor="#000000" >
+            </TextView>
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/adjusted_cost"
+                android:textColor="#000000" >
+            </TextView>
+        </TableRow>
+        <TableRow
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/pumpPrice"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="#000000">
+            </TextView>
+            <TextView
+                android:id="@+id/adjustedCost"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="#000000">
+            </TextView>
+        </TableRow>
+    </TableLayout>
+</LinearLayout>
