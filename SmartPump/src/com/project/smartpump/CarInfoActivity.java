@@ -11,16 +11,14 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.ExecutionException;
-
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
-
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
-
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -31,6 +29,7 @@ import android.content.res.XmlResourceParser;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -42,7 +41,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-
 import com.project.classes.NoDefaultSpinner;
 import com.project.classes.PreferencesHelper;
 import com.project.classes.Vehicle;
@@ -331,10 +329,14 @@ public class CarInfoActivity extends Activity implements OnItemSelectedListener
         
         AddVehicle.setOnClickListener(new OnClickListener()
         {
-            @Override
+            @SuppressLint("ShowToast")
+			@Override
             public void onClick(View v) {
                 prefs.SavePreferences("VehicleID", vID);
                 prefs.SavePreferences("VehicleMPG", MPG);
+                Toast toast = Toast.makeText(context, "Vehicle gets " + MPG + " MPG", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
                 Intent MainActivity = new Intent(CarInfoActivity.this, MainActivity .class);
                 startActivity(MainActivity);
             }   
