@@ -22,7 +22,7 @@ import android.location.Geocoder;
 public class StationRequest {
     private static String myGasFeedDevkey = "rfej9napna";
     private static String myGasFeedkey = "jgzifo2p0g";
-    private static String placesKey = "AIzaSyBafJ_CEAEyohPS09lCoJYcdefGuBa5WoE";
+    private static String placesKey = "";
     
     private static String myGasFeedDevUrl = "http://devapi.mygasfeed.com/";
     private static String myGasFeedUrl = "http://api.mygasfeed.com/";
@@ -128,16 +128,30 @@ public class StationRequest {
         
         return null;
     }
+
+    private static FuelPrice getPriceValue(JSONObject s, String priceKey, String dateKey)
+    {
+        String sPrice = (String)s.get(priceKey);
+        double price = sPrice.equals("N/A")? 0.0 : Double.parseDouble(sPrice);
+        String lastUpdate = (String) s.get(dateKey);
+        return new FuelPrice(price, lastUpdate);
+    }
     
     private static GasStation mapJsonToStation(JSONObject station, boolean requestById)
     {
+        String id = (String) station.get("id");
+        
+        //Get address details
         String address = (String) station.get("address");
         String city = (String) station.get("city");
         String state = (String) station.get("region");
-        int zip = Integer.parseInt((String) station.get("zip"));
+        String zip = (String) station.get("zip");
+        StationAddress stationAddress = new StationAddress(address, city, state, zip);
+        
+        //Get station coordinates
         double lat = Double.parseDouble((String) station.get("lat"));
         double lng = Double.parseDouble((String) station.get("lng"));
-        String id = (String) station.get("id");
+        LatLng coords = new LatLng(lat,lng);
         
         //String formattedAddress = address + ", " + city + ", " + state;
         //String phone = getPhoneNumber(formattedAddress, lat,lng);
@@ -145,27 +159,25 @@ public class StationRequest {
         //else System.out.println(phone);
         String phone = "Not Available";
         
-        String name, sPrice;
-        double distance;
         if(requestById)
         {
-            sPrice = (String) station.get("reg_price");
-            name = (String) station.get("station_name");
-            distance = 0.0;
+            String name = (String) station.get("station_name");
+            FuelPrice reg = getPriceValue(station, "reg_price", "reg_date");
+            FuelPrice mid = getPriceValue(station, "mid_price", "mid_date");
+            FuelPrice pre = getPriceValue(station, "pre_price", "pre_date");
+            FuelPrice diesel = getPriceValue(station, "diesel_price", "diesel_date");
+            return new GasStation(id, name, phone, coords, stationAddress, reg, mid, pre, diesel);
         }
         else
         {
-            sPrice = (String) station.get("price");
-            name = (String) station.get("station");
+            String name = (String) station.get("station");
+            FuelPrice price = getPriceValue(station, "price", "date");
             String distanceInfo = (String) station.get("distance");
             String[] distanceParts = distanceInfo.split(" ");
-            distance = Double.parseDouble(distanceParts[0]);
+            double distance = Double.parseDouble(distanceParts[0]);
+            //TODO: convert price property to FuelPrice
+            return new GasStation(id, name, phone, coords, stationAddress, price, distance);
         }
-        
-        //TODO: Find a better way to handle null price value
-        double price = (sPrice.equals("N/A")) ? 0.0 : Double.parseDouble(sPrice);
-        
-        return new GasStation(price, name, phone, address, city, state, zip, lat, lng, distance, id);
     }
 
     public static ArrayList<GasStation> NearbyGasStations(double latitude, double longitude, double radius, String fuelType)

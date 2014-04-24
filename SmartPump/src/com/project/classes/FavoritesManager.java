@@ -9,39 +9,37 @@ import android.content.SharedPreferences;
 
 public class FavoritesManager 
 {
-    static String PREFS = "smartpumpFavorites";
+    private PreferencesHelper helper;
+    private Set<String> favorites;
+    private String favoritesKey = "stationId";
     
-    public static void addFavorite(Context c, GasStation station)
+    public FavoritesManager(Context context)
     {
-        SharedPreferences favorites = c.getSharedPreferences(PREFS, 0);
-        SharedPreferences.Editor editor = favorites.edit();
-        Set<String> favId = favorites.getStringSet("stationId", new HashSet<String>());
-        
-        favId.add(station.getStationId());
-        
-        editor.putStringSet("stationId", favId);
-        editor.commit();
+        this.helper = new PreferencesHelper(context);
+        this.favorites = helper.GetPreferenceStringSet(favoritesKey);
+    }
+    public void addFavorite(GasStation station)
+    {
+        favorites.add(station.getStationId());
+        helper.SavePreferenceStringSet(favoritesKey, favorites);
     }
     
-    public static void removeFavorite(Context c, GasStation station)
+    public void removeFavorite(GasStation station)
     {
-        SharedPreferences favorites = c.getSharedPreferences(PREFS, 0);
-        SharedPreferences.Editor editor = favorites.edit();
-        Set<String> favId = favorites.getStringSet("stationId", new HashSet<String>());
-        
-        favId.remove(station.getStationId());
-        
-        editor.putStringSet("stationId", favId);
-        editor.commit();
+        favorites.remove(station.getStationId());
+        helper.SavePreferenceStringSet(favoritesKey, favorites);
     }
     
-    public static ArrayList<String> getFavorites(Context c)
+    public boolean checkForFavorite(GasStation station)
     {
-        SharedPreferences favorites = c.getSharedPreferences(PREFS, 0);
-        Set<String> favId = favorites.getStringSet("stationId", new HashSet<String>());
-        if (favId != null)
+        return favorites.contains(station.getStationId());
+    }
+    
+    public ArrayList<String> getFavorites()
+    {
+        if (favorites != null)
         {
-            return new ArrayList<String> (favId);
+            return new ArrayList<String> (favorites);
         }
         
         return null;

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:id="@+id/stationSummary"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp" >
+        
+        <TextView
+           android:id="@+id/stationName"
+           android:layout_width="0dp"
+           android:layout_height="wrap_content"
+           android:layout_alignParentLeft="true"
+           android:layout_toLeftOf="@+id/distanceAway"
+           android:textSize="18sp" >
+        </TextView>
+    
+        <TextView
+            android:id="@+id/distanceAway"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:textSize="14sp" >
+
+        </TextView>
+    
+        <TextView
+            android:id="@+id/stationAddress"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/stationName"
+            android:textSize="14sp" >
+
+        </TextView>
+    
+        <TextView
+            android:id="@+id/cityStateZip"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/stationAddress"
+            android:textSize="14sp" >
+        </TextView>
+    </RelativeLayout>
+    
+    <fragment
+        android:id="@+id/miniMap"
+        android:name="com.google.android.gms.maps.MapFragment"
+        android:layout_width="fill_parent"
+        android:layout_height="150dp"
+        android:layout_below="@+id/stationSummary"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="5dp" />
+    
+    <Button
+        android:id="@+id/ChooseDestination"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/miniMap"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp" 
+        android:layout_marginBottom="10dp" 
+        android:text="@string/get_directions" 
+        android:textColor="#FFFFFF"
+        android:background="#222222"/>
+
+    <RelativeLayout
+        android:id="@+id/fuelSelection"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ChooseDestination"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp" >
+        
+        <Spinner
+            android:id="@+id/fuelType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+        />
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:id="@+id/priceSummary"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ChooseDestination"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp" >
+        
+        <TextView
+            android:id="@+id/priceLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/adjustedLabel"
+            android:text="@string/pump_price"
+            android:textSize="18sp" >
+
+        </TextView>
+        
+        <TextView
+            android:id="@+id/adjustedLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight ="true"
+            android:text="@string/adjusted_cost"
+            android:textSize="18sp" >
+        </TextView>
+        
+        <TextView
+            android:id="@+id/stationPrice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/stationAdjustedCost"
+            android:layout_below="@+id/priceLabel"
+            android:textSize="22sp" >
+        </TextView>
+        
+        <TextView
+            android:id="@+id/stationAdjustedCost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/priceLabel"
+            android:textSize="22sp" >
+        </TextView>
+        
+    </RelativeLayout>
+    
+</RelativeLayout>
