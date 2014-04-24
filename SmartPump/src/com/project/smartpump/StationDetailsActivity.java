@@ -1,7 +1,27 @@
 package com.project.smartpump;
 
-import java.text.DecimalFormat;
 import java.text.NumberFormat;
+
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.location.Location;
+import android.net.Uri;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RelativeLayout;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -15,30 +35,6 @@ import com.project.classes.FavoritesManager;
 import com.project.classes.FuelPrice;
 import com.project.classes.GasStation;
 import com.project.classes.StationSearchResult;
-
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.location.Location;
-import android.net.Uri;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.RelativeLayout;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.AdapterView.OnItemSelectedListener;
 
 public class StationDetailsActivity extends Activity {
     public static Context context;
@@ -100,6 +96,17 @@ public class StationDetailsActivity extends Activity {
         distance = (TextView) findViewById(R.id.distanceAway);
         chooseStation = (Button) findViewById(R.id.ChooseDestination);
 
+        chooseStation.setOnClickListener(new OnClickListener() 
+        {
+            @Override
+            public void onClick(View v) {
+                final Intent intent = new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("http://maps.google.com/maps?" + "saddr="+ currentLat + "," + currentLng + "&daddr=" + stationLat + "," + stationLng));
+                intent.setClassName("com.google.android.apps.maps","com.google.android.maps.MapsActivity");
+                startActivity(intent);
+            }
+        });
+        
         // Get station and price information from intent
         boolean fuelSelected = this.getIntent().getExtras()
                 .getBoolean("fuelTypeSelected");

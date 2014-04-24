@@ -1,26 +1,19 @@
+
 package com.project.smartpump;
 
 import java.util.ArrayList;
 
-import com.google.android.gms.maps.model.LatLng;
-import com.project.classes.Calculations;
-import com.project.classes.FavoritesManager;
-import com.project.classes.GasStation;
-import com.project.classes.PreferencesHelper;
-import com.project.classes.StationRequest;
-import com.project.classes.StationSearchResult;
-
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 //import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -31,8 +24,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
+
+import com.google.android.gms.maps.model.LatLng;
+import com.project.classes.Calculations;
+import com.project.classes.GasStation;
+import com.project.classes.PreferencesHelper;
+import com.project.classes.StationRequest;
+import com.project.classes.StationSearchResult;
 
 public class MainActivity extends Activity implements LocationListener {
     public static Context context;
