@@ -9,10 +9,14 @@ import com.project.classes.FavoritesManager;
 import com.project.classes.GasStation;
 import com.project.classes.StationRequest;
 
+import android.app.ActionBar;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -39,6 +43,11 @@ public class FavoritesActivity extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.favorites);
         context = getApplicationContext();
+
+        // Activate Clickable Icon Button
+        ActionBar smartPumpIcon = getActionBar();
+        smartPumpIcon.setDisplayHomeAsUpEnabled(true);
+        
         lvFavs = (ListView)findViewById(android.R.id.list);
         manager = new FavoritesManager(context);
         currentLat = this.getIntent().getExtras().getDouble("latitude");
@@ -92,4 +101,19 @@ public class FavoritesActivity extends ListActivity {
         newItem.put("Address", address);
         return newItem;
     }
+    // -------------------------- OPTIONS MENU----------------------------
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+    	MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.favorites_menu, menu);
+    	return super.onCreateOptionsMenu(menu);
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+    	this.finish();
+    	return true;
+    }
+
 }

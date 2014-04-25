@@ -11,14 +11,18 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.ExecutionException;
+
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
+
 import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -41,6 +45,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
 import com.project.classes.NoDefaultSpinner;
 import com.project.classes.PreferencesHelper;
 import com.project.classes.Vehicle;
@@ -81,6 +86,10 @@ public class CarInfoActivity extends Activity implements OnItemSelectedListener
     protected void onCreate(Bundle savedInstanceState) 
     {   super.onCreate(savedInstanceState);
         final PreferencesHelper prefs = new PreferencesHelper(this);
+        
+        // Activate Clickable Icon Button
+        ActionBar smartPumpIcon = getActionBar();
+        smartPumpIcon.setDisplayHomeAsUpEnabled(true);
         
         
         System.out.println("Initializing components in car info");
@@ -358,35 +367,37 @@ public class CarInfoActivity extends Activity implements OnItemSelectedListener
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {   switch (item.getItemId())
-        {   case R.id.action_settings:
-                Toast.makeText(this, "Settings selected", Toast.LENGTH_SHORT).show();
+        {
+        case android.R.id.home:
+        	if (profileWasMade) //if a profile exists or a new one was made
+            {   
+                this.finish();
+            }
+            else //do this when nothing was pressed error in here
+            {   String message = "A Vehicle must be selected to get the adjusted" +
+                        " prices. You may reselect later from the settings menu.";
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage(message)
+                    .setCancelable(false)
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() 
+                    {   @Override
+                        public void onClick(DialogInterface dialog, int which) 
+                        {
+	                    	Intent intent = new Intent(context,MainActivity.class);
+	                        startActivity(intent);
+                            finish();
+                        }
+                    });
+                AlertDialog alert = builder.create();
+                alert.show();
+            }
+        	break;
+    	case R.id.action_settings:
+            Toast.makeText(this, "Settings selected", Toast.LENGTH_SHORT).show();
             break;
-            case R.id.action_done:      
-                if (profileWasMade) //if a profile exists or a new one was made
-                {   Intent intent = new Intent(this,MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-                else //do this when nothing was pressed error in here
-                {   String message = "It seems that no vehicle profiles exist if you wish to add" +
-                            "one later just use the settings menu";
-                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                    builder.setMessage(message)
-                        .setCancelable(false)
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() 
-                        {   @Override
-                            public void onClick(DialogInterface dialog, int which) 
-                            {// Intent intent = new Intent(this,MapView.class);
-//                              startActivity(intent);
-//                              finish();
-                            }
-                        });
-                    AlertDialog alert = builder.create();
-                    alert.show();
-                }
-            break;
-            default:
-            break;
+        
+        default:
+        break;
         }
         return true;
     }

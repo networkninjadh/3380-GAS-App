@@ -10,10 +10,14 @@ import com.project.classes.GasStation;
 import com.project.classes.StationRequest;
 import com.project.classes.StationSearchResult;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -22,7 +26,8 @@ import android.widget.ListView;
 
 public class SearchResultsView extends Activity 
 {
-    public static Context context;
+
+	public static Context context;
     private ArrayList<StationSearchResult> stations;
     private ArrayList<String> searchResults;
     //private ArrayList<Double> adjustedPrices;
@@ -38,6 +43,10 @@ public class SearchResultsView extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_results_view);
         context = getApplicationContext();
+        
+        // Activate Clickable Icon Button
+        ActionBar smartPumpIcon = getActionBar();
+        smartPumpIcon.setDisplayHomeAsUpEnabled(true);
         
         System.out.println("opening search results");
         results = (ListView)findViewById(android.R.id.list);
@@ -99,6 +108,21 @@ public class SearchResultsView extends Activity
         });
         
         System.out.println("Got to end of create");
+    }
+    
+    // -------------------------- OPTIONS MENU----------------------------
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+    	MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.results_menu, menu);
+    	return super.onCreateOptionsMenu(menu);
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+    	this.finish();
+    	return true;
     }
 
 }

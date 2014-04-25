@@ -239,7 +239,6 @@ containing a value of this type.
         public static final int AddV=0x7f050009;
         public static final int ChooseDestination=0x7f05001e;
         public static final int ResetV=0x7f05000a;
-        public static final int action_done=0x7f050028;
         public static final int action_settings=0x7f050027;
         public static final int address=0x7f05000f;
         public static final int adjustedCost=0x7f050019;
@@ -248,15 +247,15 @@ containing a value of this type.
         public static final int detailsSummary=0x7f050015;
         public static final int distanceAway=0x7f050014;
         public static final int estimatedGallons=0x7f05000e;
-        public static final int favorite=0x7f050029;
-        public static final int favorites=0x7f05002a;
+        public static final int favorite=0x7f050028;
+        public static final int favorites=0x7f050029;
         public static final int fuelSelection=0x7f05001f;
         public static final int fuelSelectionLabel=0x7f050020;
         public static final int fuelType=0x7f05000d;
         public static final int fvList=0x7f05000b;
         public static final int hybrid=0x7f050004;
         public static final int miniMap=0x7f05001d;
-        public static final int newVehicle=0x7f05002b;
+        public static final int newVehicle=0x7f05002a;
         public static final int none=0x7f050000;
         public static final int normal=0x7f050001;
         public static final int orLabel=0x7f050011;
@@ -266,7 +265,7 @@ containing a value of this type.
         public static final int satellite=0x7f050002;
         public static final int searchWithAddress=0x7f050010;
         public static final int searchWithLocation=0x7f050012;
-        public static final int settings=0x7f05002c;
+        public static final int settings=0x7f05002b;
         public static final int spinnerMake=0x7f050006;
         public static final int spinnerModel=0x7f050007;
         public static final int spinnerOptions=0x7f050008;
@@ -296,8 +295,10 @@ containing a value of this type.
     public static final class menu {
         public static final int car_info=0x7f0b0000;
         public static final int details_menu=0x7f0b0001;
-        public static final int homescreen=0x7f0b0002;
-        public static final int options_menu=0x7f0b0003;
+        public static final int favorites_menu=0x7f0b0002;
+        public static final int homescreen=0x7f0b0003;
+        public static final int options_menu=0x7f0b0004;
+        public static final int results_menu=0x7f0b0005;
     }
     public static final class string {
         public static final int AddV=0x7f060027;

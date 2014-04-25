@@ -2,6 +2,7 @@ package com.project.smartpump;
 
 import java.text.NumberFormat;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -76,6 +77,10 @@ public class StationDetailsActivity extends Activity {
         setContentView(R.layout.station_details_view);
         context = getApplicationContext();
         favoriteManager = new FavoritesManager(context);
+        
+        // Activate Clickable Icon Button
+        ActionBar smartPumpIcon = getActionBar();
+        smartPumpIcon.setDisplayHomeAsUpEnabled(true);
 
         gMap = ((MapFragment) getFragmentManager().findFragmentById(
                 R.id.miniMap)).getMap();
@@ -312,6 +317,9 @@ public class StationDetailsActivity extends Activity {
     public boolean onOptionsItemSelected(final MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
+        case android.R.id.home:
+        	this.finish();
+        	return true;
         case R.id.favorite:
             String message = isFavorite ? "Remove station as a favorite?"
                     : "Save station as a favorite?";

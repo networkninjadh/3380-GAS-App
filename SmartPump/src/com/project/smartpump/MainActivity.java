@@ -3,6 +3,7 @@ package com.project.smartpump;
 
 import java.util.ArrayList;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -49,7 +50,7 @@ public class MainActivity extends Activity implements LocationListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_screen);
-        context = getApplicationContext();
+        context = getApplicationContext();        
 
         // Verify that there is saved vehicle data
         PreferencesHelper prefs = new PreferencesHelper(context);
