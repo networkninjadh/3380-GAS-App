@@ -2,6 +2,8 @@ package com.project.smartpump;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -23,16 +25,20 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.RadioGroup.OnCheckedChangeListener;
+import android.widget.Toast;
 
 public class SearchResultsView extends Activity 
 {
-
 	public static Context context;
     private ArrayList<StationSearchResult> stations;
     private ArrayList<String> searchResults;
     //private ArrayList<Double> adjustedPrices;
     private double currentLat, currentLng;
     static ListView results;
+    RadioButton radio_sort_button;
 
     public static Context getContext() {
         return context;
@@ -82,6 +88,9 @@ public class SearchResultsView extends Activity
 
         System.out.println("Finished setting up results");
         
+        //Attempt to sort stations
+        Collections.sort(stations, StationSearchResult.StationSearchResultComparator);
+        
         //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, searchResults);
         SearchResultsAdapter adapter = new SearchResultsAdapter(stations, context);
         System.out.println("Created adapter");
@@ -106,7 +115,16 @@ public class SearchResultsView extends Activity
                 startActivity(i);
             }
         });
-        
+        RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radio_sort);
+        radioGroup.setOnCheckedChangeListener(new OnCheckedChangeListener()
+        {
+        	public void onCheckedChanged(RadioGroup group, int checkedId)
+        	{
+        		radio_sort_button = (RadioButton) findViewById(checkedId);
+        		//test the radio button
+        		Toast.makeText(context, radio_sort_button.getText(), Toast.LENGTH_SHORT).show();
+        	}
+        });
         System.out.println("Got to end of create");
     }
     

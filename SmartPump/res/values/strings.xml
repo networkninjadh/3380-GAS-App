@@ -64,4 +64,7 @@
     <string name="pump_price">Pump Price</string>
     <string name="adjusted_cost">Adjusted Cost</string>
     <string name="adjusted">Adjusted</string>
+    
+    <string name = "radio_price"> BY PRICE </string>
+    <string name = "radio_distance"> BY DISTANCE </string>
 </resources>
