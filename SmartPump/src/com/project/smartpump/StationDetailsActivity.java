@@ -266,7 +266,7 @@ public class StationDetailsActivity extends Activity {
     
     private void setPriceDisplays(FuelPrice price, double gallons) {
         double fuelPrice = price.getPrice();
-        double adjustPrice = MPG == 0 ? 0.0 : Calculations.calculate(MPG,
+        double adjustPrice = MPG == 0.0 || gallons == 0 ? 0.0 : Calculations.calculate(MPG,
                 fuelPrice, distanceAway, gallons);
         setPriceDisplays(fuelPrice, adjustPrice);
 
