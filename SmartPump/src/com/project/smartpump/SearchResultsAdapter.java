@@ -58,6 +58,7 @@ public class SearchResultsAdapter extends BaseAdapter {
 
         return v;
     }
+
     public SearchResultsAdapter DistanceSort()
     {
         Collections.sort(stationResults, new DistanceComparator());
@@ -73,6 +74,7 @@ public class SearchResultsAdapter extends BaseAdapter {
         Collections.sort(stationResults, new PriceComparator());
         return this;
     }
+
     @Override
     public int getCount() {
         return stationResults.size();

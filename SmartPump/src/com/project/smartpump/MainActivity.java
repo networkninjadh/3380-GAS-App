@@ -1,4 +1,3 @@
-
 package com.project.smartpump;
 
 import java.util.ArrayList;
@@ -114,7 +113,7 @@ public class MainActivity extends Activity implements LocationListener {
 
     // ---------------------------SEARCH HELPERS-------------------------------
     private void profileErrorAlert() {
-        String message = "It seems that you do not hava a complete vehicle profile. Adjusted pump prices"
+        String message = "It seems that you do not have a complete vehicle profile. Adjusted pump prices"
                 + " cannot be computed without the average MPG of your vehicle. Would you like to add a vehicle?";
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(message)

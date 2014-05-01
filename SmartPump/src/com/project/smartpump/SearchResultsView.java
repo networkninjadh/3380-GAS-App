@@ -2,6 +2,8 @@ package com.project.smartpump;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -24,17 +26,22 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.RadioGroup.OnCheckedChangeListener;
+import android.widget.Toast;
 
 public class SearchResultsView extends Activity 
 {
-
 	public static Context context;
     private ArrayList<StationSearchResult> stations;
     private ArrayList<String> searchResults;
     //private ArrayList<Double> adjustedPrices;
     private double currentLat, currentLng;
     static ListView results;
+
     SearchResultsAdapter adapter;
+
 
     public static Context getContext() {
         return context;
@@ -85,8 +92,7 @@ public class SearchResultsView extends Activity
                 startActivity(i);
             }
         });
-        
-        System.out.println("Got to end of create");
+
     }
     
     // -------------------------- OPTIONS MENU----------------------------
