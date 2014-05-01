@@ -2,11 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
+    
+    <ImageView
+        android:id="@+id/stationLogo"
+        android:layout_width="25dp"
+        android:layout_height="50dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/gasstation"/>
 
     <TextView
         android:id="@+id/stationName"
-        android:layout_width="85dp"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:layout_height="50dp"
         android:layout_marginRight="5dp"
         android:gravity="center_vertical"
         android:textColor="#000000" >
@@ -15,7 +24,7 @@
     <TextView
         android:id="@+id/distanceAway"
         android:layout_width="35dp"
-        android:layout_height="50dp"
+        android:layout_height="fill_parent"
         android:gravity="center"
         android:textColor="#000000"
         android:background="#9D7050">
@@ -34,7 +43,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/pump_price"
+                android:text="@string/pump"
                 android:textColor="#000000" >
             </TextView>
             <TextView
@@ -42,7 +51,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/adjusted_cost"
+                android:text="@string/adjusted"
                 android:textColor="#000000" >
             </TextView>
         </TableRow>

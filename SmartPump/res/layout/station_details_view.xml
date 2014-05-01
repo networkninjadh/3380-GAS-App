@@ -9,27 +9,39 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:src="@drawable/gasstation" >
+        android:layout_marginRight="10dp" >
 
         
         <ImageView
             android:id="@+id/stationLogo"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_alignParentLeft="true"
-            android:layout_marginBottom="5dp"/>
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"
+            android:src="@drawable/gasstation"/>
         
         <TextView
            android:id="@+id/stationName"
-           android:layout_width="0dp"
+           android:layout_width="wrap_content"
            android:layout_height="wrap_content"
-           android:layout_alignParentLeft="true"
-           android:layout_below="@+id/stationLogo"
-           android:layout_toLeftOf="@+id/distanceAway"
+           android:layout_toRightOf="@+id/stationLogo"
+           android:layout_marginTop="5dp"
+           android:layout_marginBottom="5dp"
            android:textSize="18sp" >
         </TextView>
-    
+        
+        <TextView
+            android:id="@+id/stationAddress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/stationLogo"
+            android:layout_toLeftOf="@+id/distanceAway"
+            android:layout_alignParentLeft="true"
+            android:textSize="14sp" >
+        </TextView>
+        
         <TextView
             android:id="@+id/distanceAway"
             android:layout_width="wrap_content"
@@ -37,18 +49,8 @@
             android:layout_below="@+id/stationLogo"
             android:layout_alignParentRight="true"
             android:textSize="14sp" >
-
         </TextView>
-    
-        <TextView
-            android:id="@+id/stationAddress"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/stationName"
-            android:textSize="14sp" >
-
-        </TextView>
-    
+        
         <TextView
             android:id="@+id/cityStateZip"
             android:layout_width="fill_parent"

@@ -208,11 +208,7 @@ public class StationDetailsActivity extends Activity {
     
     private void setLogo() 
     {
-        String name = station.getStationName();
-        name = (name.replace(" ","")).toLowerCase();
-        System.out.println("Name: " + name);
-        int logoId = context.getResources().getIdentifier(name, "drawable", context.getPackageName());
-        System.out.println("Id:" + String.valueOf(logoId));
+        int logoId = station.getLogoId(context);
         if (logoId != 0)
         {
             logo.setImageDrawable(context.getResources().getDrawable(logoId));

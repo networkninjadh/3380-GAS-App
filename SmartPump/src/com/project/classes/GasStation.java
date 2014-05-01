@@ -2,6 +2,7 @@ package com.project.classes;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -119,6 +120,13 @@ public class GasStation implements Parcelable {
         return this.dieselPrice;
     }
     
+    public int getLogoId(Context context)
+    {
+        String name = getStationName();
+        name = (name.replace(" ","")).toLowerCase();
+        int logoId = context.getResources().getIdentifier(name, "drawable", context.getPackageName());
+        return logoId;
+    }
     
     @Override
     public int describeContents() {

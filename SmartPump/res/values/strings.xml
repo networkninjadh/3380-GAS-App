@@ -63,6 +63,7 @@
     <string name="distance_away">Distance</string>
     <string name="pump_price">Pump Price</string>
     <string name="adjusted_cost">Adjusted Cost</string>
+    <string name="pump">Pump</string>
     <string name="adjusted">Adjusted</string>
     <string name="sort_adj_cost">Sort By Adjusted Cost</string>
 </resources>

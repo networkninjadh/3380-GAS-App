@@ -37,6 +37,7 @@ public class SearchResultsAdapter extends BaseAdapter {
             v = mInflater.inflate(R.layout.search_result_item, null);
         }
 
+        ImageView logo = (ImageView) v.findViewById(R.id.stationLogo);
         TextView name = (TextView) v.findViewById(R.id.stationName);
         // TextView address = (TextView) v.findViewById(R.id.stationAddress);
         TextView distance = (TextView) v.findViewById(R.id.distanceAway);
@@ -46,6 +47,15 @@ public class SearchResultsAdapter extends BaseAdapter {
         StationSearchResult r = stationResults.get(position);
         GasStation s = r.getStation();
         
+        int logoId = s.getLogoId(context);
+        if (logoId != 0)
+        {
+            logo.setImageDrawable(context.getResources().getDrawable(logoId));
+        }
+        else
+        {
+            logo.setImageDrawable(context.getResources().getDrawable(R.drawable.gasstation));
+        }
         name.setText(s.getStationName());
         // address.setText(s.getWebAddress());
         distance.setText(String.valueOf(s.getDistance()) + " mi");
@@ -53,8 +63,8 @@ public class SearchResultsAdapter extends BaseAdapter {
         NumberFormat currency = NumberFormat.getCurrencyInstance();
         double fuelPrice = s.getSelectedFuelPrice().getPrice();
         double adjustCost = r.getAdjustedCost();
-        pumpPrice.setText(fuelPrice == 0.0 ? "Not Found" : currency.format(fuelPrice));
-        adjustedCost.setText(adjustCost == 0.0 ? "Not Found" : currency.format(adjustCost));
+        pumpPrice.setText(fuelPrice == 0.0 ? "N/A" : currency.format(fuelPrice));
+        adjustedCost.setText(adjustCost == 0.0 ? "N/A" : currency.format(adjustCost));
 
         return v;
     }
