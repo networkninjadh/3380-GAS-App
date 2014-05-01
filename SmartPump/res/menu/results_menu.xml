@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
     
-
+<item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:title="Sort" android:visible="true" android:enabled="true" android:titleCondensed="Sort">
+        <menu>
+            <item android:id="@+id/adj_sort" android:visible="true" android:title="Sort by Adj Cost" android:enabled="true" android:titleCondensed="Sort ADJ" android:showAsAction="always"/>
+            <item android:id="@+id/dis_sort" android:showAsAction="always" android:title="Sort by Distance" android:enabled="true" android:visible="true"/>
+            <item android:id="@+id/price_sort" android:showAsAction="always" android:title="Sort by Pump Price" android:enabled="true" android:visible="true"/>
+        </menu>
+    </item>
 </menu>
+

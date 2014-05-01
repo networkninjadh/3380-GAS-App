@@ -2,6 +2,7 @@ package com.project.smartpump;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import com.project.classes.GasStation;
 import com.project.classes.StationSearchResult;
@@ -57,7 +58,21 @@ public class SearchResultsAdapter extends BaseAdapter {
 
         return v;
     }
-
+    public SearchResultsAdapter DistanceSort()
+    {
+        Collections.sort(stationResults, new DistanceComparator());
+        return this;
+    }
+    public SearchResultsAdapter AdjSort()
+    {
+        Collections.sort(stationResults, new AdjCostComparator());
+        return this;
+    }
+    public SearchResultsAdapter PriceSort()
+    {
+        Collections.sort(stationResults, new PriceComparator());
+        return this;
+    }
     @Override
     public int getCount() {
         return stationResults.size();

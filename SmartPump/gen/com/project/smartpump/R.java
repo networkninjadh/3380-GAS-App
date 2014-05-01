@@ -241,10 +241,12 @@ containing a value of this type.
         public static final int ResetV=0x7f05000a;
         public static final int action_settings=0x7f050027;
         public static final int address=0x7f05000f;
+        public static final int adj_sort=0x7f05002c;
         public static final int adjustedCost=0x7f050019;
         public static final int adjustedLabel=0x7f050024;
         public static final int cityStateZip=0x7f05001c;
         public static final int detailsSummary=0x7f050015;
+        public static final int dis_sort=0x7f05002d;
         public static final int distanceAway=0x7f050014;
         public static final int estimatedGallons=0x7f05000e;
         public static final int favorite=0x7f050028;
@@ -261,6 +263,7 @@ containing a value of this type.
         public static final int orLabel=0x7f050011;
         public static final int priceLabel=0x7f050023;
         public static final int priceSummary=0x7f050022;
+        public static final int price_sort=0x7f05002e;
         public static final int pumpPrice=0x7f050018;
         public static final int satellite=0x7f050002;
         public static final int searchWithAddress=0x7f050010;
@@ -419,6 +422,7 @@ containing a value of this type.
         public static final int searchByAddress=0x7f06003b;
         public static final int searchByLocation=0x7f06003c;
         public static final int search_results=0x7f060034;
+        public static final int sort_adj_cost=0x7f060043;
         public static final int submit=0x7f06003a;
         public static final int text1=0x7f06001f;
         public static final int text2=0x7f060020;

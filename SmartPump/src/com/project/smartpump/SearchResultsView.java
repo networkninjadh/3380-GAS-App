@@ -19,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -33,6 +34,7 @@ public class SearchResultsView extends Activity
     //private ArrayList<Double> adjustedPrices;
     private double currentLat, currentLng;
     static ListView results;
+    SearchResultsAdapter adapter;
 
     public static Context getContext() {
         return context;
@@ -54,38 +56,15 @@ public class SearchResultsView extends Activity
         //adjustedPrices = (ArrayList<Double>) this.getIntent().getSerializableExtra("adjustedPrices");
         currentLat = this.getIntent().getExtras().getDouble("latitude");
         currentLng = this.getIntent().getExtras().getDouble("longitude");
-        
-        searchResults = new ArrayList<String>();
-        if(stations != null)
-        {
-            int numStations = stations.size();
-            for (int i = 0; i < numStations; ++i)
-            {
-                GasStation s = stations.get(i).getStation();
-                double adjustedPrice = stations.get(i).getAdjustedCost();
-                NumberFormat currency = NumberFormat.getCurrencyInstance();
-                String priceDisplay = s.getSelectedFuelPrice().getPrice() == 0.0 ? "Not Available" :
-                    currency.format(s.getSelectedFuelPrice().getPrice());
-                String adjustedPriceDisplay = adjustedPrice == 0.0 ? "Not Available" :
-                    currency.format(adjustedPrice);
-                StringBuilder result = new StringBuilder(s.getStationName());
-                result.append(" " + String.valueOf(s.getDistance()));
-                result.append(" " + priceDisplay);
-                result.append(" " + adjustedPriceDisplay);
-                searchResults.add(result.toString());
-            }
-        }
-        else
-        {
-            searchResults.add("No stations found");
-        }
 
         System.out.println("Finished setting up results");
         
         //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, searchResults);
-        SearchResultsAdapter adapter = new SearchResultsAdapter(stations, context);
+        adapter = new SearchResultsAdapter(stations, context);
         System.out.println("Created adapter");
-       
+        adapter.DistanceSort();
+    	adapter.notifyDataSetChanged();
+        
         results.setAdapter(adapter);  
         System.out.println("Set adapter");
         
@@ -121,8 +100,22 @@ public class SearchResultsView extends Activity
     
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-    	this.finish();
-    	return true;
+    	switch (item.getItemId()) {
+        case R.id.adj_sort:
+        	adapter.AdjSort();
+        	adapter.notifyDataSetChanged();
+            return true;
+        case R.id.dis_sort:
+        	adapter.DistanceSort();
+        	adapter.notifyDataSetChanged();
+        	return true;
+        case R.id.price_sort:
+        	adapter.PriceSort();
+        	adapter.notifyDataSetChanged();
+        	return true;
+        default:
+            return super.onOptionsItemSelected(item);
+        }
     }
 
 }
