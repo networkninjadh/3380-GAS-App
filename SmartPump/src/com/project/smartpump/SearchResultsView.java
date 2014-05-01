@@ -107,6 +107,9 @@ public class SearchResultsView extends Activity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
     	switch (item.getItemId()) {
+    	case android.R.id.home:
+        	this.finish();
+        	return true;
         case R.id.adj_sort:
         	adapter.AdjSort();
         	adapter.notifyDataSetChanged();
