@@ -20,6 +20,7 @@ import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -42,6 +43,7 @@ public class StationDetailsActivity extends Activity {
     private GoogleMap gMap;
     private static RelativeLayout priceSummary, 
                                   fuelSelection;
+    private static ImageView logo;
     private static TextView name, 
                             address, 
                             cityStateZip, 
@@ -88,6 +90,7 @@ public class StationDetailsActivity extends Activity {
 
         priceSummary = (RelativeLayout) findViewById(R.id.priceSummary);
         fuelSelection = (RelativeLayout) findViewById(R.id.fuelSelection);
+        logo = (ImageView) findViewById(R.id.stationLogo);
         fuelType = (Spinner) findViewById(R.id.fuelType);
         numGallons = (EditText) findViewById(R.id.estimatedGallons);
         priceRequest = (Button) findViewById(R.id.submit);
@@ -126,6 +129,9 @@ public class StationDetailsActivity extends Activity {
             station = this.getIntent().getExtras().getParcelable("stationSelected");
             MPG = this.getIntent().getExtras().getDouble("MPG");
         }
+        
+        // Set station logo
+        setLogo();
         
         // Get current location
         currentLat = this.getIntent().getExtras().getDouble("latitude");
@@ -200,6 +206,20 @@ public class StationDetailsActivity extends Activity {
         }
     }
     
+    private void setLogo() 
+    {
+        String name = station.getStationName();
+        name = (name.replace(" ","")).toLowerCase();
+        System.out.println("Name: " + name);
+        int logoId = context.getResources().getIdentifier(name, "drawable", context.getPackageName());
+        System.out.println("Id:" + String.valueOf(logoId));
+        if (logoId != 0)
+        {
+            logo.setImageDrawable(context.getResources().getDrawable(logoId));
+        }
+        
+    }
+
     // -----------------------PRICE DISPLAY HELPERS--------------------------
     private void getPriceSummary()
     {
