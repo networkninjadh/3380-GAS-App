@@ -53,8 +53,6 @@ public class MainActivity extends Activity implements LocationListener {
 
         // Verify that there is saved vehicle data
         PreferencesHelper prefs = new PreferencesHelper(context);
-
-        // For now hard-coding a vehicle
         MPG = 0.0;
         String vId = prefs.GetPreferences("VehicleID");
         String mpg = vId.equals("") ? "" : prefs.GetPreferences("VehicleMPG");
@@ -84,19 +82,7 @@ public class MainActivity extends Activity implements LocationListener {
                 LatLng coords = StationRequest.getGeoCoordsFromAddress(context,
                         address.getText().toString());
                 if (coords == null) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(
-                            context);
-                    builder.setMessage("Could not find location")
-                            .setPositiveButton("OK",
-                                    new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(
-                                                DialogInterface dialog,
-                                                int which) {
-                                            address.setText("");
-                                            dialog.dismiss();
-                                        }
-                                    });
+                    couldNotFindLocationAlert();
                 } else {
                     getResults(coords.latitude, coords.longitude);
                 }
@@ -105,7 +91,15 @@ public class MainActivity extends Activity implements LocationListener {
         searchWithLocation.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                getResults(latitude, longitude);
+                if (latitude == -1.0 || longitude == -1.0)
+                {
+                    System.out.println("could not get coords");
+                    couldNotFindLocationAlert();
+                }
+                else
+                {
+                    getResults(latitude, longitude);
+                }
             }
         });
 
@@ -139,6 +133,24 @@ public class MainActivity extends Activity implements LocationListener {
         alert.show();
     }
 
+    private void couldNotFindLocationAlert()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Could not find location")
+                .setPositiveButton("OK",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(
+                                    DialogInterface dialog,
+                                    int which) {
+                                address.setText("");
+                                dialog.dismiss();
+                            }
+                        });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+    
     private void getResults(final double lat, final double lng) {
         if (fuelType.getSelectedItemPosition() == 0) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -240,8 +252,8 @@ public class MainActivity extends Activity implements LocationListener {
             longitude = location.getLongitude();
             onLocationChanged(location);
         } else {
-            // What to do if last known collection cannot be found
-            // Will not be able to do routing if requested
+            latitude = -1.0;
+            longitude = -1.0;
         }
     }
 
@@ -283,8 +295,7 @@ public class MainActivity extends Activity implements LocationListener {
         case R.id.favorites:
             System.out.println("star clicked");
             Intent i = new Intent(getContext(), FavoritesActivity.class);
-            i.putExtra("l"
-            		+ "atitude", latitude);
+            i.putExtra("latitude", latitude);
             i.putExtra("longitude", longitude);
             i.putExtra("MPG", MPG);
             startActivity(i);
